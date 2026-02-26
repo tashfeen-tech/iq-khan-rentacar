@@ -19,6 +19,19 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
+.solid {
+    background: rgba(255, 255, 255, 0.98);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.solid .navLink {
+    color: var(--text-muted);
+}
+
+.solid .mobileToggle {
+    color: var(--text-main);
+}
+
 .container {
     max-width: 1400px;
     width: 100%;
@@ -60,7 +73,8 @@
     line-height: 1;
 }
 
-.scrolled .popular {
+.scrolled .popular,
+.solid .popular {
     color: var(--text-main);
 }
 
@@ -86,11 +100,13 @@
     position: relative;
 }
 
-.scrolled .navLink {
+.scrolled .navLink,
+.solid .navLink {
     color: var(--text-muted);
 }
 
-.scrolled .navLink:hover {
+.scrolled .navLink:hover,
+.solid .navLink:hover {
     color: var(--primary);
 }
 
@@ -136,7 +152,8 @@
     cursor: pointer;
 }
 
-.scrolled .mobileToggle {
+.scrolled .mobileToggle,
+.solid .mobileToggle {
     color: var(--text-main);
 }
 

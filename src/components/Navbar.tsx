@@ -6,11 +6,13 @@ import { Car, Menu, X, Phone, UserCircle } from "lucide-react";
 import Image from "next/image";
 import styles from "./Navbar.module.css";
 import { useAuth } from "@/lib/AuthContext";
+import { usePathname } from "next/navigation";
 
 const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const { user, profile } = useAuth();
+    const pathname = usePathname();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -20,8 +22,11 @@ const Navbar = () => {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
+    const isHome = pathname === "/";
+    const navClasses = `${styles.nav} ${isScrolled ? styles.scrolled : ""} ${!isHome ? styles.solid : ""}`;
+
     return (
-        <nav className={`${styles.nav} ${isScrolled ? styles.scrolled : ""}`}>
+        <nav className={navClasses}>
             <div className={styles.container}>
                 <Link href="/" className={styles.logo}>
                     <Image
