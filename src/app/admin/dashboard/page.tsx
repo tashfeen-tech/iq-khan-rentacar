@@ -82,7 +82,7 @@ export default function AdminDashboard() {
     const [isCarModalOpen, setIsCarModalOpen] = useState(false);
     const [editingCar, setEditingCar] = useState<any>(null);
     const [carForm, setCarForm] = useState({
-        name: "", type: "Sedan", transmission: "Automatic", seats: 4, image: "", features: ""
+        name: "", type: "Sedan", transmission: "Automatic", seats: 4, image: "", features: "", price: ""
     });
     const [imageFile, setImageFile] = useState<File | null>(null);
 
@@ -190,7 +190,7 @@ export default function AdminDashboard() {
 
     const openCreateCar = () => {
         setEditingCar(null);
-        setCarForm({ name: "", type: "Sedan", transmission: "Automatic", seats: 4, image: "", features: "" });
+        setCarForm({ name: "", type: "Sedan", transmission: "Automatic", seats: 4, image: "", features: "", price: "" });
         setImageFile(null);
         setIsCarModalOpen(true);
     };
@@ -203,7 +203,8 @@ export default function AdminDashboard() {
             transmission: car.transmission,
             seats: car.seats,
             image: car.image,
-            features: car.features?.join(", ") || ""
+            features: car.features?.join(", ") || "",
+            price: car.price || ""
         });
         setImageFile(null);
         setIsCarModalOpen(true);
@@ -227,7 +228,8 @@ export default function AdminDashboard() {
                 seats: Number(carForm.seats),
                 image: imgUrl,
                 features: carForm.features.split(",").map(f => f.trim()).filter(Boolean),
-                available: true
+                available: true,
+                price: carForm.price
             };
 
             if (editingCar) {
@@ -792,9 +794,23 @@ export default function AdminDashboard() {
                                         <option>Sedan</option>
                                         <option>Premium Sedan</option>
                                         <option>SUV</option>
+                                        <option>Premium SUV</option>
                                         <option>Van</option>
+                                        <option>Luxury Van</option>
                                         <option>Pickup / 4x4</option>
+                                        <option>Luxury Sedan</option>
                                     </select>
+                                </div>
+                            </div>
+
+                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                                    <label style={{ fontSize: '14px', fontWeight: 600, color: 'var(--text-muted)' }}>Daily Price (Rs.)</label>
+                                    <input required type="text" placeholder="e.g. 15,000" value={carForm.price} onChange={e => setCarForm({ ...carForm, price: e.target.value })} style={{ padding: '12px', borderRadius: '12px', border: '1px solid var(--border)', background: 'var(--background)' }} />
+                                </div>
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                                    <label style={{ fontSize: '14px', fontWeight: 600, color: 'var(--text-muted)' }}>Seats</label>
+                                    <input type="number" required value={carForm.seats} onChange={e => setCarForm({ ...carForm, seats: Number(e.target.value) })} style={{ padding: '12px', borderRadius: '12px', border: '1px solid var(--border)', background: 'var(--background)' }} />
                                 </div>
                             </div>
 
@@ -805,10 +821,6 @@ export default function AdminDashboard() {
                                         <option>Automatic</option>
                                         <option>Manual</option>
                                     </select>
-                                </div>
-                                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                                    <label style={{ fontSize: '14px', fontWeight: 600, color: 'var(--text-muted)' }}>Seats</label>
-                                    <input type="number" required value={carForm.seats} onChange={e => setCarForm({ ...carForm, seats: Number(e.target.value) })} style={{ padding: '12px', borderRadius: '12px', border: '1px solid var(--border)', background: 'var(--background)' }} />
                                 </div>
                             </div>
 

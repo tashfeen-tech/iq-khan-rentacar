@@ -1,38 +1,43 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Users, Fuel, Gauge, CheckCircle2 } from "lucide-react";
-import Image from "next/image";
-import styles from "./CarCard.module.css";
 import { Car } from "@/data/fleet";
+import { Users, Fuel, Gauge, CheckCircle2, Star } from "lucide-react";
+import styles from "./CarCard.module.css";
+import { motion } from "framer-motion";
 
 interface CarCardProps {
     car: Car;
     priority?: boolean;
 }
 
-const CarCard = ({ car, priority = false }: CarCardProps) => {
+export default function CarCard({ car }: CarCardProps) {
     return (
-        <motion.div
-            whileHover={{ y: -10 }}
-            className={styles.card}
-        >
-            <div className={styles.imageContainer} style={{ position: 'relative', width: '100%', height: '220px' }}>
-                <Image
+        <div className={styles.card}>
+            <div className={styles.imageWrapper}>
+                <img
                     src={car.image}
                     alt={car.name}
-                    className={styles.carImage}
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    style={{ objectFit: 'contain' }}
-                    priority={priority}
+                    className={styles.image}
+                    loading="lazy"
                 />
-                <span className={styles.carTypeBadge}>{car.type}</span>
+                <div className={styles.typeBadge}>{car.type}</div>
+                {car.id.includes('civic') || car.id.includes('grande') || car.id.includes('v8') ? (
+                    <div className={styles.featuredBadge}>
+                        <Star size={14} fill="currentColor" /> Featured
+                    </div>
+                ) : null}
             </div>
 
             <div className={styles.content}>
                 <div className={styles.header}>
                     <h3 className={styles.name}>{car.name}</h3>
+                    {car.price && (
+                        <div className={styles.priceContainer}>
+                            <span className={styles.priceLabel}>Starting at</span>
+                            <span className={styles.price}>Rs. {car.price}</span>
+                            <span className={styles.perDay}>/day</span>
+                        </div>
+                    )}
                 </div>
 
                 <div className={styles.specs}>
@@ -46,24 +51,29 @@ const CarCard = ({ car, priority = false }: CarCardProps) => {
                     </div>
                     <div className={styles.specItem}>
                         <Fuel size={16} />
-                        <span>Petrol</span>
+                        <span>High Efficiency</span>
                     </div>
                 </div>
 
                 <div className={styles.features}>
-                    {car.features.slice(0, 2).map((feature, index) => (
-                        <span key={index} className={styles.feature}>
-                            <CheckCircle2 size={12} /> {feature}
-                        </span>
+                    {car.features.slice(0, 3).map((feature, i) => (
+                        <div key={i} className={styles.featureTag}>
+                            <CheckCircle2 size={12} color="var(--success)" />
+                            {feature}
+                        </div>
                     ))}
                 </div>
 
-                <button className={styles.bookBtn}>
-                    Send Inquiry
-                </button>
+                <div className={styles.footer}>
+                    <button className={styles.bookBtn}>
+                        Check Availability
+                    </button>
+                    <div className={styles.status}>
+                        <div className={car.available ? styles.dotActive : styles.dotInactive}></div>
+                        {car.available ? "Ready to Rent" : "Booked Today"}
+                    </div>
+                </div>
             </div>
-        </motion.div>
+        </div>
     );
-};
-
-export default CarCard;
+}
