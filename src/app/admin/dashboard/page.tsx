@@ -51,6 +51,8 @@ interface Booking {
     toCity?: string;
     airport?: string;
     selectedFleetCar?: string;
+    message?: string;
+    time?: string;
 }
 
 interface ContactMessage {
@@ -589,6 +591,11 @@ export default function AdminDashboard() {
                                                 <span className={styles.customerName}>{booking.name}</span>
                                                 <span className={styles.customerPhone}>{booking.phone}</span>
                                                 <span className={styles.customerEmail}>{booking.email}</span>
+                                                {booking.message && (
+                                                    <div className={styles.bookingMessage}>
+                                                        <strong>Message:</strong> "{booking.message}"
+                                                    </div>
+                                                )}
                                             </div>
                                         </td>
                                         <td>
@@ -623,6 +630,11 @@ export default function AdminDashboard() {
                                                     </>
                                                 ) : (
                                                     <span>{booking.pickupDate?.replace('T', ' ')}</span>
+                                                )}
+                                                {booking.time && (
+                                                    <span style={{ display: 'block', fontSize: '11px', color: 'var(--text-muted)', marginTop: '4px', fontWeight: 600 }}>
+                                                        Time: {booking.time}
+                                                    </span>
                                                 )}
                                             </div>
                                         </td>
