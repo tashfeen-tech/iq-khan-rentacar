@@ -31,11 +31,7 @@ service cloud.firestore {
 
     match /bookings/{bookingId} {
       allow create: if true;
-      allow read: if request.auth != null && (
-        resource.data.userId == request.auth.uid || 
-        resource.data.email == request.auth.token.email ||
-        resource.data.email == request.auth.token.email.lower()
-      );
+      allow read: if request.auth != null;
       allow read, write: if isAdmin();
     }
 
