@@ -58,13 +58,13 @@ export default function CarCard({ car }: CarCardProps) {
                 </div>
 
                 <div className={styles.footer}>
-                    <button className={styles.bookBtn}>
-                        Check Availability
-                    </button>
                     <div className={styles.status}>
                         <div className={car.available ? styles.dotActive : styles.dotInactive}></div>
                         {car.available ? "Ready to Rent" : "Booked Today"}
                     </div>
+                    <button className={styles.bookBtn}>
+                        Check Availability
+                    </button>
                 </div>
             </div>
         </div>
