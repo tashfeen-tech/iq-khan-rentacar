@@ -41,48 +41,63 @@ export default function MyBookingsPage() {
             return;
         }
 
-        // Query bookings by userId (most reliable) OR email (original and lowercase)
-        const conditions = [where("userId", "==", user.uid)];
-        if (user.email) {
-            conditions.push(where("email", "==", user.email));
-            if (user.email.toLowerCase() !== user.email) {
-                conditions.push(where("email", "==", user.email.toLowerCase()));
+        const fetchBookings = async () => {
+            try {
+                const results: Booking[] = [];
+                const ids = new Set<string>();
+
+                const queries = [
+                    query(collection(db, "bookings"), where("userId", "==", user.uid))
+                ];
+                if (user.email) {
+                    queries.push(query(collection(db, "bookings"), where("email", "==", user.email)));
+                    if (user.email.toLowerCase() !== user.email) {
+                        queries.push(query(collection(db, "bookings"), where("email", "==", user.email.toLowerCase())));
+                    }
+                }
+
+                const unsubscribes = queries.map(q =>
+                    onSnapshot(q, (snapshot) => {
+                        snapshot.docs.forEach(d => {
+                            if (!ids.has(d.id)) {
+                                ids.add(d.id);
+                                results.push({ id: d.id, ...d.data() } as Booking);
+                            }
+                        });
+
+                        const sortedData = [...results].sort((a, b) => {
+                            const getTime = (ca: any) => {
+                                if (!ca) return 0;
+                                if (ca.toMillis) return ca.toMillis();
+                                if (ca.seconds) return ca.seconds * 1000;
+                                if (ca instanceof Date) return ca.getTime();
+                                return 0;
+                            };
+                            return getTime(b.createdAt) - getTime(a.createdAt);
+                        });
+
+                        setBookings(sortedData);
+                        setLoading(false);
+                        setError(null);
+                    }, (err) => {
+                        console.error("Query failed:", err);
+                        setError(`Access error: ${err.message}`);
+                        setLoading(false);
+                    })
+                );
+
+                return () => unsubscribes.forEach(u => u());
+            } catch (err: any) {
+                console.error("Fetch error:", err);
+                setError(err.message);
+                setLoading(false);
             }
-        }
+        };
 
-        const q = query(
-            collection(db, "bookings"),
-            or(...conditions)
-        );
-
-        const unsubscribe = onSnapshot(q, (snapshot) => {
-            const data = snapshot.docs.map((d) => ({
-                id: d.id,
-                ...d.data(),
-            })) as Booking[];
-
-            // Sort in memory safely
-            const sortedData = [...data].sort((a, b) => {
-                const getTime = (ca: any) => {
-                    if (!ca) return 0;
-                    if (ca.toMillis) return ca.toMillis();
-                    if (ca.seconds) return ca.seconds * 1000;
-                    if (ca instanceof Date) return ca.getTime();
-                    return 0;
-                };
-                return getTime(b.createdAt) - getTime(a.createdAt);
-            });
-
-            setBookings(sortedData);
-            setLoading(false);
-            setError(null);
-        }, (error) => {
-            console.error("Snapshot error:", error);
-            setError(`Connection error: ${error.message}`);
-            setLoading(false);
-        });
-
-        return () => unsubscribe();
+        const cleanupPromise = fetchBookings();
+        return () => {
+            cleanupPromise.then(cleanup => cleanup?.());
+        };
     }, [user]);
 
     const cancelBooking = async (id: string) => {
