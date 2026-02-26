@@ -16,6 +16,50 @@
     background: var(--background);
 }
 
+.mobileHeader {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 70px;
+    background: #ffffff;
+    border-bottom: 1px solid var(--border);
+    padding: 0 20px;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;
+}
+
+.menuToggle {
+    background: transparent;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.sidebarClose {
+    display: none;
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    color: var(--text-muted);
+    cursor: pointer;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+    z-index: 1001;
+}
+
 /* Sidebar */
 .sidebar {
     background: #ffffff;
@@ -540,16 +584,46 @@
 }
 
 @media (max-width: 1200px) {
+    .dashboard {
+        grid-template-columns: 1fr;
+        padding-top: 70px;
+    }
+
+    .mobileHeader {
+        display: flex;
+    }
+
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: -300px;
+        bottom: 0;
+        width: 280px;
+        z-index: 1002;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        display: flex;
+        box-shadow: 20px 0 50px rgba(0, 0, 0, 0.1);
+    }
+
+    .sidebar.open {
+        transform: translateX(300px);
+    }
+
+    .sidebarClose {
+        display: flex;
+    }
+
     .statsGrid {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    .dashboard {
-        grid-template-columns: 1fr;
+    .tableContainer {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
     }
 
-    .sidebar {
-        display: none;
+    .table {
+        min-width: 900px;
     }
 }
 
@@ -571,4 +645,16 @@
         padding-left: 0;
         margin-top: 16px;
     }
+
+    .header h1 {
+        font-size: 22px;
+    }
+
+    .statCard {
+        padding: 20px;
+    }
+}
+
+.sidebarActive {
+    overflow: hidden;
 }

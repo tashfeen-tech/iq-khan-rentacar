@@ -27,7 +27,9 @@ import {
     Trash2,
     Eye,
     Settings,
-    Users
+    Users,
+    Menu,
+    X as CloseIcon
 } from "lucide-react";
 import styles from "./Dashboard.module.css";
 
@@ -89,6 +91,7 @@ export default function AdminDashboard() {
     const [loading, setLoading] = useState(true);
     const [activeTab, setActiveTab] = useState<Tab>("dashboard");
     const [bookingFilter, setBookingFilter] = useState<'all' | 'pending' | 'confirmed' | 'cancelled'>('all');
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     // Car Modal State
     const [isCarModalOpen, setIsCarModalOpen] = useState(false);
@@ -364,9 +367,25 @@ export default function AdminDashboard() {
     };
 
     return (
-        <div className={styles.dashboard}>
+        <div className={`${styles.dashboard} ${isSidebarOpen ? styles.sidebarActive : ""}`}>
+            {/* Mobile Header */}
+            <div className={styles.mobileHeader}>
+                <div className={styles.mobileBrand}>
+                    <Image src="/logo.png" alt="Popular" width={120} height={40} style={{ objectFit: 'contain' }} />
+                </div>
+                <button className={styles.menuToggle} onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
+                    {isSidebarOpen ? <CloseIcon size={24} /> : <Menu size={24} />}
+                </button>
+            </div>
+
+            {/* Sidebar Overlay */}
+            {isSidebarOpen && <div className={styles.overlay} onClick={() => setIsSidebarOpen(false)} />}
+
             {/* Sidebar */}
-            <aside className={styles.sidebar}>
+            <aside className={`${styles.sidebar} ${isSidebarOpen ? styles.open : ""}`}>
+                <div className={styles.sidebarClose} onClick={() => setIsSidebarOpen(false)}>
+                    <CloseIcon size={24} />
+                </div>
                 <div className={styles.brand} style={{ marginBottom: '32px' }}>
                     <Image
                         src="/logo.png"
@@ -381,14 +400,14 @@ export default function AdminDashboard() {
                 <nav className={styles.nav}>
                     <div
                         className={`${styles.navItem} ${activeTab === "dashboard" ? styles.active : ""}`}
-                        onClick={() => setActiveTab("dashboard")}
+                        onClick={() => { setActiveTab("dashboard"); setIsSidebarOpen(false); }}
                     >
                         <LayoutDashboard size={20} />
                         Dashboard
                     </div>
                     <div
                         className={`${styles.navItem} ${activeTab === "bookings" ? styles.active : ""}`}
-                        onClick={() => setActiveTab("bookings")}
+                        onClick={() => { setActiveTab("bookings"); setIsSidebarOpen(false); }}
                     >
                         <CalendarCheck size={20} />
                         Bookings
@@ -398,14 +417,14 @@ export default function AdminDashboard() {
                     </div>
                     <div
                         className={`${styles.navItem} ${activeTab === "fleet" ? styles.active : ""}`}
-                        onClick={() => setActiveTab("fleet")}
+                        onClick={() => { setActiveTab("fleet"); setIsSidebarOpen(false); }}
                     >
                         <Car size={20} />
                         Fleet
                     </div>
                     <div
                         className={`${styles.navItem} ${activeTab === "messages" ? styles.active : ""}`}
-                        onClick={() => setActiveTab("messages")}
+                        onClick={() => { setActiveTab("messages"); setIsSidebarOpen(false); }}
                     >
                         <MessageSquare size={20} />
                         Inquiries & Contact
@@ -415,7 +434,7 @@ export default function AdminDashboard() {
                     </div>
                     <div
                         className={`${styles.navItem} ${activeTab === "partners" ? styles.active : ""}`}
-                        onClick={() => setActiveTab("partners")}
+                        onClick={() => { setActiveTab("partners"); setIsSidebarOpen(false); }}
                     >
                         <Users size={20} />
                         Partners
