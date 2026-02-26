@@ -3,22 +3,24 @@
 import { Car } from "@/data/fleet";
 import { Users, Fuel, Gauge, CheckCircle2, Star } from "lucide-react";
 import styles from "./CarCard.module.css";
-import { motion } from "framer-motion";
-
+import Image from "next/image";
 interface CarCardProps {
     car: Car;
     priority?: boolean;
 }
 
-export default function CarCard({ car }: CarCardProps) {
+export default function CarCard({ car, priority }: CarCardProps) {
     return (
         <div className={styles.card}>
             <div className={styles.imageWrapper}>
-                <img
+                <Image
                     src={car.image}
                     alt={car.name}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className={styles.image}
-                    loading="lazy"
+                    priority={priority}
+                    style={{ objectFit: 'cover' }}
                 />
                 <div className={styles.typeBadge}>{car.type}</div>
                 {car.id.includes('civic') || car.id.includes('grande') || car.id.includes('v8') ? (

@@ -98,6 +98,44 @@ export default function AdminDashboard() {
     });
     const [imageFile, setImageFile] = useState<File | null>(null);
 
+    const compressImage = (file: File): Promise<Blob> => {
+        return new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = (event) => {
+                const img = new window.Image();
+                img.src = event.target?.result as string;
+                img.onload = () => {
+                    const canvas = document.createElement('canvas');
+                    const MAX_WIDTH = 1200;
+                    const MAX_HEIGHT = 1200;
+                    let width = img.width;
+                    let height = img.height;
+
+                    if (width > height) {
+                        if (width > MAX_WIDTH) {
+                            height *= MAX_WIDTH / width;
+                            width = MAX_WIDTH;
+                        }
+                    } else {
+                        if (height > MAX_HEIGHT) {
+                            width *= MAX_HEIGHT / height;
+                            height = MAX_HEIGHT;
+                        }
+                    }
+
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext('2d');
+                    ctx?.drawImage(img, 0, 0, width, height);
+                    canvas.toBlob((blob) => {
+                        resolve(blob || file);
+                    }, 'image/jpeg', 0.8);
+                };
+            };
+        });
+    };
+
     const { user, profile, loading: authLoading, logout: authLogout } = useAuth();
     const router = useRouter();
 
@@ -231,7 +269,8 @@ export default function AdminDashboard() {
             let imgUrl = carForm.image;
             if (imageFile) {
                 const storageRef = ref(storage, `fleet/${Date.now()}_${imageFile.name}`);
-                const snap = await uploadBytes(storageRef, imageFile);
+                const compressedBlob = await compressImage(imageFile);
+                const snap = await uploadBytes(storageRef, compressedBlob);
                 imgUrl = await getDownloadURL(snap.ref);
             }
 
@@ -854,8 +893,14 @@ export default function AdminDashboard() {
                                 {displayCars.map((car) => (
                                     <tr key={car.docId}>
                                         <td>
-                                            <div style={{ width: '80px', height: '40px', background: '#f5f5f5', borderRadius: '8px', overflow: 'hidden' }}>
-                                                <img src={car.image} alt={car.name} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+                                            <div style={{ width: '80px', height: '40px', background: '#f5f5f5', borderRadius: '8px', overflow: 'hidden', position: 'relative' }}>
+                                                <Image
+                                                    src={car.image}
+                                                    alt={car.name}
+                                                    fill
+                                                    sizes="80px"
+                                                    style={{ objectFit: 'contain' }}
+                                                />
                                             </div>
                                         </td>
                                         <td><span className={styles.customerName}>{car.name}</span><br /><span style={{ fontSize: '12px', color: 'var(--text-muted)' }}>Rs. {car.price}/day</span></td>

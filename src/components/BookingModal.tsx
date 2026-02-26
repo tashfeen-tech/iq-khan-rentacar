@@ -9,6 +9,7 @@ import { db } from "@/lib/firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { useAuth } from "@/lib/AuthContext";
 import Link from "next/link";
+import Image from "next/image";
 
 interface BookingModalProps {
     car: Car | null;
@@ -146,7 +147,13 @@ const BookingModal = ({ car, isOpen, onClose }: BookingModalProps) => {
                         <div className={styles.grid}>
                             <div className={styles.carInfo}>
                                 <div className={styles.carImagePlaceholder}>
-                                    <img src={car.image} alt={car.name} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '16px' }} />
+                                    <Image
+                                        src={car.image}
+                                        alt={car.name}
+                                        fill
+                                        priority
+                                        style={{ objectFit: 'cover', borderRadius: '16px' }}
+                                    />
                                 </div>
                                 <h3>{car.name}</h3>
                                 <p className={styles.carType}>{car.type}</p>
