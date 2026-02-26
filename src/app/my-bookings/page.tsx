@@ -33,6 +33,7 @@ export default function MyBookingsPage() {
     const { user, profile, loading: authLoading, logout } = useAuth();
     const [bookings, setBookings] = useState<Booking[]>([]);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
         if (!user) {
@@ -40,11 +41,12 @@ export default function MyBookingsPage() {
             return;
         }
 
-        // Query bookings by user email
+        // Query bookings by userId (most reliable) OR email
+        // We'll try to find by email which is what most users will expect if they book pre-login
+        const userEmail = user.email?.toLowerCase();
         const q = query(
             collection(db, "bookings"),
-            where("email", "==", user.email),
-            orderBy("createdAt", "desc")
+            where("email", "==", userEmail)
         );
 
         const unsubscribe = onSnapshot(q, (snapshot) => {
@@ -52,10 +54,25 @@ export default function MyBookingsPage() {
                 id: d.id,
                 ...d.data(),
             })) as Booking[];
-            setBookings(data);
+
+            // Sort in memory safely
+            const sortedData = [...data].sort((a, b) => {
+                const getTime = (ca: any) => {
+                    if (!ca) return 0;
+                    if (ca.toMillis) return ca.toMillis();
+                    if (ca.seconds) return ca.seconds * 1000;
+                    if (ca instanceof Date) return ca.getTime();
+                    return 0;
+                };
+                return getTime(b.createdAt) - getTime(a.createdAt);
+            });
+
+            setBookings(sortedData);
             setLoading(false);
+            setError(null);
         }, (error) => {
-            console.error("Error fetching bookings:", error);
+            console.error("Snapshot error:", error);
+            setError(`Connection error: ${error.message}`);
             setLoading(false);
         });
 
@@ -149,6 +166,10 @@ export default function MyBookingsPage() {
                             {loading ? (
                                 <div className={styles.loadingContainer}>
                                     Loading your bookings...
+                                </div>
+                            ) : error ? (
+                                <div className={styles.errorBanner}>
+                                    {error}
                                 </div>
                             ) : bookings.length === 0 ? (
                                 <div className={styles.emptyState}>

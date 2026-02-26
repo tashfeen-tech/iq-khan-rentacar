@@ -41,6 +41,7 @@ interface Booking {
     pickupDate: string;
     returnDate: string;
     totalPrice: number;
+    userId: string;
     status: "pending" | "confirmed" | "cancelled";
     createdAt: any;
     withDriver: boolean;
@@ -633,7 +634,9 @@ export default function AdminDashboard() {
                                                     defaultValue={booking.totalPrice || 0}
                                                     onBlur={(e) => {
                                                         const newVal = Number(e.target.value);
-                                                        if (newVal !== booking.totalPrice) updateBookingField(booking.id, "totalPrice", newVal);
+                                                        if (!isNaN(newVal) && newVal !== booking.totalPrice) {
+                                                            updateBookingField(booking.id, "totalPrice", newVal);
+                                                        }
                                                     }}
                                                     style={{ width: '80px', padding: '4px 8px', borderRadius: '4px', border: '1px solid var(--border)', background: 'var(--surface-hover)', outline: 'none' }}
                                                 />

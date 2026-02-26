@@ -29,7 +29,7 @@ service cloud.firestore {
 
     match /bookings/{bookingId} {
       allow create: if true;
-      allow read: if request.auth != null && (request.auth.uid == resource.data.userId || request.auth.token.email == resource.data.email);
+      allow read: if request.auth != null && (request.auth.uid == resource.data.userId || request.auth.token.email.toLower() == resource.data.email.toLower());
       allow read, write: if isAdmin();
     }
 

@@ -64,7 +64,7 @@ const BookingModal = ({ car, isOpen, onClose }: BookingModalProps) => {
 
             await addDoc(collection(db, "bookings"), {
                 name: formData.name,
-                email: formData.email,
+                email: formData.email.toLowerCase(),
                 phone: formData.phone,
                 pickupDate: formData.pickupDate,
                 returnDate: formData.returnDate,
