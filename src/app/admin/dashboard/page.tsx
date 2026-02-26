@@ -10,6 +10,7 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { useAuth } from "@/lib/AuthContext";
 import { useRouter } from "next/navigation";
+import { FLEET_DATA } from "@/data/fleet";
 import {
     Car,
     LayoutDashboard,
@@ -171,6 +172,8 @@ export default function AdminDashboard() {
 
         return () => unsubscribe();
     }, [user, profile]);
+
+    const displayCars = cars.length > 0 ? cars : FLEET_DATA.map(c => ({ ...c, docId: c.id }));
 
     const seedCars = async () => {
         const { FLEET_DATA } = await import("@/data/fleet");
@@ -713,7 +716,7 @@ export default function AdminDashboard() {
                 {activeTab === "fleet" && (
                     <div className={styles.tableContainer}>
                         <div className={styles.tableHeader}>
-                            <h2>Fleet Details ({cars.length})</h2>
+                            <h2>Fleet Details ({displayCars.length})</h2>
                             <div style={{ display: 'flex', gap: '12px' }}>
                                 <button className={styles.submitBtn} style={{ padding: "8px 16px", background: "var(--primary)", color: "#000", border: "none", borderRadius: "8px", fontWeight: "bold", cursor: "pointer", display: 'flex', alignItems: 'center', gap: '8px' }} onClick={openCreateCar}>
                                     <Plus size={16} /> Add Car
@@ -737,7 +740,7 @@ export default function AdminDashboard() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {cars.map((car) => (
+                                {displayCars.map((car) => (
                                     <tr key={car.docId}>
                                         <td>
                                             <div style={{ width: '80px', height: '40px', background: '#f5f5f5', borderRadius: '8px', overflow: 'hidden' }}>
