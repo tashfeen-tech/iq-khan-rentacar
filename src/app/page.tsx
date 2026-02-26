@@ -214,7 +214,7 @@ export default function Home() {
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '12px', color: 'var(--text-muted)' }}>
               <li>Mian Plaza, Civic Centre Block D-2, Phase 1, Johar Town, Lahore</li>
               <li>+92 304 9991234 (WhatsApp 24/7)</li>
-              <li>info@popularrentacar.com</li>
+              <li>popularrentacar938@gmail.com</li>
               <li><a href="https://share.google/GWVrBltkF4hrlyH4m" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--primary)', textDecoration: 'underline', fontWeight: 600 }}>Google Business Profile</a></li>
             </ul>
           </div>

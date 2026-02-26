@@ -44,6 +44,10 @@ interface Booking {
     withDriver: boolean;
     days: number;
     label?: string;
+    fromCity?: string;
+    toCity?: string;
+    airport?: string;
+    selectedFleetCar?: string;
 }
 
 interface ContactMessage {
@@ -547,17 +551,37 @@ export default function AdminDashboard() {
                                         </td>
                                         <td>
                                             <div className={styles.carInfo}>
-                                                <span className={styles.carName}>{booking.carName}</span>
-                                                <span className={styles.driverTag}>
-                                                    {booking.withDriver ? "With Driver" : "Self Drive"}
+                                                <span className={styles.carName}>
+                                                    {booking.selectedFleetCar ? `${booking.selectedFleetCar} (${booking.carName})` : booking.carName}
                                                 </span>
+                                                {booking.fromCity && booking.toCity && (
+                                                    <span style={{ fontSize: '12px', color: 'var(--primary)', fontWeight: 600, marginTop: '2px' }}>
+                                                        {booking.fromCity} → {booking.toCity}
+                                                    </span>
+                                                )}
+                                                {booking.airport && (
+                                                    <span style={{ fontSize: '12px', color: 'var(--primary)', fontWeight: 600, marginTop: '2px' }}>
+                                                        {booking.airport}
+                                                    </span>
+                                                )}
+                                                {!booking.selectedFleetCar && (
+                                                    <span className={styles.driverTag}>
+                                                        {booking.withDriver ? "With Driver" : "Self Drive"}
+                                                    </span>
+                                                )}
                                             </div>
                                         </td>
                                         <td>
                                             <div className={styles.duration}>
-                                                <span>{booking.pickupDate}</span>
-                                                <span className={styles.separator}>→</span>
-                                                <span>{booking.returnDate}</span>
+                                                {booking.returnDate ? (
+                                                    <>
+                                                        <span>{booking.pickupDate}</span>
+                                                        <span className={styles.separator}>→</span>
+                                                        <span>{booking.returnDate}</span>
+                                                    </>
+                                                ) : (
+                                                    <span>{booking.pickupDate?.replace('T', ' ')}</span>
+                                                )}
                                             </div>
                                         </td>
                                         <td>

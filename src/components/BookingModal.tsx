@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Calendar, User, Phone, Mail, LogIn, MessageCircle } from "lucide-react";
+import { X, Calendar, User, Phone, Mail, LogIn, MessageCircle, MapPin } from "lucide-react";
 import styles from "./BookingModal.module.css";
-import { Car } from "@/data/fleet";
+import { Car, FLEET_DATA } from "@/data/fleet";
 import { db } from "@/lib/firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { useAuth } from "@/lib/AuthContext";
@@ -25,7 +25,12 @@ const BookingModal = ({ car, isOpen, onClose }: BookingModalProps) => {
         pickupDate: "",
         returnDate: "",
         withDriver: false,
-        message: ""
+        message: "",
+        fromCity: "",
+        toCity: "",
+        airport: "",
+        time: "",
+        selectedFleetCar: ""
     });
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
@@ -58,7 +63,18 @@ const BookingModal = ({ car, isOpen, onClose }: BookingModalProps) => {
             const days = Math.ceil((end.getTime() - start.getTime()) / (1000 * 3600 * 24)) || 1;
 
             await addDoc(collection(db, "bookings"), {
-                ...formData,
+                name: formData.name,
+                email: formData.email,
+                phone: formData.phone,
+                pickupDate: formData.pickupDate,
+                returnDate: formData.returnDate,
+                withDriver: formData.withDriver,
+                message: formData.message,
+                fromCity: formData.fromCity,
+                toCity: formData.toCity,
+                airport: formData.airport,
+                time: formData.time,
+                selectedFleetCar: formData.selectedFleetCar,
                 carId: car.id,
                 carName: car.name,
                 carImage: car.image,
@@ -75,7 +91,12 @@ const BookingModal = ({ car, isOpen, onClose }: BookingModalProps) => {
                 ...prev,
                 message: "",
                 pickupDate: "",
-                returnDate: ""
+                returnDate: "",
+                fromCity: "",
+                toCity: "",
+                airport: "",
+                time: "",
+                selectedFleetCar: ""
             }));
             setTimeout(() => {
                 onClose();
@@ -93,7 +114,9 @@ const BookingModal = ({ car, isOpen, onClose }: BookingModalProps) => {
 
     if (!isOpen || !car) return null;
 
-
+    const isOneWay = car.id === 'service-all-pakistan-one-way-service';
+    const isAirport = car.id === 'service-airport-pick-&-drop-service';
+    const isSpecial = isOneWay || isAirport;
 
     return (
         <AnimatePresence>
@@ -183,46 +206,119 @@ const BookingModal = ({ car, isOpen, onClose }: BookingModalProps) => {
                                         </div>
                                     </div>
 
-                                    <div className={styles.inputRow}>
-                                        <div className={styles.inputGroup}>
-                                            <label><Calendar size={16} /> Pickup Date</label>
-                                            <input
-                                                type="date"
-                                                required
-                                                value={formData.pickupDate}
-                                                onChange={e => setFormData({ ...formData, pickupDate: e.target.value })}
-                                            />
-                                        </div>
-                                        <div className={styles.inputGroup}>
-                                            <label><Calendar size={16} /> Return Date</label>
-                                            <input
-                                                type="date"
-                                                required
-                                                value={formData.returnDate}
-                                                onChange={e => setFormData({ ...formData, returnDate: e.target.value })}
-                                            />
-                                        </div>
-                                    </div>
+                                    {isSpecial ? (
+                                        <>
+                                            <div className={styles.inputGroup} style={{ marginBottom: '15px' }}>
+                                                <label>Select Car</label>
+                                                <select
+                                                    required
+                                                    value={formData.selectedFleetCar}
+                                                    onChange={e => setFormData({ ...formData, selectedFleetCar: e.target.value })}
+                                                    style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid var(--border)', background: 'var(--surface)', color: 'var(--text-main)' }}
+                                                >
+                                                    <option value="" disabled>Choose a vehicle...</option>
+                                                    {FLEET_DATA.map(c => (
+                                                        <option key={c.id} value={c.name}>{c.name}</option>
+                                                    ))}
+                                                </select>
+                                            </div>
 
-                                    <div className={styles.toggleGroup}>
-                                        <label style={{ fontSize: '14px', fontWeight: 600 }}>Do you need a driver?</label>
-                                        <div className={styles.toggle}>
-                                            <button
-                                                type="button"
-                                                className={!formData.withDriver ? styles.active : ""}
-                                                onClick={() => setFormData({ ...formData, withDriver: false })}
-                                            >
-                                                Self Drive
-                                            </button>
-                                            <button
-                                                type="button"
-                                                className={formData.withDriver ? styles.active : ""}
-                                                onClick={() => setFormData({ ...formData, withDriver: true })}
-                                            >
-                                                With Driver
-                                            </button>
-                                        </div>
-                                    </div>
+                                            {isOneWay && (
+                                                <div className={styles.inputRow}>
+                                                    <div className={styles.inputGroup}>
+                                                        <label><MapPin size={16} /> From City</label>
+                                                        <input
+                                                            type="text"
+                                                            required
+                                                            placeholder="City name"
+                                                            value={formData.fromCity}
+                                                            onChange={e => setFormData({ ...formData, fromCity: e.target.value })}
+                                                        />
+                                                    </div>
+                                                    <div className={styles.inputGroup}>
+                                                        <label><MapPin size={16} /> To City</label>
+                                                        <input
+                                                            type="text"
+                                                            required
+                                                            placeholder="City in Punjab, KPK, Sindh"
+                                                            value={formData.toCity}
+                                                            onChange={e => setFormData({ ...formData, toCity: e.target.value })}
+                                                        />
+                                                    </div>
+                                                </div>
+                                            )}
+
+                                            {isAirport && (
+                                                <div className={styles.inputGroup} style={{ marginBottom: '15px' }}>
+                                                    <label><MapPin size={16} /> Airport</label>
+                                                    <select
+                                                        required
+                                                        value={formData.airport}
+                                                        onChange={e => setFormData({ ...formData, airport: e.target.value })}
+                                                        style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid var(--border)', background: 'var(--surface)', color: 'var(--text-main)' }}
+                                                    >
+                                                        <option value="" disabled>Select Airport</option>
+                                                        <option value="Allama Iqbal International Airport, Lahore">Allama Iqbal International Airport, Lahore</option>
+                                                        <option value="Jinnah International Airport, Karachi">Jinnah International Airport, Karachi</option>
+                                                        <option value="Islamabad International Airport">Islamabad International Airport</option>
+                                                    </select>
+                                                </div>
+                                            )}
+
+                                            <div className={styles.inputGroup} style={{ marginBottom: '15px' }}>
+                                                <label><Calendar size={16} /> Date & Time</label>
+                                                <input
+                                                    type="datetime-local"
+                                                    required
+                                                    value={formData.pickupDate}
+                                                    onChange={e => setFormData({ ...formData, pickupDate: e.target.value })}
+                                                />
+                                            </div>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <div className={styles.inputRow}>
+                                                <div className={styles.inputGroup}>
+                                                    <label><Calendar size={16} /> Pickup Date</label>
+                                                    <input
+                                                        type="date"
+                                                        required
+                                                        value={formData.pickupDate}
+                                                        onChange={e => setFormData({ ...formData, pickupDate: e.target.value })}
+                                                    />
+                                                </div>
+                                                <div className={styles.inputGroup}>
+                                                    <label><Calendar size={16} /> Return Date</label>
+                                                    <input
+                                                        type="date"
+                                                        required
+                                                        value={formData.returnDate}
+                                                        onChange={e => setFormData({ ...formData, returnDate: e.target.value })}
+                                                    />
+                                                </div>
+                                            </div>
+
+                                            <div className={styles.toggleGroup}>
+                                                <label style={{ fontSize: '14px', fontWeight: 600 }}>Do you need a driver?</label>
+                                                <div className={styles.toggle}>
+                                                    <button
+                                                        type="button"
+                                                        className={!formData.withDriver ? styles.active : ""}
+                                                        onClick={() => setFormData({ ...formData, withDriver: false })}
+                                                    >
+                                                        Self Drive
+                                                    </button>
+                                                    <button
+                                                        type="button"
+                                                        className={formData.withDriver ? styles.active : ""}
+                                                        onClick={() => setFormData({ ...formData, withDriver: true })}
+                                                    >
+                                                        With Driver
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </>
+                                    )}
 
                                     <div className={styles.inputGroup}>
                                         <label>Message / Requirements</label>
