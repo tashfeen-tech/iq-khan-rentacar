@@ -31,13 +31,6 @@ export default function CarCard({ car }: CarCardProps) {
             <div className={styles.content}>
                 <div className={styles.header}>
                     <h3 className={styles.name}>{car.name}</h3>
-                    {car.price && (
-                        <div className={styles.priceContainer}>
-                            <span className={styles.priceLabel}>Starting at</span>
-                            <span className={styles.price}>Rs. {car.price}</span>
-                            <span className={styles.perDay}>/day</span>
-                        </div>
-                    )}
                 </div>
 
                 <div className={styles.specs}>

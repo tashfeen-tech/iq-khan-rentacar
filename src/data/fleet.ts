@@ -7,193 +7,178 @@ export interface Car {
     image: string;
     available: boolean;
     features: string[];
-    price?: string; // Daily rate for display
 }
 
 export const FLEET_DATA: Car[] = [
-    // --- Economy / Standard ---
     {
         id: 'suzuki-alto',
-        name: 'Suzuki Alto (New)',
+        name: 'Suzuki Alto',
         type: 'Hatchback',
         transmission: 'Automatic',
         seats: 4,
-        image: 'https://images.unsplash.com/photo-1590362891991-f776e747a588?auto=format&fit=crop&q=80&w=800',
+        image: '/cars/suzuki-alto.png',
         available: true,
-        features: ['AC', 'Compact', 'Fuel Efficient', 'VXL Model'],
-        price: '4,500'
+        features: ['AC', 'Compact', 'Fuel Efficient', 'City Drive']
     },
     {
         id: 'suzuki-cultus',
-        name: 'Suzuki Cultus VXL',
+        name: 'Suzuki Cultus',
+        type: 'Hatchback',
+        transmission: 'Manual',
+        seats: 5,
+        image: '/cars/suzuki-cultus.png',
+        available: true,
+        features: ['AC', 'Bluetooth', 'Economical', 'Spacious']
+    },
+    {
+        id: 'suzuki-wagon-r',
+        name: 'Suzuki Wagon R',
+        type: 'Hatchback',
+        transmission: 'Manual',
+        seats: 5,
+        image: '/cars/suzuki-wagon-r.png',
+        available: true,
+        features: ['High Roof', 'Economical', 'Spacious Cabin', 'AC']
+    },
+    {
+        id: 'suzuki-swift',
+        name: 'Suzuki Swift',
         type: 'Hatchback',
         transmission: 'Automatic',
         seats: 5,
-        image: 'https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&q=80&w=800',
+        image: '/cars/suzuki-swift.png',
         available: true,
-        features: ['AC', 'Bluetooth', 'Power Windows', 'Spacious'],
-        price: '6,000'
+        features: ['AC', 'Alloy Rims', 'Sporty Look', 'Push Start']
     },
     {
-        id: 'toyota-yaris-ativ',
-        name: 'Toyota Yaris ATIV X',
+        id: 'toyota-yaris',
+        name: 'Toyota Yaris',
         type: 'Sedan',
         transmission: 'Automatic',
         seats: 5,
-        image: 'https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?auto=format&fit=crop&q=80&w=800',
+        image: '/cars/toyota-yaris.png',
         available: true,
-        features: ['Climate Control', 'Cruise Control', 'Airbags', '1.5L Engine'],
-        price: '8,500'
+        features: ['AC', 'Bluetooth', 'Airbags', 'Apple CarPlay']
     },
     {
-        id: 'honda-city-aspire',
-        name: 'Honda City Aspire',
+        id: 'honda-city',
+        name: 'Honda City',
         type: 'Sedan',
         transmission: 'Automatic',
         seats: 5,
-        image: 'https://images.unsplash.com/photo-1609521263047-f8f205293f24?auto=format&fit=crop&q=80&w=800',
+        image: '/cars/honda-city.png',
         available: true,
-        features: ['Leather Seats', 'Touchscreen', 'Alloy Wheels', 'Comfortable'],
-        price: '9,000'
+        features: ['AC', 'Touchscreen', 'Spacious Trunk', 'Comfortable']
     },
-
-    // --- Premium Sedans ---
     {
-        id: 'toyota-grande',
-        name: 'Toyota Corolla Grande',
+        id: 'toyota-corolla-gli',
+        name: 'Toyota Corolla GLi',
+        type: 'Sedan',
+        transmission: 'Automatic',
+        seats: 5,
+        image: '/cars/toyota-corolla.png',
+        available: true,
+        features: ['Reliable', 'AC', 'Comfortable Ride', 'Family Car']
+    },
+    {
+        id: 'honda-civic-2023',
+        name: 'Honda Civic 2023',
         type: 'Premium Sedan',
         transmission: 'Automatic',
         seats: 5,
-        image: 'https://images.unsplash.com/photo-1623122119332-60292fb2f87d?auto=format&fit=crop&q=80&w=800',
+        image: '/cars/honda-civic.png',
         available: true,
-        features: ['Sunroof', 'Paddle Shifters', 'Leather Interior', 'LED Lights'],
-        price: '12,000'
+        features: ['Sunroof', 'Adaptive Cruise', 'Leather Seats', 'Lane Assist']
     },
     {
-        id: 'honda-civic-rs',
-        name: 'Honda Civic RS Turbo',
-        type: 'Executive Sedan',
+        id: 'changan-alsvin',
+        name: 'Changan Alsvin',
+        type: 'Sedan',
         transmission: 'Automatic',
         seats: 5,
-        image: 'https://images.unsplash.com/photo-1594502184342-2e12f877aa73?auto=format&fit=crop&q=80&w=800',
+        image: '/cars/changan-alsvin.png',
         available: true,
-        features: ['Turbo Engine', 'Sunroof', 'Adaptive Cruise', 'Sport Mode'],
-        price: '18,500'
+        features: ['Sunroof', 'Cruise Control', 'Touchscreen', 'Fuel Efficient']
     },
     {
-        id: 'hyundai-sonata',
-        name: 'Hyundai Sonata 2.5',
-        type: 'Luxury Sedan',
+        id: 'honda-brv',
+        name: 'Honda BR-V',
+        type: 'MPV',
         transmission: 'Automatic',
-        seats: 5,
-        image: 'https://images.unsplash.com/photo-1617814076367-b759c7d6274a?auto=format&fit=crop&q=80&w=800',
+        seats: 7,
+        image: '/cars/honda-brv.png',
         available: true,
-        features: ['Panoramic Sunroof', 'Ambient Lighting', 'Digital Cluster', 'Nappa Leather'],
-        price: '25,000'
+        features: ['7 Seater', 'Family Car', 'Rear AC Vents', 'Spacious']
     },
-
-    // --- SUVs & 4x4s ---
     {
-        id: 'kia-sportage-awd',
-        name: 'KIA Sportage AWD',
+        id: 'hyundai-tucson',
+        name: 'Hyundai Tucson',
         type: 'SUV',
         transmission: 'Automatic',
         seats: 5,
-        image: 'https://images.unsplash.com/photo-1630046944933-255017006764?auto=format&fit=crop&q=80&w=800',
+        image: '/cars/hyundai-tucson.png',
         available: true,
-        features: ['AWD', 'Panoramic Sunroof', 'Power Tailgate', 'Premium Sound'],
-        price: '18,000'
+        features: ['Panoramic Sunroof', 'AWD', 'Premium Audio', 'Wireless Charging']
     },
     {
-        id: 'hyundai-tucson-ultimate',
-        name: 'Hyundai Tucson Ultimate',
+        id: 'kia-sportage',
+        name: 'KIA Sportage',
         type: 'SUV',
         transmission: 'Automatic',
         seats: 5,
-        image: 'https://images.unsplash.com/photo-1623912953265-5c12030d5246?auto=format&fit=crop&q=80&w=800',
+        image: '/cars/kia-sportage.png',
         available: true,
-        features: ['Wireless Charging', 'H-TRAC', 'Ventilated Seats', 'Safety Suite'],
-        price: '18,000'
+        features: ['Panoramic Sunroof', 'All-Wheel Drive', 'Premium Audio']
     },
     {
-        id: 'toyota-fortuner-legender',
-        name: 'Toyota Fortuner Legender',
-        type: 'Premium SUV',
-        transmission: 'Automatic',
-        seats: 7,
-        image: 'https://images.unsplash.com/photo-1641044390552-320c296680a1?auto=format&fit=crop&q=80&w=800',
-        available: true,
-        features: ['4x4 Sigma 4', 'Dual Tone Interior', 'Sport Mode', 'Off-road King'],
-        price: '35,000'
-    },
-    {
-        id: 'toyota-revo-rocco',
-        name: 'Toyota Hilux Revo Rocco',
-        type: 'Adventure Pick-up',
+        id: 'mg-hs',
+        name: 'MG HS',
+        type: 'SUV',
         transmission: 'Automatic',
         seats: 5,
-        image: 'https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&q=80&w=800',
+        image: '/cars/mg-hs-trophy.png',
         available: true,
-        features: ['Rocco Kit', 'Turbo Diesel', 'Tow Bar', 'Off-road Ready'],
-        price: '28,000'
+        features: ['Turbo Engine', 'Panoramic Sunroof', 'Leather Seats', 'Ambient Lighting']
     },
-
-    // --- Luxury & Exotic ---
     {
-        id: 'land-cruiser-v8',
-        name: 'Toyota Land Cruiser V8',
-        type: 'Ultimate Luxury SUV',
+        id: 'toyota-fortuner',
+        name: 'Toyota Fortuner',
+        type: 'SUV',
         transmission: 'Automatic',
         seats: 7,
-        image: 'https://images.unsplash.com/photo-1594912154447-4951475c7e0b?auto=format&fit=crop&q=80&w=800',
+        image: '/cars/toyota-fortuner.png',
         available: true,
-        features: ['V8 Engine', 'Rear Entertainment', 'Four Zone AC', 'Prestige Presence'],
-        price: '75,000'
+        features: ['4x4', 'Leather Interior', 'Spacious', 'Off-road']
     },
     {
-        id: 'toyota-prado-txi',
-        name: 'Toyota Prado TXL',
-        type: 'Luxury 4x4',
+        id: 'toyota-prado',
+        name: 'Toyota Land Cruiser Prado',
+        type: 'Luxury SUV',
         transmission: 'Automatic',
         seats: 7,
-        image: 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800',
+        image: '/cars/toyota-prado.png',
         available: true,
-        features: ['Sunroof', '7 Seats', 'Cool Box', 'Height Control'],
-        price: '45,000'
+        features: ['4x4', 'Luxury Interior', 'Sunroof', 'Off-road Master']
     },
     {
-        id: 'audi-a6',
-        name: 'Audi A6 (Business Class)',
-        type: 'Executive Luxury',
+        id: 'toyota-revo',
+        name: 'Toyota Hilux Revo',
+        type: 'Pickup / 4x4',
         transmission: 'Automatic',
         seats: 5,
-        image: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&q=80&w=800',
+        image: '/cars/toyota-hilux-revo.png',
         available: true,
-        features: ['Matrix LED', 'Virtual Cockpit', 'Soft Closing Doors', 'Bose Sound'],
-        price: '55,000'
+        features: ['4x4', 'Off-road Capability', 'Turbo Diesel', 'Tow Bar']
     },
-
-    // --- Vans / Group Travel ---
     {
         id: 'hiace-grand-cabin',
         name: 'Toyota HiAce Grand Cabin',
-        type: 'Luxury Van',
+        type: 'Van',
         transmission: 'Automatic',
         seats: 14,
-        image: 'https://images.unsplash.com/photo-1532152399201-9031f0cf2d81?auto=format&fit=crop&q=80&w=800',
+        image: '/cars/toyota-hiace.png',
         available: true,
-        features: ['14 Seater', 'Dual AC', 'Reclining Seats', 'Entertainment System'],
-        price: '18,500'
-    },
-    {
-        id: 'coaster',
-        name: 'Toyota Coaster',
-        type: 'Executive Bus',
-        transmission: 'Manual',
-        seats: 26,
-        image: 'https://images.unsplash.com/photo-1532581133503-4670cf840f6d?auto=format&fit=crop&q=80&w=800',
-        available: true,
-        features: ['28 Seater', 'Perfect for Tours', 'High Roof', 'Spacious Cargo'],
-        price: '30,000'
+        features: ['14 Seater', 'Dual AC', 'Large Luggage Space', 'Group Travel']
     }
 ];
+

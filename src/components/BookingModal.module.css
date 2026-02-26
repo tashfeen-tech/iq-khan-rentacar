@@ -1,9 +1,12 @@
 .overlay {
     position: fixed;
-    inset: 0;
-    background: rgba(15, 23, 42, 0.8);
-    backdrop-filter: blur(8px);
-    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(10px);
+    z-index: 2000;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -14,68 +17,81 @@
     background: var(--surface);
     width: 100%;
     max-width: 900px;
-    max-height: 90vh;
     border-radius: 32px;
+    border: 1px solid var(--glass-border);
     position: relative;
+    overflow: hidden;
+    max-height: 90vh;
     overflow-y: auto;
-    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .closeBtn {
     position: absolute;
     top: 24px;
     right: 24px;
+    background: var(--glass);
+    color: #fff;
+    border-radius: 50%;
     width: 40px;
     height: 40px;
-    border-radius: 50%;
-    background: var(--surface-hover);
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: var(--transition-smooth);
     z-index: 10;
+    transition: var(--transition-smooth);
 }
 
 .closeBtn:hover {
     background: var(--primary);
-    color: white;
-    transform: rotate(90deg);
+    color: #000;
 }
 
 .grid {
     display: grid;
-    grid-template-columns: 1fr 1.2fr;
+    grid-template-columns: 1fr 1.5fr;
 }
 
 .carInfo {
-    background: var(--surface-hover);
-    padding: 40px;
+    background: #fafafa;
+    padding: 48px;
     border-right: 1px solid var(--border);
 }
 
 .carImagePlaceholder {
     width: 100%;
-    height: 200px;
-    margin-bottom: 24px;
-    box-shadow: var(--shadow-md);
+    aspect-ratio: 16/9;
+    background: #f5f5f5;
     border-radius: 16px;
-    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 32px;
 }
 
 .carInfo h3 {
-    font-size: 24px;
-    font-weight: 800;
+    font-size: 28px;
     margin-bottom: 8px;
 }
 
 .carType {
     color: var(--primary);
-    font-weight: 700;
-    font-size: 14px;
+    font-weight: 600;
     text-transform: uppercase;
+    font-size: 13px;
     letter-spacing: 1px;
     margin-bottom: 24px;
+}
+
+.priceTag {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 32px;
+}
+
+.priceTag span {
+    font-size: 14px;
+    color: var(--text-muted);
+    font-weight: 400;
 }
 
 .featureList {
@@ -86,39 +102,30 @@
 }
 
 .featureList li {
+    color: var(--text-muted);
+    font-size: 15px;
     display: flex;
     align-items: center;
     gap: 10px;
-    color: var(--text-muted);
-    font-size: 14px;
-    font-weight: 500;
 }
 
 .featureList li::before {
-    content: '✓';
-    color: var(--success);
-    font-weight: 900;
+    content: "•";
+    color: var(--primary);
 }
 
 .formContainer {
-    padding: 40px;
+    padding: 48px;
 }
 
 .formContainer h2 {
     font-size: 28px;
-    font-weight: 800;
-    margin-bottom: 30px;
+    margin-bottom: 32px;
 }
 
 .form {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-}
-
-.inputRow {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
     gap: 20px;
 }
 
@@ -128,109 +135,109 @@
     gap: 8px;
 }
 
+.inputRow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
 .inputGroup label {
     font-size: 13px;
-    font-weight: 700;
-    color: var(--text-main);
+    font-weight: 600;
+    color: var(--text-muted);
     display: flex;
     align-items: center;
     gap: 8px;
 }
 
 .inputGroup input {
+    background: #f9f9f9;
+    border: 1px solid var(--border);
     padding: 12px 16px;
     border-radius: 12px;
-    border: 1.5px solid var(--border);
-    background: var(--background);
     color: var(--text-main);
     font-family: inherit;
-    font-size: 14px;
+    font-size: 15px;
     transition: var(--transition-smooth);
 }
 
 .inputGroup input:focus {
     border-color: var(--primary);
+    background: #ffffff;
     outline: none;
-    background: white;
 }
 
 .toggleGroup {
-    background: var(--surface-hover);
-    padding: 16px;
-    border-radius: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
 }
 
 .toggle {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    background: var(--background);
+    display: flex;
+    background: var(--glass);
     padding: 4px;
     border-radius: 10px;
-    margin-top: 10px;
 }
 
 .toggle button {
-    padding: 8px;
+    padding: 8px 20px;
     border-radius: 8px;
-    font-size: 13px;
-    font-weight: 700;
-    transition: var(--transition-smooth);
+    font-size: 14px;
+    font-weight: 600;
     background: transparent;
     color: var(--text-muted);
+    transition: var(--transition-smooth);
 }
 
 .toggle button.active {
-    background: white;
-    color: var(--primary);
-    box-shadow: var(--shadow-sm);
+    background: var(--primary);
+    color: #000;
 }
 
 .submitBtn {
-    background: var(--primary);
-    color: white;
-    padding: 16px;
-    border-radius: 14px;
-    font-weight: 800;
-    font-size: 16px;
     margin-top: 10px;
+    background: var(--primary);
+    color: #000;
+    padding: 16px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 700;
     transition: var(--transition-smooth);
 }
 
-.submitBtn:hover {
-    background: var(--text-main);
+.submitBtn:hover:not(:disabled) {
     transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+    box-shadow: 0 5px 15px var(--primary-glow);
+}
+
+.submitBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
 .successMessage {
-    padding: 80px 40px;
+    padding: 80px 48px;
     text-align: center;
 }
 
 .successIcon {
-    width: 64px;
-    height: 64px;
-    background: var(--success);
-    color: white;
+    width: 80px;
+    height: 80px;
+    background: var(--primary);
+    color: #000;
     border-radius: 50%;
+    font-size: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 32px;
-    margin: 0 auto 24px;
-    box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
-}
-
-.successMessage h2 {
-    font-size: 32px;
-    margin-bottom: 12px;
+    margin: 0 auto 32px;
 }
 
 .error {
-    color: var(--primary);
+    color: #ff4d4d;
     font-size: 14px;
-    font-weight: 600;
-    text-align: center;
 }
 
 @media (max-width: 768px) {
@@ -242,8 +249,8 @@
         display: none;
     }
 
-    .modal {
-        border-radius: 24px;
+    .formContainer {
+        padding: 32px 24px;
     }
 
     .inputRow {

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Calendar, User, Phone, Mail, LogIn } from "lucide-react";
+import { X, Calendar, User, Phone, Mail, LogIn, MessageCircle } from "lucide-react";
 import styles from "./BookingModal.module.css";
 import { Car } from "@/data/fleet";
 import { db } from "@/lib/firebase";
@@ -238,13 +238,36 @@ const BookingModal = ({ car, isOpen, onClose }: BookingModalProps) => {
 
                                     {error && <p className={styles.error}>{error}</p>}
 
-                                    <button
-                                        type="submit"
-                                        className={styles.submitBtn}
-                                        disabled={loading}
-                                    >
-                                        {loading ? "Sending..." : `Send Inquiry`}
-                                    </button>
+                                    <div style={{ display: 'flex', gap: '12px', marginTop: '10px' }}>
+                                        <button
+                                            type="submit"
+                                            className={styles.submitBtn}
+                                            disabled={loading}
+                                            style={{ flex: 1 }}
+                                        >
+                                            {loading ? "Sending..." : `Send Inquiry`}
+                                        </button>
+
+                                        <a
+                                            href={`https://wa.me/923041111111?text=Hi! I am interested in renting the ${car.name}.`}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className={styles.submitBtn}
+                                            style={{
+                                                flex: 1,
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                                gap: '8px',
+                                                background: '#25D366',
+                                                textDecoration: 'none',
+                                                color: 'white'
+                                            }}
+                                        >
+                                            <MessageCircle size={20} />
+                                            WhatsApp
+                                        </a>
+                                    </div>
                                 </form>
                             </div>
                         </div>
