@@ -83,6 +83,7 @@ export default function AdminDashboard() {
     const [cars, setCars] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
     const [activeTab, setActiveTab] = useState<Tab>("dashboard");
+    const [bookingFilter, setBookingFilter] = useState<'all' | 'pending' | 'confirmed' | 'cancelled'>('all');
 
     // Car Modal State
     const [isCarModalOpen, setIsCarModalOpen] = useState(false);
@@ -346,21 +347,21 @@ export default function AdminDashboard() {
                         )}
                     </div>
                     <div
-                        className={`${styles.navItem} ${activeTab === "messages" ? styles.active : ""}`}
-                        onClick={() => setActiveTab("messages")}
-                    >
-                        <MessageSquare size={20} />
-                        Messages
-                        {stats.unreadMessages > 0 && (
-                            <span className={styles.badge}>{stats.unreadMessages}</span>
-                        )}
-                    </div>
-                    <div
                         className={`${styles.navItem} ${activeTab === "fleet" ? styles.active : ""}`}
                         onClick={() => setActiveTab("fleet")}
                     >
                         <Car size={20} />
                         Fleet
+                    </div>
+                    <div
+                        className={`${styles.navItem} ${activeTab === "messages" ? styles.active : ""}`}
+                        onClick={() => setActiveTab("messages")}
+                    >
+                        <MessageSquare size={20} />
+                        Inquiries & Contact
+                        {stats.unreadMessages > 0 && (
+                            <span className={styles.badge}>{stats.unreadMessages}</span>
+                        )}
                     </div>
                     <div
                         className={`${styles.navItem} ${activeTab === "partners" ? styles.active : ""}`}
@@ -447,7 +448,7 @@ export default function AdminDashboard() {
                                 <thead>
                                     <tr>
                                         <th>Customer</th>
-                                        <th>Car Details</th>
+                                        <th>Service / Car</th>
                                         <th>Duration</th>
                                         <th>Total Price</th>
                                         <th>Status</th>
@@ -455,7 +456,7 @@ export default function AdminDashboard() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {bookings.slice(0, 5).map((booking) => (
+                                    {bookings.filter(b => b.status === "pending").slice(0, 5).map((booking) => (
                                         <tr key={booking.id}>
                                             <td>
                                                 <div className={styles.customerInfo}>
@@ -465,10 +466,24 @@ export default function AdminDashboard() {
                                             </td>
                                             <td>
                                                 <div className={styles.carInfo}>
-                                                    <span className={styles.carName}>{booking.carName}</span>
-                                                    <span className={styles.driverTag}>
-                                                        {booking.withDriver ? "With Driver" : "Self Drive"}
+                                                    <span className={styles.carName}>
+                                                        {booking.selectedFleetCar ? `${booking.selectedFleetCar} (${booking.carName})` : booking.carName}
                                                     </span>
+                                                    {booking.fromCity && booking.toCity && (
+                                                        <span style={{ fontSize: '11px', color: 'var(--primary)', fontWeight: 600 }}>
+                                                            {booking.fromCity} → {booking.toCity}
+                                                        </span>
+                                                    )}
+                                                    {booking.airport && (
+                                                        <span style={{ fontSize: '11px', color: 'var(--primary)', fontWeight: 600 }}>
+                                                            {booking.airport}
+                                                        </span>
+                                                    )}
+                                                    {!booking.selectedFleetCar && (
+                                                        <span className={styles.driverTag}>
+                                                            {booking.withDriver ? "With Driver" : "Self Drive"}
+                                                        </span>
+                                                    )}
                                                 </div>
                                             </td>
                                             <td>
@@ -524,8 +539,26 @@ export default function AdminDashboard() {
                 {/* ========== BOOKINGS TAB ========== */}
                 {activeTab === "bookings" && (
                     <div className={styles.tableContainer}>
-                        <div className={styles.tableHeader}>
-                            <h2>All Bookings ({bookings.length})</h2>
+                        <div className={styles.tableHeader} style={{ flexDirection: 'column', alignItems: 'flex-start', gap: '16px' }}>
+                            <h2>Bookings Console</h2>
+                            <div style={{ display: 'flex', gap: '8px', overflowX: 'auto', width: '100%', paddingBottom: '4px' }}>
+                                {['all', 'pending', 'confirmed', 'cancelled'].map(f => (
+                                    <button
+                                        key={f}
+                                        onClick={() => setBookingFilter(f as any)}
+                                        style={{
+                                            padding: '8px 16px', borderRadius: '100px',
+                                            border: '1px solid var(--border)',
+                                            background: bookingFilter === f ? 'var(--primary)' : 'var(--surface-hover)',
+                                            color: bookingFilter === f ? '#000' : 'var(--text-main)',
+                                            fontWeight: bookingFilter === f ? 700 : 500,
+                                            cursor: 'pointer', textTransform: 'capitalize', whiteSpace: 'nowrap'
+                                        }}
+                                    >
+                                        {f} ({f === 'all' ? bookings.length : bookings.filter(b => b.status === f).length})
+                                    </button>
+                                ))}
+                            </div>
                         </div>
                         <table className={styles.table}>
                             <thead>
@@ -540,7 +573,7 @@ export default function AdminDashboard() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {bookings.map((booking) => (
+                                {bookings.filter(b => bookingFilter === 'all' || b.status === bookingFilter).map((booking) => (
                                     <tr key={booking.id}>
                                         <td>
                                             <div className={styles.customerInfo}>
@@ -790,7 +823,7 @@ export default function AdminDashboard() {
                                     <th>Vehicle</th>
                                     <th>Type</th>
                                     <th>Transmission</th>
-                                    <th>Seats</th>
+                                    <th>Features</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -802,10 +835,16 @@ export default function AdminDashboard() {
                                                 <img src={car.image} alt={car.name} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
                                             </div>
                                         </td>
-                                        <td><span className={styles.customerName}>{car.name}</span></td>
+                                        <td><span className={styles.customerName}>{car.name}</span><br /><span style={{ fontSize: '12px', color: 'var(--text-muted)' }}>Rs. {car.price}/day</span></td>
                                         <td>{car.type}</td>
                                         <td>{car.transmission}</td>
-                                        <td>{car.seats} Seats</td>
+                                        <td>
+                                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px', maxWidth: '200px' }}>
+                                                {car.features?.map((f: string, i: number) => (
+                                                    <span key={i} style={{ fontSize: '10px', background: 'var(--surface-hover)', padding: '2px 6px', borderRadius: '4px' }}>{f}</span>
+                                                ))}
+                                            </div>
+                                        </td>
                                         <td>
                                             <div className={styles.actions}>
                                                 <button onClick={() => openEditCar(car)} className={styles.approveBtn} title="Edit">

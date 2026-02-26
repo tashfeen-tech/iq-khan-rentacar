@@ -35,10 +35,10 @@ export default function MyBookingsPage() {
             return;
         }
 
-        // Query bookings by user email
+        // Query bookings by userId
         const q = query(
             collection(db, "bookings"),
-            where("email", "==", user.email),
+            where("userId", "==", user.uid),
             orderBy("createdAt", "desc")
         );
 
