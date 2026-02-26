@@ -41,14 +41,18 @@ export default function MyBookingsPage() {
             return;
         }
 
-        // Query bookings by userId (most reliable) OR email
-        const userEmail = user.email?.toLowerCase();
+        // Query bookings by userId (most reliable) OR email (original and lowercase)
+        const conditions = [where("userId", "==", user.uid)];
+        if (user.email) {
+            conditions.push(where("email", "==", user.email));
+            if (user.email.toLowerCase() !== user.email) {
+                conditions.push(where("email", "==", user.email.toLowerCase()));
+            }
+        }
+
         const q = query(
             collection(db, "bookings"),
-            or(
-                where("userId", "==", user.uid),
-                where("email", "==", userEmail)
-            )
+            or(...conditions)
         );
 
         const unsubscribe = onSnapshot(q, (snapshot) => {

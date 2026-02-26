@@ -3,7 +3,9 @@ service cloud.firestore {
   match /databases/{database}/documents {
     
     function isAdmin() {
-      return request.auth != null && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+      return request.auth != null && 
+             exists(/databases/$(database)/documents/users/$(request.auth.uid)) &&
+             get(/databases/$(database)/documents/users/$(request.auth.uid)).data.get('role', 'user') == 'admin';
     }
 
     match /cars/{carId} {
@@ -31,6 +33,7 @@ service cloud.firestore {
       allow create: if true;
       allow read: if request.auth != null && (
         (resource.data.get('userId', '') == request.auth.uid) || 
+        (resource.data.get('email', '') == request.auth.token.get('email', '')) ||
         (resource.data.get('email', '').lower() == request.auth.token.get('email', '').lower())
       );
       allow read, write: if isAdmin();
