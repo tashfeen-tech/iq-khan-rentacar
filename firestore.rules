@@ -33,8 +33,7 @@ service cloud.firestore {
       allow create: if true;
       allow read: if request.auth != null && (
         (resource.data.get('userId', '') == request.auth.uid) || 
-        (resource.data.get('email', '') == request.auth.token.get('email', '')) ||
-        (resource.data.get('email', '').lower() == request.auth.token.get('email', '').lower())
+        (resource.data.get('email', '').lower() == request.auth.token.email.lower())
       );
       allow read, write: if isAdmin();
     }
