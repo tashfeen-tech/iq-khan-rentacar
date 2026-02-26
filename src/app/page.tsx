@@ -36,10 +36,24 @@ export default function Home() {
     setIsModalOpen(true);
   };
 
+  const handleBookService = (serviceName: string) => {
+    setSelectedCar({
+      id: "service-" + serviceName.toLowerCase().replace(/ /g, '-'),
+      name: serviceName,
+      type: "Premium Service",
+      transmission: "Automatic",
+      seats: 4,
+      image: "/logo.png",
+      available: true,
+      features: ["VIP Treatment", "Chauffeur Included", "Flexible Timing"]
+    });
+    setIsModalOpen(true);
+  };
+
   return (
     <>
       <Navbar />
-      <Hero />
+      <Hero onBookService={handleBookService} />
 
       <section id="fleet" style={{ padding: '100px 24px', maxWidth: '1200px', margin: '0 auto' }}>
         <motion.div

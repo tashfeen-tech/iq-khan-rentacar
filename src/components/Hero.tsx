@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { ChevronRight, Calendar, MapPin, Search } from "lucide-react";
 import styles from "./Hero.module.css";
 
-const Hero = () => {
+const Hero = ({ onBookService }: { onBookService?: (serviceName: string) => void }) => {
     return (
         <section className={styles.hero}>
             <div className={styles.overlay}></div>
@@ -32,9 +32,9 @@ const Hero = () => {
                             <div style={{ background: 'rgba(0,0,0,0.3)', padding: '12px', borderRadius: '8px', textAlign: 'center', color: '#fff' }}>Toyota Yaris</div>
                             <div style={{ background: 'rgba(0,0,0,0.3)', padding: '12px', borderRadius: '8px', textAlign: 'center', color: '#fff' }}>Honda Civic</div>
                         </div>
-                        <a href="https://wa.me/9230346257123?text=Hi! I want to book a One-Way Trip." target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ width: '100%', textAlign: 'center' }}>
+                        <button onClick={() => onBookService?.("All Pakistan One-Way Service")} className="btn-primary" style={{ width: '100%', textAlign: 'center', border: 'none', cursor: 'pointer' }}>
                             Book One-Way Trip
-                        </a>
+                        </button>
                     </motion.div>
 
                     {/* Airport Pick & Drop Card */}
@@ -56,9 +56,9 @@ const Hero = () => {
                             <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '10px' }}>✅ Luxury Vehicles Available</li>
                             <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '10px' }}>✅ Meet & Greet Service</li>
                         </ul>
-                        <a href="https://wa.me/9230346257123?text=Hi! I need an airport transfer." target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ width: '100%', textAlign: 'center' }}>
+                        <button onClick={() => onBookService?.("Airport Pick & Drop Service")} className="btn-primary" style={{ width: '100%', textAlign: 'center', border: 'none', cursor: 'pointer' }}>
                             Book Airport Transfer
-                        </a>
+                        </button>
                     </motion.div>
 
                 </div>

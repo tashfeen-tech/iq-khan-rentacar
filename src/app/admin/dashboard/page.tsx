@@ -43,6 +43,7 @@ interface Booking {
     createdAt: any;
     withDriver: boolean;
     days: number;
+    label?: string;
 }
 
 interface ContactMessage {
@@ -265,6 +266,14 @@ export default function AdminDashboard() {
             await updateDoc(doc(db, "bookings", id), { status });
         } catch (err) {
             console.error("Error updating status:", err);
+        }
+    };
+
+    const updateBookingField = async (id: string, field: string, value: any) => {
+        try {
+            await updateDoc(doc(db, "bookings", id), { [field]: value });
+        } catch (err) {
+            console.error(`Error updating ${field}:`, err);
         }
     };
 
@@ -521,7 +530,7 @@ export default function AdminDashboard() {
                                     <th>Car Details</th>
                                     <th>Duration</th>
                                     <th>Total Price</th>
-                                    <th>Status</th>
+                                    <th>Status / Label</th>
                                     <th>Booked At</th>
                                     <th>Actions</th>
                                 </tr>
@@ -552,12 +561,34 @@ export default function AdminDashboard() {
                                             </div>
                                         </td>
                                         <td>
-                                            <span className={styles.price}>Rs. {booking.totalPrice?.toLocaleString()}</span>
+                                            <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                                                <span style={{ fontWeight: 'bold' }}>Rs.</span>
+                                                <input
+                                                    type="number"
+                                                    defaultValue={booking.totalPrice || 0}
+                                                    onBlur={(e) => {
+                                                        const newVal = Number(e.target.value);
+                                                        if (newVal !== booking.totalPrice) updateBookingField(booking.id, "totalPrice", newVal);
+                                                    }}
+                                                    style={{ width: '80px', padding: '4px 8px', borderRadius: '4px', border: '1px solid var(--border)', background: 'var(--surface-hover)', outline: 'none' }}
+                                                />
+                                            </div>
                                         </td>
                                         <td>
-                                            <span className={`${styles.status} ${styles[booking.status]}`}>
-                                                {booking.status}
-                                            </span>
+                                            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                                                <span className={`${styles.status} ${styles[booking.status]}`}>
+                                                    {booking.status}
+                                                </span>
+                                                <input
+                                                    type="text"
+                                                    placeholder="Add label (VIP)"
+                                                    defaultValue={booking.label || ""}
+                                                    onBlur={(e) => {
+                                                        if (e.target.value !== booking.label) updateBookingField(booking.id, "label", e.target.value);
+                                                    }}
+                                                    style={{ width: '100px', fontSize: '12px', padding: '4px', borderRadius: '4px', border: '1px solid var(--border)' }}
+                                                />
+                                            </div>
                                         </td>
                                         <td>
                                             <span className={styles.timestamp}>{formatTimestamp(booking.createdAt)}</span>
