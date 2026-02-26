@@ -22,6 +22,11 @@ interface Booking {
     name: string;
     phone: string;
     email: string;
+    label?: string;
+    fromCity?: string;
+    toCity?: string;
+    airport?: string;
+    selectedFleetCar?: string;
 }
 
 export default function MyBookingsPage() {
@@ -35,10 +40,10 @@ export default function MyBookingsPage() {
             return;
         }
 
-        // Query bookings by userId
+        // Query bookings by user email
         const q = query(
             collection(db, "bookings"),
-            where("userId", "==", user.uid),
+            where("email", "==", user.email),
             orderBy("createdAt", "desc")
         );
 
@@ -169,14 +174,23 @@ export default function MyBookingsPage() {
                                             <div className={styles.cardTop}>
                                                 <div className={styles.carTitle}>
                                                     <Car size={20} color="var(--primary)" />
-                                                    <h3>{booking.carName}</h3>
-                                                    <span className={styles.driverBadge}>
-                                                        {booking.withDriver ? "With Driver" : "Self Drive"}
-                                                    </span>
+                                                    <h3>{booking.selectedFleetCar ? `${booking.selectedFleetCar} (${booking.carName})` : booking.carName}</h3>
+                                                    {!booking.selectedFleetCar && (
+                                                        <span className={styles.driverBadge}>
+                                                            {booking.withDriver ? "With Driver" : "Self Drive"}
+                                                        </span>
+                                                    )}
                                                 </div>
-                                                <span className={`${styles.statusBadge} ${getStatusClass(booking.status)}`}>
-                                                    {booking.status}
-                                                </span>
+                                                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '6px' }}>
+                                                    <span className={`${styles.statusBadge} ${getStatusClass(booking.status)}`}>
+                                                        {booking.status}
+                                                    </span>
+                                                    {booking.label && (
+                                                        <span style={{ fontSize: '12px', background: 'var(--surface-hover)', padding: '4px 8px', borderRadius: '4px', fontWeight: 600, border: '1px solid var(--border)' }}>
+                                                            {booking.label}
+                                                        </span>
+                                                    )}
+                                                </div>
                                             </div>
 
                                             <div className={styles.cardBody}>

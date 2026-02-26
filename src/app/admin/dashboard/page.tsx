@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 import { useEffect, useState } from "react";
 import { auth, db, storage } from "@/lib/firebase";
 import {
@@ -323,9 +325,15 @@ export default function AdminDashboard() {
         <div className={styles.dashboard}>
             {/* Sidebar */}
             <aside className={styles.sidebar}>
-                <div className={styles.brand}>
-                    <Car size={32} color="var(--primary)" />
-                    <span>POPULAR ADMIN</span>
+                <div className={styles.brand} style={{ marginBottom: '32px' }}>
+                    <Image
+                        src="/logo.png"
+                        alt="Popular Rent A Car"
+                        width={180}
+                        height={60}
+                        style={{ objectFit: 'contain' }}
+                        priority
+                    />
                 </div>
 
                 <nav className={styles.nav}>
