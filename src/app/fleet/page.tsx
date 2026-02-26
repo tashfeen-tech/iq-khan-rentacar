@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import CarCard from "@/components/CarCard";
 import BookingModal from "@/components/BookingModal";
-import { Car } from "@/data/fleet";
+import { Car, FLEET_DATA } from "@/data/fleet";
 import { db } from "@/lib/firebase";
 import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
 import { motion } from "framer-motion";
@@ -33,7 +33,9 @@ export default function FleetPage() {
         return () => unsubscribe();
     }, []);
 
-    const filtered = fleetData.filter((car) => {
+    const displayData = fleetData.length > 0 ? fleetData : FLEET_DATA;
+
+    const filtered = displayData.filter((car) => {
         const typeMatch = activeType === "All" || car.type === activeType;
         const seatMatch =
             seatFilter === "Any" ||

@@ -52,6 +52,19 @@ button {
   font-family: var(--font-main);
 }
 
+input,
+textarea,
+select {
+  font-family: var(--font-main);
+  color: var(--text-main) !important;
+  background-color: var(--surface);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-muted) !important;
+}
+
 .premium-card {
   background: var(--glass);
   backdrop-filter: blur(10px);

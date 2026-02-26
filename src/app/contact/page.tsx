@@ -69,7 +69,7 @@ export default function ContactPage() {
                             <div className={styles.infoIcon}><Phone size={22} /></div>
                             <div>
                                 <span className={styles.infoLabel}>Call / WhatsApp</span>
-                                <a href="tel:+923059991234" className={styles.infoValue}>+92 305 9991234</a>
+                                <a href="tel:+923041111111" className={styles.infoValue}>+92 304 1111111</a>
                             </div>
                         </div>
 
@@ -77,7 +77,7 @@ export default function ContactPage() {
                             <div className={styles.infoIcon}><MessageCircle size={22} /></div>
                             <div>
                                 <span className={styles.infoLabel}>WhatsApp</span>
-                                <a href="https://wa.me/923059991234" target="_blank" rel="noopener noreferrer" className={styles.infoValue}>
+                                <a href="https://wa.me/923041111111" target="_blank" rel="noopener noreferrer" className={styles.infoValue}>
                                     Chat on WhatsApp
                                 </a>
                             </div>
@@ -120,7 +120,7 @@ export default function ContactPage() {
                         </div>
 
                         <a
-                            href="https://wa.me/923059991234?text=Hi%20Popular%20Rent%20A%20Car%2C%20I%20would%20like%20to%20inquire%20about%20a%20car."
+                            href="https://wa.me/923041111111?text=Hi%20Popular%20Rent%20A%20Car%2C%20I%20would%20like%20to%20inquire%20about%20a%20car."
                             target="_blank"
                             rel="noopener noreferrer"
                             className={`btn-primary ${styles.whatsappBtn}`}

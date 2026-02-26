@@ -36,6 +36,7 @@
     line-height: 1.1;
     margin-bottom: 24px;
     letter-spacing: -1px;
+    color: #ffffff;
 }
 
 .highlight {
@@ -46,7 +47,7 @@
 .subtitle {
     font-size: 18px;
     line-height: 1.6;
-    color: var(--text-muted);
+    color: rgba(255, 255, 255, 0.7);
     margin-bottom: 48px;
     max-width: 550px;
 }
@@ -86,15 +87,15 @@
 
 .bookingItem input,
 .bookingItem select {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid var(--border);
-    padding: 14px 18px;
-    border-radius: 12px;
-    color: #fff;
-    font-family: inherit;
-    font-size: 15px;
-    outline: none;
-    transition: var(--transition-smooth);
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid var(--border) !important;
+    padding: 14px 18px !important;
+    border-radius: 12px !important;
+    color: #fff !important;
+    font-family: inherit !important;
+    font-size: 15px !important;
+    outline: none !important;
+    transition: var(--transition-smooth) !important;
 }
 
 .bookingItem input:focus,

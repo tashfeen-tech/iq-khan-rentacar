@@ -52,7 +52,7 @@ const Navbar = () => {
                             Sign In
                         </Link>
                     )}
-                    <a href="tel:03059991234" className="btn-primary">
+                    <a href="tel:03041111111" className="btn-primary">
                         <Phone size={18} />
                         <span>Book Now</span>
                     </a>
@@ -79,7 +79,7 @@ const Navbar = () => {
                     ) : (
                         <Link href="/auth" onClick={() => setIsMobileMenuOpen(false)}>Sign In</Link>
                     )}
-                    <a href="tel:03059991234" className="btn-primary">Book Now</a>
+                    <a href="tel:03041111111" className="btn-primary">Book Now</a>
                 </div>
             )}
         </nav>

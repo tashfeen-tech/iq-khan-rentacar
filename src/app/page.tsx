@@ -5,7 +5,7 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import CarCard from "@/components/CarCard";
 import BookingModal from "@/components/BookingModal";
-import { Car } from "@/data/fleet";
+import { Car, FLEET_DATA } from "@/data/fleet";
 import { db } from "@/lib/firebase";
 import { collection, onSnapshot, query } from "firebase/firestore";
 import { motion } from "framer-motion";
@@ -28,6 +28,8 @@ export default function Home() {
     });
     return () => unsubscribe();
   }, []);
+
+  const displayFleet = fleetData.length > 0 ? fleetData : FLEET_DATA;
 
   const handleBookClick = (car: Car) => {
     setSelectedCar(car);
@@ -60,7 +62,7 @@ export default function Home() {
           gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
           gap: '32px'
         }}>
-          {fleetData.slice(0, 9).map((car, index) => (
+          {displayFleet.slice(0, 9).map((car, index) => (
             <motion.div
               key={car.id}
               initial={{ opacity: 0, y: 20 }}
@@ -144,6 +146,57 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Airport Service & Reviews Section */}
+      <section style={{ background: 'var(--surface-hover)', padding: '100px 24px' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '60px' }}>
+
+          <div className="premium-card" style={{ padding: '40px' }}>
+            <h2 style={{ fontSize: '32px', fontWeight: 800, marginBottom: '20px' }}>
+              <span className="gradient-text">Airport Pick & Drop</span> Service
+            </h2>
+            <p style={{ color: 'var(--text-muted)', fontSize: '18px', marginBottom: '30px' }}>
+              Skip the taxi queues at Allama Iqbal International Airport. Book our reliable airport transfer service. Our professional drivers will be waiting for you upon arrival.
+            </p>
+            <ul style={{ listStyle: 'none', padding: 0, marginBottom: '30px' }}>
+              <li style={{ marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px' }}>✅ Punctual & Reliable</li>
+              <li style={{ marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px' }}>✅ Luxury Vehicles Available</li>
+              <li style={{ marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px' }}>✅ Meet & Greet Service</li>
+            </ul>
+            <a href="https://wa.me/923041111111?text=Hi! I need an airport transfer." target="_blank" rel="noopener noreferrer" className="btn-primary">Book Airport Transfer</a>
+          </div>
+
+          <div className="premium-card" style={{ padding: '40px' }}>
+            <h2 style={{ fontSize: '32px', fontWeight: 800, marginBottom: '20px' }}>
+              What Our <span className="gradient-text">Clients Say</span>
+            </h2>
+            <p style={{ color: 'var(--text-muted)', fontSize: '18px', marginBottom: '30px' }}>
+              Trusted by thousands of travelers. Read our latest Google Reviews.
+            </p>
+
+            <div style={{ background: 'var(--surface)', padding: '24px', borderRadius: '16px', marginBottom: '20px', border: '1px solid var(--border)' }}>
+              <div style={{ display: 'flex', gap: '4px', color: '#FFD700', marginBottom: '10px' }}>
+                ★★★★★
+              </div>
+              <p style={{ color: 'var(--text-main)', fontStyle: 'italic', marginBottom: '10px' }}>
+                "Excellent service! The car was in perfect condition and the driver was very professional. Highly recommended for one-way travel to Islamabad."
+              </p>
+              <p style={{ fontSize: '14px', color: 'var(--text-muted)' }}>- Google User</p>
+            </div>
+
+            <div style={{ background: 'var(--surface)', padding: '24px', borderRadius: '16px', border: '1px solid var(--border)' }}>
+              <div style={{ display: 'flex', gap: '4px', color: '#FFD700', marginBottom: '10px' }}>
+                ★★★★★
+              </div>
+              <p style={{ color: 'var(--text-main)', fontStyle: 'italic', marginBottom: '10px' }}>
+                "Booked an Audi for a wedding event. Seamless process and top-notch vehicle quality. Popular Rent A Car is indeed the best in Lahore."
+              </p>
+              <p style={{ fontSize: '14px', color: 'var(--text-muted)' }}>- Local Guide</p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
       {/* Footer */}
       <footer style={{ padding: '80px 24px 40px', borderTop: '1px solid var(--border)', background: 'var(--background)' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '40px' }}>
@@ -152,28 +205,31 @@ export default function Home() {
             <p style={{ color: 'var(--text-muted)', lineHeight: '1.6' }}>
               The most trusted car rental service in Pakistan. Travel anywhere with comfort, safety, and peace of mind.
             </p>
-            <div style={{ display: 'flex', gap: '16px', marginTop: '20px' }}>
-              {/* Social Links placeholders */}
-              <a href="https://www.facebook.com/popularrentcars" target="_blank" rel="noreferrer" style={{ color: 'var(--secondary)' }}>Facebook</a>
-              <a href="https://www.instagram.com/popularrentacars" target="_blank" rel="noreferrer" style={{ color: 'var(--primary)' }}>Insta</a>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', marginTop: '20px' }}>
+              <a href="https://www.facebook.com/popularrentcars" target="_blank" rel="noreferrer" style={{ color: 'var(--text-main)', fontWeight: 600 }}>Facebook</a>
+              <a href="https://www.instagram.com/popularrentacars" target="_blank" rel="noreferrer" style={{ color: 'var(--text-main)', fontWeight: 600 }}>Instagram</a>
+              <a href="https://www.linkedin.com/company/popular-rent-car" target="_blank" rel="noreferrer" style={{ color: 'var(--text-main)', fontWeight: 600 }}>LinkedIn</a>
+              <a href="https://www.pinterest.com/popularrentacars" target="_blank" rel="noreferrer" style={{ color: 'var(--text-main)', fontWeight: 600 }}>Pinterest</a>
+              <a href="https://www.youtube.com/@popularrentacar_pk" target="_blank" rel="noreferrer" style={{ color: 'var(--text-main)', fontWeight: 600 }}>YouTube</a>
+              <a href="https://www.tiktok.com/@muhammadimran.777" target="_blank" rel="noreferrer" style={{ color: 'var(--text-main)', fontWeight: 600 }}>TikTok</a>
             </div>
           </div>
           <div>
             <h4 style={{ marginBottom: '20px', color: 'var(--accent)', fontWeight: 700 }}>Quick Links</h4>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '12px' }}>
               <li><a href="#" style={{ color: 'var(--text-muted)' }}>Home</a></li>
-              <li><a href="#fleet" style={{ color: 'var(--text-muted)' }}>Our Fleet</a></li>
-              <li><a href="#partner" style={{ color: 'var(--text-muted)' }}>List Your Car</a></li>
-              <li><a href="#" style={{ color: 'var(--text-muted)' }}>About Us</a></li>
+              <li><a href="/fleet" style={{ color: 'var(--text-muted)' }}>Our Fleet</a></li>
+              <li><a href="/partner" style={{ color: 'var(--text-muted)' }}>List Your Car</a></li>
+              <li><a href="/about" style={{ color: 'var(--text-muted)' }}>About Us</a></li>
             </ul>
           </div>
           <div>
             <h4 style={{ marginBottom: '20px', color: 'var(--accent)', fontWeight: 700 }}>Contact</h4>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '12px', color: 'var(--text-muted)' }}>
               <li>Mian Plaza, Civic Centre Block D-2, Phase 1, Johar Town, Lahore</li>
-              <li>+92 305 9991234 (WhatsApp 24/7)</li>
+              <li>+92 304 9991234 (WhatsApp 24/7)</li>
               <li>info@popularrentacar.com</li>
-              <li><a href="https://share.google/GWVrBltkF4hrlyH4m" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--primary)', textDecoration: 'underline' }}>Google Business Profile</a></li>
+              <li><a href="https://share.google/GWVrBltkF4hrlyH4m" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--primary)', textDecoration: 'underline', fontWeight: 600 }}>Google Business Profile</a></li>
             </ul>
           </div>
         </div>
