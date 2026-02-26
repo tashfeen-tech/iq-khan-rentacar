@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "@/lib/AuthContext";
 import { db } from "@/lib/firebase";
-import { collection, query, where, orderBy, onSnapshot, doc, updateDoc } from "firebase/firestore";
+import { collection, query, where, orderBy, onSnapshot, doc, updateDoc, or } from "firebase/firestore";
 import Navbar from "@/components/Navbar";
 import { motion } from "framer-motion";
 import { Calendar, Car, MapPin, CreditCard, Clock, LogOut, CalendarCheck, Package } from "lucide-react";
@@ -42,11 +42,13 @@ export default function MyBookingsPage() {
         }
 
         // Query bookings by userId (most reliable) OR email
-        // We'll try to find by email which is what most users will expect if they book pre-login
         const userEmail = user.email?.toLowerCase();
         const q = query(
             collection(db, "bookings"),
-            where("email", "==", userEmail)
+            or(
+                where("userId", "==", user.uid),
+                where("email", "==", userEmail)
+            )
         );
 
         const unsubscribe = onSnapshot(q, (snapshot) => {
