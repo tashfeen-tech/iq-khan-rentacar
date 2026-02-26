@@ -84,29 +84,7 @@ export default function Home() {
         onClose={() => setIsModalOpen(false)}
       />
 
-      {/* Special Offer Banner */}
-      <section style={{ background: 'var(--primary)', color: 'white', padding: '40px 24px', textAlign: 'center' }}>
-        <h2 style={{ fontSize: '28px', fontWeight: 800, marginBottom: '10px' }}>Weekend Special! 🚗</h2>
-        <p style={{ fontSize: '18px' }}>Rent a car for 3 days (Fri-Sat-Sun) for just <strong>Rs. 12,500!</strong></p>
-      </section>
 
-      {/* One-Way Service Section */}
-      <section style={{ padding: '100px 24px', maxWidth: '1200px', margin: '0 auto' }}>
-        <div style={{ textAlign: 'center', marginBottom: '60px' }}>
-          <h2 style={{ fontSize: 'clamp(32px, 5vw, 42px)', fontWeight: 800 }}>
-            All Pakistan <span className="gradient-text">One-Way Service</span>
-          </h2>
-          <p style={{ color: 'var(--text-muted)', fontSize: '18px', maxWidth: '600px', margin: '16px auto 0' }}>
-            Traveling across cities? Drop off the car at your destination anywhere in Punjab, KPK, or Sindh with our flexible one-way service. Available with or without driver.
-          </p>
-        </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '20px', textAlign: 'center' }}>
-          <div className="premium-card" style={{ padding: '24px' }}><h3>Alto</h3></div>
-          <div className="premium-card" style={{ padding: '24px' }}><h3>Cultus</h3></div>
-          <div className="premium-card" style={{ padding: '24px' }}><h3>Yaris</h3></div>
-          <div className="premium-card" style={{ padding: '24px' }}><h3>Civic</h3></div>
-        </div>
-      </section>
 
       {/* Partner Section */}
       <section id="partner" style={{ background: 'var(--surface-hover)', padding: '100px 24px' }}>
@@ -146,54 +124,49 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Airport Service & Reviews Section */}
+      {/* Reviews Section */}
       <section style={{ background: 'var(--surface-hover)', padding: '100px 24px' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '60px' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          <h2 style={{ fontSize: '32px', fontWeight: 800, marginBottom: '20px', textAlign: 'center' }}>
+            What Our <span className="gradient-text">Clients Say</span>
+          </h2>
+          <p style={{ color: 'var(--text-muted)', fontSize: '18px', marginBottom: '50px', textAlign: 'center' }}>
+            Trusted by thousands of travelers. Read our latest Google Reviews.
+          </p>
 
-          <div className="premium-card" style={{ padding: '40px' }}>
-            <h2 style={{ fontSize: '32px', fontWeight: 800, marginBottom: '20px' }}>
-              <span className="gradient-text">Airport Pick & Drop</span> Service
-            </h2>
-            <p style={{ color: 'var(--text-muted)', fontSize: '18px', marginBottom: '30px' }}>
-              Skip the taxi queues at Allama Iqbal International Airport. Book our reliable airport transfer service. Our professional drivers will be waiting for you upon arrival.
-            </p>
-            <ul style={{ listStyle: 'none', padding: 0, marginBottom: '30px' }}>
-              <li style={{ marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px' }}>✅ Punctual & Reliable</li>
-              <li style={{ marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px' }}>✅ Luxury Vehicles Available</li>
-              <li style={{ marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px' }}>✅ Meet & Greet Service</li>
-            </ul>
-            <a href="https://wa.me/923041111111?text=Hi! I need an airport transfer." target="_blank" rel="noopener noreferrer" className="btn-primary">Book Airport Transfer</a>
-          </div>
-
-          <div className="premium-card" style={{ padding: '40px' }}>
-            <h2 style={{ fontSize: '32px', fontWeight: 800, marginBottom: '20px' }}>
-              What Our <span className="gradient-text">Clients Say</span>
-            </h2>
-            <p style={{ color: 'var(--text-muted)', fontSize: '18px', marginBottom: '30px' }}>
-              Trusted by thousands of travelers. Read our latest Google Reviews.
-            </p>
-
-            <div style={{ background: 'var(--surface)', padding: '24px', borderRadius: '16px', marginBottom: '20px', border: '1px solid var(--border)' }}>
-              <div style={{ display: 'flex', gap: '4px', color: '#FFD700', marginBottom: '10px' }}>
-                ★★★★★
-              </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '30px' }}>
+            <div style={{ background: 'var(--surface)', padding: '24px', borderRadius: '16px', border: '1px solid var(--border)' }}>
+              <div style={{ display: 'flex', gap: '4px', color: '#FFD700', marginBottom: '10px' }}>★★★★★</div>
               <p style={{ color: 'var(--text-main)', fontStyle: 'italic', marginBottom: '10px' }}>
                 "Excellent service! The car was in perfect condition and the driver was very professional. Highly recommended for one-way travel to Islamabad."
               </p>
-              <p style={{ fontSize: '14px', color: 'var(--text-muted)' }}>- Google User</p>
+              <p style={{ fontSize: '14px', color: 'var(--text-muted)', fontWeight: 'bold' }}>- Google User</p>
             </div>
 
             <div style={{ background: 'var(--surface)', padding: '24px', borderRadius: '16px', border: '1px solid var(--border)' }}>
-              <div style={{ display: 'flex', gap: '4px', color: '#FFD700', marginBottom: '10px' }}>
-                ★★★★★
-              </div>
+              <div style={{ display: 'flex', gap: '4px', color: '#FFD700', marginBottom: '10px' }}>★★★★★</div>
               <p style={{ color: 'var(--text-main)', fontStyle: 'italic', marginBottom: '10px' }}>
                 "Booked an Audi for a wedding event. Seamless process and top-notch vehicle quality. Popular Rent A Car is indeed the best in Lahore."
               </p>
-              <p style={{ fontSize: '14px', color: 'var(--text-muted)' }}>- Local Guide</p>
+              <p style={{ fontSize: '14px', color: 'var(--text-muted)', fontWeight: 'bold' }}>- Local Guide</p>
+            </div>
+
+            <div style={{ background: 'var(--surface)', padding: '24px', borderRadius: '16px', border: '1px solid var(--border)' }}>
+              <div style={{ display: 'flex', gap: '4px', color: '#FFD700', marginBottom: '10px' }}>★★★★★</div>
+              <p style={{ color: 'var(--text-main)', fontStyle: 'italic', marginBottom: '10px' }}>
+                "I used their airport pick and drop service. The driver was waiting at the terminal right on time. Highly prompt and extremely reliable."
+              </p>
+              <p style={{ fontSize: '14px', color: 'var(--text-muted)', fontWeight: 'bold' }}>- Sarah K.</p>
+            </div>
+
+            <div style={{ background: 'var(--surface)', padding: '24px', borderRadius: '16px', border: '1px solid var(--border)' }}>
+              <div style={{ display: 'flex', gap: '4px', color: '#FFD700', marginBottom: '10px' }}>★★★★★</div>
+              <p style={{ color: 'var(--text-main)', fontStyle: 'italic', marginBottom: '10px' }}>
+                "Best car rental in Lahore. I rented a Yaris for 3 days and the entire process from booking to returning was fully smooth with zero hidden charges."
+              </p>
+              <p style={{ fontSize: '14px', color: 'var(--text-muted)', fontWeight: 'bold' }}>- Ali R.</p>
             </div>
           </div>
-
         </div>
       </section>
 
@@ -208,7 +181,6 @@ export default function Home() {
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', marginTop: '20px' }}>
               <a href="https://www.facebook.com/popularrentcars" target="_blank" rel="noreferrer" style={{ color: 'var(--text-main)', fontWeight: 600 }}>Facebook</a>
               <a href="https://www.instagram.com/popularrentacars" target="_blank" rel="noreferrer" style={{ color: 'var(--text-main)', fontWeight: 600 }}>Instagram</a>
-              <a href="https://www.linkedin.com/company/popular-rent-car" target="_blank" rel="noreferrer" style={{ color: 'var(--text-main)', fontWeight: 600 }}>LinkedIn</a>
               <a href="https://www.pinterest.com/popularrentacars" target="_blank" rel="noreferrer" style={{ color: 'var(--text-main)', fontWeight: 600 }}>Pinterest</a>
               <a href="https://www.youtube.com/@popularrentacar_pk" target="_blank" rel="noreferrer" style={{ color: 'var(--text-main)', fontWeight: 600 }}>YouTube</a>
               <a href="https://www.tiktok.com/@muhammadimran.777" target="_blank" rel="noreferrer" style={{ color: 'var(--text-main)', fontWeight: 600 }}>TikTok</a>

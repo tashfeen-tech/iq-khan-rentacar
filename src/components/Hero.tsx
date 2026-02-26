@@ -10,60 +10,57 @@ const Hero = () => {
             <div className={styles.overlay}></div>
 
             <div className={styles.container}>
-                <div className={styles.content}>
-                    <motion.h1
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8 }}
-                        className={styles.title}
-                    >
-                        Redefining <span className="gradient-text">Luxury</span> <br />
-                        Car Rental in <span className={styles.highlight}>Lahore</span>
-                    </motion.h1>
+                <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '30px', paddingTop: '100px', paddingBottom: '150px' }}>
 
-                    <motion.p
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, delay: 0.2 }}
-                        className={styles.subtitle}
-                    >
-                        Explore the city with elegance. Premium fleet, professional drivers,
-                        and unmatched service tailored for your comfort.
-                    </motion.p>
-
+                    {/* One-Way Service Card */}
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.8, delay: 0.4 }}
-                        className={styles.bookingCard}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.8 }}
+                        className="premium-card"
+                        style={{ padding: '40px', background: 'rgba(255, 255, 255, 0.05)', backdropFilter: 'blur(10px)', border: '1px solid var(--border)' }}
                     >
-                        <div className={styles.bookingGrid}>
-                            <div className={styles.bookingItem}>
-                                <label><MapPin size={16} /> Pickup Location</label>
-                                <select>
-                                    <option>Lahore All Areas</option>
-                                    <option>Allama Iqbal Airport</option>
-                                    <option>Gulberg</option>
-                                    <option>DHA</option>
-                                </select>
-                            </div>
-
-                            <div className={styles.bookingItem}>
-                                <label><Calendar size={16} /> Pickup Date</label>
-                                <input type="date" />
-                            </div>
-
-                            <div className={styles.bookingItem}>
-                                <label><Calendar size={16} /> Return Date</label>
-                                <input type="date" />
-                            </div>
-
-                            <button className={styles.searchBtn}>
-                                <Search size={20} />
-                                <span>Search Cars</span>
-                            </button>
+                        <h2 style={{ fontSize: '32px', fontWeight: 800, marginBottom: '20px', color: '#fff' }}>
+                            <span className="gradient-text">All Pakistan</span> <br /> One-Way Service
+                        </h2>
+                        <p style={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '18px', marginBottom: '25px', lineHeight: 1.6 }}>
+                            Drop off anywhere in Punjab, KPK, or Sindh with our flexible one-way service. Available with or without driver.
+                        </p>
+                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', marginBottom: '30px' }}>
+                            <div style={{ background: 'rgba(0,0,0,0.3)', padding: '12px', borderRadius: '8px', textAlign: 'center', color: '#fff' }}>Suzuki Alto</div>
+                            <div style={{ background: 'rgba(0,0,0,0.3)', padding: '12px', borderRadius: '8px', textAlign: 'center', color: '#fff' }}>Suzuki Cultus</div>
+                            <div style={{ background: 'rgba(0,0,0,0.3)', padding: '12px', borderRadius: '8px', textAlign: 'center', color: '#fff' }}>Toyota Yaris</div>
+                            <div style={{ background: 'rgba(0,0,0,0.3)', padding: '12px', borderRadius: '8px', textAlign: 'center', color: '#fff' }}>Honda Civic</div>
                         </div>
+                        <a href="https://wa.me/9230346257123?text=Hi! I want to book a One-Way Trip." target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ width: '100%', textAlign: 'center' }}>
+                            Book One-Way Trip
+                        </a>
                     </motion.div>
+
+                    {/* Airport Pick & Drop Card */}
+                    <motion.div
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.8, delay: 0.2 }}
+                        className="premium-card"
+                        style={{ padding: '40px', background: 'rgba(255, 255, 255, 0.05)', backdropFilter: 'blur(10px)', border: '1px solid var(--border)' }}
+                    >
+                        <h2 style={{ fontSize: '32px', fontWeight: 800, marginBottom: '20px', color: '#fff' }}>
+                            <span className="gradient-text">Airport Pick & Drop</span> <br /> Service
+                        </h2>
+                        <p style={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '18px', marginBottom: '30px', lineHeight: 1.6 }}>
+                            Skip the taxi queues at Allama Iqbal Airport. Book our reliable airport transfer service with professional drivers.
+                        </p>
+                        <ul style={{ listStyle: 'none', padding: 0, marginBottom: '30px', color: '#fff' }}>
+                            <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '10px' }}>✅ Punctual & Reliable</li>
+                            <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '10px' }}>✅ Luxury Vehicles Available</li>
+                            <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '10px' }}>✅ Meet & Greet Service</li>
+                        </ul>
+                        <a href="https://wa.me/9230346257123?text=Hi! I need an airport transfer." target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ width: '100%', textAlign: 'center' }}>
+                            Book Airport Transfer
+                        </a>
+                    </motion.div>
+
                 </div>
             </div>
 

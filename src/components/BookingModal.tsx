@@ -249,7 +249,7 @@ const BookingModal = ({ car, isOpen, onClose }: BookingModalProps) => {
                                         </button>
 
                                         <a
-                                            href={`https://wa.me/923041111111?text=Hi! I am interested in renting the ${car.name}.`}
+                                            href={`https://wa.me/9230346257123?text=Hi! I am interested in renting the ${car.name}.`}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             className={styles.submitBtn}

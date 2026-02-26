@@ -25,13 +25,12 @@ const Navbar = () => {
             <div className={styles.container}>
                 <Link href="/" className={styles.logo}>
                     <Image
-                        src="https://popularrentacar.com/wp-content/uploads/2025/09/Popular-Rent-A-Car-Logo.webp"
+                        src="/logo.png"
                         alt="Popular Rent A Car"
                         width={180}
                         height={60}
                         style={{ objectFit: 'contain' }}
                         priority
-                        unoptimized
                     />
                 </Link>
 
@@ -52,7 +51,7 @@ const Navbar = () => {
                             Sign In
                         </Link>
                     )}
-                    <a href="tel:03041111111" className="btn-primary">
+                    <a href="tel:030346257123" className="btn-primary">
                         <Phone size={18} />
                         <span>Book Now</span>
                     </a>
@@ -79,7 +78,7 @@ const Navbar = () => {
                     ) : (
                         <Link href="/auth" onClick={() => setIsMobileMenuOpen(false)}>Sign In</Link>
                     )}
-                    <a href="tel:03041111111" className="btn-primary">Book Now</a>
+                    <a href="tel:030346257123" className="btn-primary">Book Now</a>
                 </div>
             )}
         </nav>
