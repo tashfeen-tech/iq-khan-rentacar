@@ -4,15 +4,17 @@
   --background: #050505;
   --surface: #0f0f0f;
   --surface-hover: #151515;
-  --primary: #eb212e;
-  /* HD Vibrant Red */
-  --primary-glow: rgba(235, 33, 46, 0.4);
+  --primary: #2ecc71;
+  /* IQ Khan Light Green */
+  --primary-dark: #1a8a4a;
+  /* IQ Khan Dark Green */
+  --primary-glow: rgba(46, 204, 113, 0.4);
   --secondary: #111111;
   --success: #00c853;
   --warning: #ffd600;
   --text-main: #ffffff;
   --text-muted: #b0b0b0;
-  --accent: #eb212e;
+  --accent: #2ecc71;
   --border: rgba(255, 255, 255, 0.08);
   --glass: rgba(10, 10, 10, 0.7);
   --glass-border: rgba(255, 255, 255, 0.1);
@@ -76,7 +78,7 @@ textarea::placeholder {
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, #eb212e 0%, #aa151e 100%);
+  background: linear-gradient(135deg, #2ecc71 0%, #1a8a4a 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -93,7 +95,7 @@ textarea::placeholder {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  box-shadow: 0 4px 15px rgba(235, 33, 46, 0.3);
+  box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
 }
 
 .btn-primary:hover {
@@ -135,7 +137,7 @@ textarea::placeholder {
 
 .btn-outline:hover {
   border-color: var(--primary);
-  background: rgba(235, 33, 46, 0.05);
+  background: rgba(46, 204, 113, 0.05);
   color: var(--primary);
 }
 

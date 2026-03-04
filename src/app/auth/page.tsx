@@ -59,7 +59,7 @@ export default function AuthPage() {
                     <p>
                         {mode === "login"
                             ? "Sign in to manage your bookings"
-                            : "Join Popular Rent A Car today"}
+                            : "Join IQ Khan Rent A Car today"}
                     </p>
                 </div>
 

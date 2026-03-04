@@ -78,7 +78,7 @@ const ArmoredServices = () => {
                     viewport={{ once: true }}
                     className={styles.subtitle}
                 >
-                    At Popular Rent A Car, we understand that security is not a luxury—it is a necessity.
+                    At IQ Khan Rent A Car, we understand that security is not a luxury—it is a necessity.
                     Our bulletproof and armored vehicle rental services are designed to provide maximum
                     protection, comfort, and discretion.
                 </motion.p>

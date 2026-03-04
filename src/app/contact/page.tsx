@@ -70,7 +70,7 @@ export default function ContactPage() {
                             <div className={styles.infoIcon}><Phone size={22} /></div>
                             <div>
                                 <span className={styles.infoLabel}>Call / WhatsApp</span>
-                                <a href="tel:+923046257123" className={styles.infoValue}>+92 304 6257 123</a>
+                                <a href="tel:+923340002910" className={styles.infoValue}>+92 334 0002910</a>
                             </div>
                         </div>
 
@@ -78,7 +78,7 @@ export default function ContactPage() {
                             <div className={styles.infoIcon}><MessageCircle size={22} /></div>
                             <div>
                                 <span className={styles.infoLabel}>WhatsApp</span>
-                                <a href="https://wa.me/923046257123" target="_blank" rel="noopener noreferrer" className={styles.infoValue}>
+                                <a href="https://wa.me/923340002910" target="_blank" rel="noopener noreferrer" className={styles.infoValue}>
                                     Chat on WhatsApp
                                 </a>
                             </div>
@@ -88,8 +88,8 @@ export default function ContactPage() {
                             <div className={styles.infoIcon}><Mail size={22} /></div>
                             <div>
                                 <span className={styles.infoLabel}>Email</span>
-                                <a href="mailto:popularrentacarofficial@gmail.com" className={styles.infoValue}>
-                                    popularrentacarofficial@gmail.com
+                                <a href="mailto:iqkhanrentacar@gmail.com" className={styles.infoValue}>
+                                    iqkhanrentacar@gmail.com
                                 </a>
                             </div>
                         </div>
@@ -98,7 +98,7 @@ export default function ContactPage() {
                             <div className={styles.infoIcon}><MapPin size={22} /></div>
                             <div>
                                 <span className={styles.infoLabel}>Location</span>
-                                <span className={styles.infoValue}>Mian Plaza, Near MCB Bank, Civic Centre Block D-2, Phase 1, Johar Town, Lahore</span>
+                                <span className={styles.infoValue}>Al Hafeez Shopping Mall, Main Blvd Gulberg, Block D 1 Block D1 Gulberg III, Lahore, 54660</span>
                             </div>
                         </div>
 
@@ -113,15 +113,15 @@ export default function ContactPage() {
                         <div className={styles.infoItem}>
                             <div className={styles.infoIcon}><MapPin size={22} /></div>
                             <div>
-                                <span className={styles.infoLabel}>Business Profile</span>
-                                <a href="https://share.google/GWVrBltkF4hrlyH4m" target="_blank" rel="noopener noreferrer" className={styles.infoValue} style={{ color: 'var(--primary)', textDecoration: 'underline' }}>
-                                    View on Google
+                                <span className={styles.infoLabel}>Social Media</span>
+                                <a href="https://www.facebook.com/iqkhanrentacar" target="_blank" rel="noopener noreferrer" className={styles.infoValue} style={{ color: 'var(--primary)', textDecoration: 'underline' }}>
+                                    View on Facebook
                                 </a>
                             </div>
                         </div>
 
                         <a
-                            href="https://wa.me/923046257123?text=Hi%20Popular%20Rent%20A%20Car%2C%20I%20would%20like%20to%20inquire%20about%20a%20car."
+                            href="https://wa.me/923340002910?text=Hi%20IQ%20Khan%20Rent%20A%20Car%2C%20I%20would%20like%20to%20inquire%20about%20a%20car."
                             target="_blank"
                             rel="noopener noreferrer"
                             className={`btn-primary ${styles.whatsappBtn}`}

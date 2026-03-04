@@ -34,12 +34,12 @@ const VALUES = [
     {
         icon: MapPin,
         title: "All of Lahore",
-        desc: "We cover every corner of Lahore — from DHA to Johar Town and beyond.",
+        desc: "We cover every corner of Lahore — from DHA to Gulberg and beyond.",
     },
     {
         icon: Award,
         title: "Trusted Since Day One",
-        desc: "Hundreds of satisfied customers trust Popular Rent A Car for their travel needs every month.",
+        desc: "Hundreds of satisfied customers trust IQ Khan Rent A Car for their travel needs every month.",
     },
 ];
 
@@ -62,7 +62,7 @@ export default function AboutPage() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.7 }}
                     >
-                        About <span className="gradient-text">Popular Rent A Car</span>
+                        About <span className="gradient-text">IQ Khan Rent A Car</span>
                     </motion.h1>
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
@@ -84,14 +84,14 @@ export default function AboutPage() {
                     >
                         <h2>Our <span className="gradient-text">Story</span></h2>
                         <p>
-                            Popular Rent A Car was founded with a single vision: to bring luxury, reliability,
+                            IQ Khan Rent A Car was founded with a single vision: to bring luxury, reliability,
                             and affordability directly to the people of Lahore and beyond. Over the years, a small fleet has grown
                             into one of the city&apos;s most respected car rental services.
                         </p>
                         <p>
                             We believe every journey should be comfortable, safe, and memorable. Whether you&apos;re
                             heading to a corporate meeting, an airport, a wedding, or exploring the city —
-                            Popular Rent A Car ensures you arrive in style.
+                            IQ Khan Rent A Car ensures you arrive in style.
                         </p>
                         <p>
                             Our fleet is carefully curated to include the finest vehicles from compact sedans to
@@ -164,7 +164,7 @@ export default function AboutPage() {
                     >
                         Ready to Ride?
                     </motion.h2>
-                    <p>Book your vehicle today and experience the Popular Rent A Car difference.</p>
+                    <p>Book your vehicle today and experience the IQ Khan Rent A Car difference.</p>
                     <a href="/fleet" className="btn-primary" style={{ fontSize: "18px", padding: "16px 40px" }}>
                         Browse Fleet
                     </a>

@@ -31,8 +31,8 @@ const PLANS = [
             "Priority Doorstep Delivery"
         ],
         badge: "Best Value",
-        gradient: "linear-gradient(135deg, #2a0a0a 0%, #0a0a0a 100%)",
-        accent: "#eb212e"
+        gradient: "linear-gradient(135deg, #0a1a0f 0%, #0a0a0a 100%)",
+        accent: "#2ecc71"
     },
     {
         id: "corporate",

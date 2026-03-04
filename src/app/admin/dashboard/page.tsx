@@ -371,7 +371,7 @@ export default function AdminDashboard() {
             {/* Mobile Header */}
             <div className={styles.mobileHeader}>
                 <div className={styles.mobileBrand}>
-                    <Image src="/logo.png" alt="Popular" width={120} height={40} style={{ objectFit: 'contain' }} />
+                    <Image src="/logo.png" alt="IQ Khan" width={120} height={40} style={{ objectFit: 'contain' }} />
                 </div>
                 <button className={styles.menuToggle} onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
                     {isSidebarOpen ? <CloseIcon size={24} /> : <Menu size={24} />}
@@ -389,7 +389,7 @@ export default function AdminDashboard() {
                 <div className={styles.brand} style={{ marginBottom: '32px' }}>
                     <Image
                         src="/logo.png"
-                        alt="Popular Rent A Car"
+                        alt="IQ Khan Rent A Car"
                         width={180}
                         height={60}
                         style={{ objectFit: 'contain' }}
@@ -472,7 +472,7 @@ export default function AdminDashboard() {
                                     <p>Total Bookings</p>
                                     <h3>{stats.total}</h3>
                                 </div>
-                                <div className={styles.statIcon} style={{ background: "rgba(235, 33, 46, 0.1)", color: "var(--primary)" }}>
+                                <div className={styles.statIcon} style={{ background: "rgba(46, 204, 113, 0.1)", color: "var(--primary)" }}>
                                     <CalendarCheck size={24} />
                                 </div>
                             </div>

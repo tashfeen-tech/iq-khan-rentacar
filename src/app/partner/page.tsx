@@ -49,7 +49,7 @@ export default function PartnerPage() {
                         List Your <span className="gradient-text">Car</span>
                     </h1>
                     <p style={{ textAlign: 'center', color: 'var(--text-muted)', marginBottom: '30px' }}>
-                        Join Popular Rent A Car and earn monthly income. Please provide accurate details.
+                        Join IQ Khan Rent A Car and earn monthly income. Please provide accurate details.
                     </p>
 
                     {success ? (

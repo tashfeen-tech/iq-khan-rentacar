@@ -31,7 +31,7 @@ const Navbar = () => {
                 <Link href="/" className={styles.logo}>
                     <Image
                         src="/logo.png"
-                        alt="Popular Rent A Car"
+                        alt="IQ Khan Rent A Car"
                         width={180}
                         height={60}
                         style={{ objectFit: 'contain' }}
@@ -56,7 +56,7 @@ const Navbar = () => {
                             Sign In
                         </Link>
                     )}
-                    <a href="tel:+923046257123" className="btn-primary">
+                    <a href="tel:+923340002910" className="btn-primary">
                         <Phone size={18} />
                         <span>Book Now</span>
                     </a>
@@ -83,7 +83,7 @@ const Navbar = () => {
                     ) : (
                         <Link href="/auth" onClick={() => setIsMobileMenuOpen(false)}>Sign In</Link>
                     )}
-                    <a href="tel:+923046257123" className="btn-primary">Book Now</a>
+                    <a href="tel:+923340002910" className="btn-primary">Book Now</a>
                 </div>
             )}
         </nav>

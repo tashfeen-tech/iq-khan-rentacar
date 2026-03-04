@@ -36,7 +36,7 @@ export default function AdminLogin() {
                 <div className={styles.header}>
                     <Car size={40} className={styles.logo} />
                     <h1>Admin Portal</h1>
-                    <p>Popular Rent A Car Management</p>
+                    <p>IQ Khan Rent A Car Management</p>
                 </div>
 
                 <form onSubmit={handleLogin} className={styles.form}>

@@ -78,8 +78,8 @@ export default function Home() {
               padding: '60px 40px',
               textAlign: 'center',
               cursor: 'pointer',
-              background: 'linear-gradient(145deg, #1a0505 0%, #050505 100%)',
-              border: '1px solid #eb212e44',
+              background: 'linear-gradient(145deg, #051a0f 0%, #050505 100%)',
+              border: '1px solid rgba(46, 204, 113, 0.27)',
               position: 'relative',
               overflow: 'hidden',
               display: 'flex',
@@ -94,7 +94,7 @@ export default function Home() {
               right: '-20px',
               width: '120px',
               height: '120px',
-              background: 'radial-gradient(circle, #eb212e33 0%, transparent 70%)'
+              background: 'radial-gradient(circle, rgba(46, 204, 113, 0.2) 0%, transparent 70%)'
             }} />
 
             <div style={{ width: '100%', height: '180px', position: 'relative', borderRadius: '16px', overflow: 'hidden', marginBottom: '10px' }}>
@@ -106,7 +106,7 @@ export default function Home() {
             </div>
 
             <h3 style={{ fontSize: '28px', fontWeight: 900, color: '#fff' }}>
-              Book <span style={{ color: '#eb212e' }}>Armored Vehicles</span>
+              Book <span style={{ color: '#2ecc71' }}>Armored Vehicles</span>
             </h3>
 
             <ul style={{
@@ -144,8 +144,8 @@ export default function Home() {
               padding: '60px 40px',
               textAlign: 'center',
               cursor: 'pointer',
-              background: 'linear-gradient(145deg, #1a0505 0%, #050505 100%)',
-              border: '1px solid #eb212e44',
+              background: 'linear-gradient(145deg, #051a0f 0%, #050505 100%)',
+              border: '1px solid rgba(46, 204, 113, 0.27)',
               position: 'relative',
               overflow: 'hidden',
               display: 'flex',
@@ -160,7 +160,7 @@ export default function Home() {
               right: '-20px',
               width: '120px',
               height: '120px',
-              background: 'radial-gradient(circle, #eb212e22 0%, transparent 70%)'
+              background: 'radial-gradient(circle, rgba(46, 204, 113, 0.13) 0%, transparent 70%)'
             }} />
 
             <div style={{ width: '100%', height: '180px', position: 'relative', borderRadius: '16px', overflow: 'hidden', marginBottom: '10px' }}>
@@ -181,7 +181,7 @@ export default function Home() {
             </div>
 
             <h3 style={{ fontSize: '28px', fontWeight: 900, color: '#fff' }}>
-              Book for your <span style={{ color: '#eb212e' }}>Corporation</span>
+              Book for your <span style={{ color: '#2ecc71' }}>Corporation</span>
             </h3>
 
             <ul style={{
@@ -267,7 +267,7 @@ export default function Home() {
         <div style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
           <h2 style={{ fontSize: 'clamp(32px, 5vw, 42px)', fontWeight: 800 }}>List Your <span className="gradient-text">Car With Us</span></h2>
           <p style={{ color: 'var(--text-muted)', fontSize: '18px', margin: '16px 0 40px' }}>
-            Want to rent out your car monthly? Partner with Popular Rent A Car. We ensure strict reference checks and verified clients.
+            Want to rent out your car monthly? Partner with IQ Khan Rent A Car. We ensure strict reference checks and verified clients.
           </p>
           <a href="/partner" className="btn-primary" style={{ padding: '16px 32px', fontSize: '18px' }}>Become a Partner</a>
         </div>
@@ -277,7 +277,7 @@ export default function Home() {
       <section style={{ background: 'var(--surface)', padding: '100px 24px' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           <h2 style={{ fontSize: 'clamp(32px, 5vw, 42px)', marginBottom: '60px', textAlign: 'center', fontWeight: 800 }}>
-            Why Choose <span className="gradient-text">Popular Rent A Car</span>?
+            Why Choose <span className="gradient-text">IQ Khan Rent A Car</span>?
           </h2>
 
           <div style={{
@@ -322,7 +322,7 @@ export default function Home() {
             <div style={{ background: 'var(--surface)', padding: '24px', borderRadius: '16px', border: '1px solid var(--border)' }}>
               <div style={{ display: 'flex', gap: '4px', color: '#FFD700', marginBottom: '10px' }}>★★★★★</div>
               <p style={{ color: 'var(--text-main)', fontStyle: 'italic', marginBottom: '10px' }}>
-                "Booked an Audi for a wedding event. Seamless process and top-notch vehicle quality. Popular Rent A Car is indeed the best in Lahore."
+                "Booked an Audi for a wedding event. Seamless process and top-notch vehicle quality. IQ Khan Rent A Car is indeed the best in Lahore."
               </p>
               <p style={{ fontSize: '14px', color: 'var(--text-muted)', fontWeight: 'bold' }}>- Local Guide</p>
             </div>

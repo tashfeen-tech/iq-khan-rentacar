@@ -18,10 +18,10 @@ const Hero = ({ onBookService }: { onBookService?: (serviceName: string) => void
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8 }}
                         className="premium-card"
-                        style={{ padding: '40px', background: 'rgba(255, 255, 255, 0.05)', backdropFilter: 'blur(10px)', border: '1px solid #eb212e44' }}
+                        style={{ padding: '40px', background: 'rgba(255, 255, 255, 0.05)', backdropFilter: 'blur(10px)', border: '1px solid rgba(46, 204, 113, 0.27)' }}
                     >
                         <h2 style={{ fontSize: '30px', fontWeight: 900, marginBottom: '20px', color: '#fff' }}>
-                            <span style={{ color: '#eb212e' }}>All Pakistan</span> <br /> One-Way Service
+                            <span style={{ color: '#2ecc71' }}>All Pakistan</span> <br /> One-Way Service
                         </h2>
 
                         <ul style={{
@@ -55,10 +55,10 @@ const Hero = ({ onBookService }: { onBookService?: (serviceName: string) => void
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8, delay: 0.2 }}
                         className="premium-card"
-                        style={{ padding: '40px', background: 'rgba(255, 255, 255, 0.05)', backdropFilter: 'blur(10px)', border: '1px solid #eb212e44' }}
+                        style={{ padding: '40px', background: 'rgba(255, 255, 255, 0.05)', backdropFilter: 'blur(10px)', border: '1px solid rgba(46, 204, 113, 0.27)' }}
                     >
                         <h2 style={{ fontSize: '30px', fontWeight: 900, marginBottom: '20px', color: '#fff' }}>
-                            <span style={{ color: '#eb212e' }}>Airport Pick & Drop</span> <br /> Service
+                            <span style={{ color: '#2ecc71' }}>Airport Pick & Drop</span> <br /> Service
                         </h2>
 
                         <ul style={{

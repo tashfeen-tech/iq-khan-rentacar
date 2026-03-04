@@ -7,35 +7,35 @@ import styles from "./VideoGallery.module.css";
 const VIDEOS = [
     {
         id: "v1",
-        platform: "youtube",
-        title: "Company Overview",
-        thumbnail: "https://img.youtube.com/vi/FwW-u7Ju0Fk/maxresdefault.jpg",
-        url: "https://www.youtube.com/watch?v=FwW-u7Ju0Fk",
-        icon: Youtube
+        platform: "facebook",
+        title: "IQ Khan Fleet Showcase",
+        thumbnail: "/logo.png",
+        url: "https://www.facebook.com/iqkhanrentacar",
+        icon: ExternalLink
     },
     {
         id: "v2",
-        platform: "tiktok",
-        title: "Showroom Showcase",
+        platform: "facebook",
+        title: "Our Premium Services",
         thumbnail: "/logo.png",
-        url: "https://www.tiktok.com/@popularrentacars/video/7347039125695991045",
-        icon: Music2
+        url: "https://www.facebook.com/iqkhanrentacar/videos",
+        icon: ExternalLink
     },
     {
         id: "v3",
-        platform: "youtube",
-        title: "One-Way Service Promo",
-        thumbnail: "https://img.youtube.com/vi/-AUpnQ2g31E/maxresdefault.jpg",
-        url: "https://www.youtube.com/shorts/-AUpnQ2g31E",
-        icon: Youtube
+        platform: "facebook",
+        title: "Customer Testimonials",
+        thumbnail: "/logo.png",
+        url: "https://www.facebook.com/iqkhanrentacar",
+        icon: ExternalLink
     },
     {
         id: "v4",
-        platform: "tiktok",
-        title: "Popular Fleet Montage",
+        platform: "facebook",
+        title: "All Pakistan Service",
         thumbnail: "/logo.png",
-        url: "https://www.tiktok.com/@muhammadimran.777/video/7489098510575389970",
-        icon: Music2
+        url: "https://www.facebook.com/iqkhanrentacar",
+        icon: ExternalLink
     }
 ];
 
@@ -52,7 +52,7 @@ const VideoGallery = () => {
                     Showcasing <span className="gradient-text">Our Excellence</span>
                 </motion.h2>
                 <p className={styles.subtitle}>
-                    Catch a glimpse of our premium showroom, diverse fleet, and exceptional services
+                    Catch a glimpse of our premium fleet, diverse vehicles, and exceptional services
                     through our latest social media highlights.
                 </p>
             </div>
@@ -82,9 +82,9 @@ const VideoGallery = () => {
                                     <Play size={24} fill="currentColor" />
                                 </div>
                             </div>
-                            <div className={video.platform === 'youtube' ? styles.platformBadgeYt : styles.platformBadgeTk}>
+                            <div className={styles.platformBadgeTk}>
                                 <video.icon size={16} />
-                                <span>{video.platform === 'youtube' ? 'YouTube' : 'TikTok'}</span>
+                                <span>Facebook</span>
                             </div>
                         </div>
                         <div className={styles.content}>
