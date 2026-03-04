@@ -54,7 +54,7 @@
 .emptyIcon {
     width: 80px;
     height: 80px;
-    background: rgba(212, 175, 55, 0.1);
+    background: rgba(235, 33, 46, 0.1);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -88,7 +88,7 @@
 }
 
 .bookingCard:hover {
-    border-color: rgba(212, 175, 55, 0.3);
+    border-color: rgba(235, 33, 46, 0.3);
 }
 
 .cardTop {
@@ -111,7 +111,7 @@
 
 .driverBadge {
     font-size: 11px;
-    background: rgba(212, 175, 55, 0.1);
+    background: rgba(235, 33, 46, 0.1);
     color: var(--primary);
     padding: 4px 10px;
     border-radius: 50px;
@@ -246,7 +246,7 @@
     width: 44px;
     height: 44px;
     background: var(--primary);
-    color: #000;
+    color: #ffffff;
     border-radius: 50%;
     display: flex;
     align-items: center;

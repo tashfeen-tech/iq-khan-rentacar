@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Calendar, User, Phone, Mail, LogIn, MessageCircle, MapPin } from "lucide-react";
+import { X, Calendar, User, Phone, Mail, LogIn, MessageCircle, MapPin, Shield, Users, Clock } from "lucide-react";
 import styles from "./BookingModal.module.css";
 import { Car, FLEET_DATA } from "@/data/fleet";
 import { db } from "@/lib/firebase";
@@ -31,7 +31,10 @@ const BookingModal = ({ car, isOpen, onClose }: BookingModalProps) => {
         toCity: "",
         airport: "",
         time: "",
-        selectedFleetCar: ""
+        selectedFleetCar: "",
+        protectionLevel: "B6",
+        companyName: "",
+        duration: "Monthly"
     });
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
@@ -76,6 +79,9 @@ const BookingModal = ({ car, isOpen, onClose }: BookingModalProps) => {
                 airport: formData.airport,
                 time: formData.time,
                 selectedFleetCar: formData.selectedFleetCar,
+                protectionLevel: formData.protectionLevel,
+                companyName: formData.companyName,
+                duration: formData.duration,
                 carId: car.id,
                 carName: car.name,
                 carImage: car.image,
@@ -117,7 +123,9 @@ const BookingModal = ({ car, isOpen, onClose }: BookingModalProps) => {
 
     const isOneWay = car.id === 'service-all-pakistan-one-way-service';
     const isAirport = car.id === 'service-airport-pick-&-drop-service';
-    const isSpecial = isOneWay || isAirport;
+    const isArmored = car.id === 'service-bulletproof-armored-vehicle';
+    const isCorporate = car.id === 'service-corporate-rental-solution';
+    const isSpecial = isOneWay || isAirport || isArmored || isCorporate;
 
     return (
         <AnimatePresence>
@@ -152,7 +160,11 @@ const BookingModal = ({ car, isOpen, onClose }: BookingModalProps) => {
                                         alt={car.name}
                                         fill
                                         priority
-                                        style={{ objectFit: 'cover', borderRadius: '16px' }}
+                                        style={{
+                                            objectFit: car.image.includes('logo') ? 'contain' : 'cover',
+                                            borderRadius: '16px',
+                                            padding: car.image.includes('logo') ? '20px' : '0'
+                                        }}
                                     />
                                 </div>
                                 <h3>{car.name}</h3>
@@ -164,7 +176,18 @@ const BookingModal = ({ car, isOpen, onClose }: BookingModalProps) => {
                             </div>
 
                             <div className={styles.formContainer}>
-                                <h2>Book This Vehicle</h2>
+                                {isSpecial && (
+                                    <div className={styles.mobileLogo}>
+                                        <Image
+                                            src={car.image}
+                                            alt={car.name}
+                                            width={150}
+                                            height={60}
+                                            style={{ objectFit: 'contain' }}
+                                        />
+                                    </div>
+                                )}
+                                <h2>{isSpecial ? car.name : "Book This Vehicle"}</h2>
 
                                 {!user && (
                                     <Link href="/auth" style={{
@@ -281,6 +304,48 @@ const BookingModal = ({ car, isOpen, onClose }: BookingModalProps) => {
                                                     onChange={e => setFormData({ ...formData, pickupDate: e.target.value })}
                                                 />
                                             </div>
+
+                                            {isArmored && (
+                                                <div className={styles.inputGroup} style={{ marginBottom: '15px' }}>
+                                                    <label><Shield size={16} /> Protection Level Required</label>
+                                                    <select
+                                                        value={formData.protectionLevel}
+                                                        onChange={e => setFormData({ ...formData, protectionLevel: e.target.value })}
+                                                        style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid var(--border)', background: 'var(--surface)', color: 'var(--text-main)' }}
+                                                    >
+                                                        <option value="B6">B6 Level Protection (High)</option>
+                                                        <option value="B7">B7 Level Protection (Maximum)</option>
+                                                        <option value="Unarmored">Unarmored / VIP Only</option>
+                                                    </select>
+                                                </div>
+                                            )}
+
+                                            {isCorporate && (
+                                                <div className={styles.inputRow}>
+                                                    <div className={styles.inputGroup}>
+                                                        <label><Users size={16} /> Company Name</label>
+                                                        <input
+                                                            type="text"
+                                                            required
+                                                            placeholder="Company / NGO Name"
+                                                            value={formData.companyName}
+                                                            onChange={e => setFormData({ ...formData, companyName: e.target.value })}
+                                                        />
+                                                    </div>
+                                                    <div className={styles.inputGroup}>
+                                                        <label><Clock size={16} /> Duration</label>
+                                                        <select
+                                                            value={formData.duration}
+                                                            onChange={e => setFormData({ ...formData, duration: e.target.value })}
+                                                            style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid var(--border)', background: 'var(--surface)', color: 'var(--text-main)' }}
+                                                        >
+                                                            <option value="Monthly">Monthly Basis</option>
+                                                            <option value="Yearly">Yearly Contract</option>
+                                                            <option value="Project">Short Project Basis</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            )}
                                         </>
                                     ) : (
                                         <>
@@ -352,7 +417,7 @@ const BookingModal = ({ car, isOpen, onClose }: BookingModalProps) => {
                                         </button>
 
                                         <a
-                                            href={`https://wa.me/923059991234?text=Hi! I am interested in renting the ${car.name}.`}
+                                            href={`https://wa.me/923046257123?text=Hi! I am interested in renting the ${car.name}.`}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             className={styles.submitBtn}

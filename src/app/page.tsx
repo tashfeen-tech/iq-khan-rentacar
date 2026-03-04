@@ -9,6 +9,12 @@ import { Car, FLEET_DATA } from "@/data/fleet";
 import { db } from "@/lib/firebase";
 import { collection, onSnapshot, query } from "firebase/firestore";
 import { motion } from "framer-motion";
+import Partners from "@/components/Partners";
+import ArmoredServices from "@/components/ArmoredServices";
+import HotelServices from "@/components/HotelServices";
+import VideoGallery from "@/components/VideoGallery";
+import RentalPlans from "@/components/RentalPlans";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   const [selectedCar, setSelectedCar] = useState<Car | null>(null);
@@ -55,6 +61,160 @@ export default function Home() {
       <Navbar />
       <Hero onBookService={handleBookService} />
 
+      {/* Improved Quick Booking CTAs */}
+      <section style={{ padding: '60px 24px', maxWidth: '1200px', margin: '0 auto' }}>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
+          gap: '30px'
+        }}>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            onClick={() => handleBookService("Bulletproof Armored Vehicle")}
+            className="premium-card"
+            style={{
+              padding: '60px 40px',
+              textAlign: 'center',
+              cursor: 'pointer',
+              background: 'linear-gradient(145deg, #1a0505 0%, #050505 100%)',
+              border: '1px solid #eb212e44',
+              position: 'relative',
+              overflow: 'hidden',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              gap: '20px'
+            }}
+          >
+            <div style={{
+              position: 'absolute',
+              top: '-20px',
+              right: '-20px',
+              width: '120px',
+              height: '120px',
+              background: 'radial-gradient(circle, #eb212e33 0%, transparent 70%)'
+            }} />
+
+            <div style={{ width: '100%', height: '180px', position: 'relative', borderRadius: '16px', overflow: 'hidden', marginBottom: '10px' }}>
+              <img
+                src="/cars/armored-lc.png"
+                alt="Armored Land Cruiser"
+                style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.95 }}
+              />
+            </div>
+
+            <h3 style={{ fontSize: '28px', fontWeight: 900, color: '#fff' }}>
+              Book <span style={{ color: '#eb212e' }}>Armored Vehicles</span>
+            </h3>
+
+            <ul style={{
+              listStyle: 'none',
+              padding: 0,
+              margin: '0 0 24px 0',
+              color: 'var(--text-muted)',
+              textAlign: 'left',
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr',
+              gap: '12px',
+              fontSize: '13px'
+            }}>
+              <li>✓ B6/B7 Ballistic Protection</li>
+              <li>✓ Bulletproof Glass & Suspension</li>
+              <li>✓ Security Details & Escort</li>
+              <li>✓ Tactical Professional Drivers</li>
+              <li>✓ High-Risk Mitigation</li>
+              <li>✓ Trained Armed Guards</li>
+              <li>✓ LC200/LC300 & Mercedes</li>
+              <li>✓ Diplomatic & VIP Protocol</li>
+            </ul>
+
+            <span className="btn-primary" style={{ padding: '16px 40px', fontSize: '18px', width: '100%' }}>Book Security Detail</span>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            onClick={() => handleBookService("Corporate Rental Solution")}
+            className="premium-card"
+            style={{
+              padding: '60px 40px',
+              textAlign: 'center',
+              cursor: 'pointer',
+              background: 'linear-gradient(145deg, #1a0505 0%, #050505 100%)',
+              border: '1px solid #eb212e44',
+              position: 'relative',
+              overflow: 'hidden',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              gap: '20px'
+            }}
+          >
+            <div style={{
+              position: 'absolute',
+              top: '-20px',
+              right: '-20px',
+              width: '120px',
+              height: '120px',
+              background: 'radial-gradient(circle, #eb212e22 0%, transparent 70%)'
+            }} />
+
+            <div style={{ width: '100%', height: '180px', position: 'relative', borderRadius: '16px', overflow: 'hidden', marginBottom: '10px' }}>
+              <div style={{ width: '100%', height: '100%', position: 'relative' }}>
+                <img
+                  src="/cars/corporate-logos.png"
+                  alt="Corporate Partners"
+                  style={{
+                    width: '160%',
+                    height: 'auto',
+                    position: 'absolute',
+                    top: '-45%',
+                    left: '-30%',
+                    opacity: 0.95
+                  }}
+                />
+              </div>
+            </div>
+
+            <h3 style={{ fontSize: '28px', fontWeight: 900, color: '#fff' }}>
+              Book for your <span style={{ color: '#eb212e' }}>Corporation</span>
+            </h3>
+
+            <ul style={{
+              listStyle: 'none',
+              padding: 0,
+              margin: '0 0 24px 0',
+              color: 'var(--text-muted)',
+              textAlign: 'left',
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr',
+              gap: '12px',
+              fontSize: '13px'
+            }}>
+              <li>✓ 24/7 Priority Ops Support</li>
+              <li>✓ Monthly Fleet Contracts</li>
+              <li>✓ Executive Protocol Services</li>
+              <li>✓ Strict Driver Verification</li>
+              <li>✓ Trusted by Pepsi & Nestle</li>
+              <li>✓ Logistics Coordination</li>
+              <li>✓ Scalable Business Leasing</li>
+              <li>✓ Dedicated Account Managers</li>
+            </ul>
+
+            <span className="btn-primary" style={{ padding: '16px 40px', fontSize: '18px', width: '100%' }}>Corporate Inquiry</span>
+          </motion.div>
+        </div>
+      </section>
+
+      <ArmoredServices />
+      <HotelServices />
+      <RentalPlans />
+      <VideoGallery />
+
       <section id="fleet" style={{ padding: '100px 24px', maxWidth: '1200px', margin: '0 auto' }}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -91,6 +251,8 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      <Partners title="Affiliated Corporate Partners" />
 
       <BookingModal
         car={selectedCar}
@@ -185,44 +347,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer style={{ padding: '80px 24px 40px', borderTop: '1px solid var(--border)', background: 'var(--background)' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '40px' }}>
-          <div>
-            <h3 style={{ marginBottom: '20px', letterSpacing: '2px', fontWeight: 800 }}>Popular Rent A Car</h3>
-            <p style={{ color: 'var(--text-muted)', lineHeight: '1.6' }}>
-              The most trusted car rental service in Pakistan. Travel anywhere with comfort, safety, and peace of mind.
-            </p>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', marginTop: '20px' }}>
-              <a href="https://www.facebook.com/popularrentcars" target="_blank" rel="noreferrer" style={{ color: 'var(--text-main)', fontWeight: 600 }}>Facebook</a>
-              <a href="https://www.instagram.com/popularrentacars" target="_blank" rel="noreferrer" style={{ color: 'var(--text-main)', fontWeight: 600 }}>Instagram</a>
-              <a href="https://www.pinterest.com/popularrentacars" target="_blank" rel="noreferrer" style={{ color: 'var(--text-main)', fontWeight: 600 }}>Pinterest</a>
-              <a href="https://www.youtube.com/@popularrentacar_pk" target="_blank" rel="noreferrer" style={{ color: 'var(--text-main)', fontWeight: 600 }}>YouTube</a>
-              <a href="https://www.tiktok.com/@muhammadimran.777" target="_blank" rel="noreferrer" style={{ color: 'var(--text-main)', fontWeight: 600 }}>TikTok</a>
-            </div>
-          </div>
-          <div>
-            <h4 style={{ marginBottom: '20px', color: 'var(--accent)', fontWeight: 700 }}>Quick Links</h4>
-            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '12px' }}>
-              <li><a href="#" style={{ color: 'var(--text-muted)' }}>Home</a></li>
-              <li><a href="/fleet" style={{ color: 'var(--text-muted)' }}>Our Fleet</a></li>
-              <li><a href="/partner" style={{ color: 'var(--text-muted)' }}>List Your Car</a></li>
-              <li><a href="/about" style={{ color: 'var(--text-muted)' }}>About Us</a></li>
-            </ul>
-          </div>
-          <div>
-            <h4 style={{ marginBottom: '20px', color: 'var(--accent)', fontWeight: 700 }}>Contact</h4>
-            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '12px', color: 'var(--text-muted)' }}>
-              <li>Mian Plaza, Civic Centre Block D-2, Phase 1, Johar Town, Lahore</li>
-              <li>+92 304 9991234 (WhatsApp 24/7)</li>
-              <li>popularrentacar938@gmail.com</li>
-              <li><a href="https://share.google/GWVrBltkF4hrlyH4m" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--primary)', textDecoration: 'underline', fontWeight: 600 }}>Google Business Profile</a></li>
-            </ul>
-          </div>
-        </div>
-        <div style={{ maxWidth: '1200px', margin: '60px auto 0', paddingTop: '30px', borderTop: '1px solid var(--border)', textAlign: 'center', color: 'var(--text-muted)', fontSize: '14px' }}>
-          © 2025 Popular Rent A Car. All rights reserved.
-        </div>
-      </footer>
+      <Footer />
     </>
   );
 }

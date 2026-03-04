@@ -7,6 +7,7 @@ import styles from "./Contact.module.css";
 import { Phone, Mail, MapPin, MessageCircle, Clock, Send } from "lucide-react";
 import { db } from "@/lib/firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import Footer from "@/components/Footer";
 
 export default function ContactPage() {
     const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
@@ -69,7 +70,7 @@ export default function ContactPage() {
                             <div className={styles.infoIcon}><Phone size={22} /></div>
                             <div>
                                 <span className={styles.infoLabel}>Call / WhatsApp</span>
-                                <a href="tel:+923059991234" className={styles.infoValue}>+92 305 9991234</a>
+                                <a href="tel:+923046257123" className={styles.infoValue}>+92 304 6257 123</a>
                             </div>
                         </div>
 
@@ -77,7 +78,7 @@ export default function ContactPage() {
                             <div className={styles.infoIcon}><MessageCircle size={22} /></div>
                             <div>
                                 <span className={styles.infoLabel}>WhatsApp</span>
-                                <a href="https://wa.me/923059991234" target="_blank" rel="noopener noreferrer" className={styles.infoValue}>
+                                <a href="https://wa.me/923046257123" target="_blank" rel="noopener noreferrer" className={styles.infoValue}>
                                     Chat on WhatsApp
                                 </a>
                             </div>
@@ -87,8 +88,8 @@ export default function ContactPage() {
                             <div className={styles.infoIcon}><Mail size={22} /></div>
                             <div>
                                 <span className={styles.infoLabel}>Email</span>
-                                <a href="mailto:popularrentacar938@gmail.com" className={styles.infoValue}>
-                                    popularrentacar938@gmail.com
+                                <a href="mailto:popularrentacarofficial@gmail.com" className={styles.infoValue}>
+                                    popularrentacarofficial@gmail.com
                                 </a>
                             </div>
                         </div>
@@ -120,7 +121,7 @@ export default function ContactPage() {
                         </div>
 
                         <a
-                            href="https://wa.me/923059991234?text=Hi%20Popular%20Rent%20A%20Car%2C%20I%20would%20like%20to%20inquire%20about%20a%20car."
+                            href="https://wa.me/923046257123?text=Hi%20Popular%20Rent%20A%20Car%2C%20I%20would%20like%20to%20inquire%20about%20a%20car."
                             target="_blank"
                             rel="noopener noreferrer"
                             className={`btn-primary ${styles.whatsappBtn}`}
@@ -203,6 +204,7 @@ export default function ContactPage() {
                     </motion.div>
                 </div>
             </div>
+            <Footer />
         </>
     );
 }

@@ -16,8 +16,8 @@
     left: -50%;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle at 30% 30%, rgba(212, 175, 55, 0.06) 0%, transparent 50%),
-        radial-gradient(circle at 70% 70%, rgba(212, 175, 55, 0.04) 0%, transparent 50%);
+    background: radial-gradient(circle at 30% 30%, rgba(235, 33, 46, 0.06) 0%, transparent 50%),
+        radial-gradient(circle at 70% 70%, rgba(235, 33, 46, 0.04) 0%, transparent 50%);
     pointer-events: none;
 }
 
@@ -75,7 +75,7 @@
 
 .tab.active {
     background: var(--primary);
-    color: #000;
+    color: #ffffff;
 }
 
 .form {
@@ -125,7 +125,7 @@
 .submitBtn {
     margin-top: 8px;
     background: var(--primary);
-    color: #000;
+    color: #ffffff;
     padding: 16px;
     border-radius: 12px;
     font-size: 16px;

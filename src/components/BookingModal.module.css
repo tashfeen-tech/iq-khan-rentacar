@@ -43,7 +43,7 @@
 
 .closeBtn:hover {
     background: var(--primary);
-    color: #000;
+    color: #ffffff;
 }
 
 .grid {
@@ -52,20 +52,22 @@
 }
 
 .carInfo {
-    background: #fafafa;
+    background: #0d0d0d;
     padding: 48px;
     border-right: 1px solid var(--border);
 }
 
 .carImagePlaceholder {
+    position: relative;
     width: 100%;
     aspect-ratio: 16/9;
-    background: #f5f5f5;
+    background: #151515;
     border-radius: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 32px;
+    overflow: hidden;
 }
 
 .carInfo h3 {
@@ -151,11 +153,11 @@
 }
 
 .inputGroup input {
-    background: #f9f9f9;
+    background: rgba(255, 255, 255, 0.05);
     border: 1px solid var(--border);
     padding: 12px 16px;
     border-radius: 12px;
-    color: var(--text-main);
+    color: #ffffff;
     font-family: inherit;
     font-size: 15px;
     transition: var(--transition-smooth);
@@ -163,7 +165,7 @@
 
 .inputGroup input:focus {
     border-color: var(--primary);
-    background: #ffffff;
+    background: rgba(255, 255, 255, 0.08);
     outline: none;
 }
 
@@ -193,13 +195,14 @@
 
 .toggle button.active {
     background: var(--primary);
-    color: #000;
+    color: #ffffff;
+    font-weight: 800;
 }
 
 .submitBtn {
     margin-top: 10px;
     background: var(--primary);
-    color: #000;
+    color: #ffffff;
     padding: 16px;
     border-radius: 12px;
     font-size: 16px;
@@ -226,7 +229,7 @@
     width: 80px;
     height: 80px;
     background: var(--primary);
-    color: #000;
+    color: #ffffff;
     border-radius: 50%;
     font-size: 40px;
     display: flex;
@@ -256,4 +259,14 @@
     .inputRow {
         grid-template-columns: 1fr;
     }
+
+    .mobileLogo {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+}
+
+.mobileLogo {
+    display: none;
 }

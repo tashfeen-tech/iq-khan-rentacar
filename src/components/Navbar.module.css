@@ -13,23 +13,23 @@
 
 .scrolled {
     height: 80px;
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(15, 15, 15, 0.9);
     backdrop-filter: blur(15px);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .solid {
-    background: rgba(255, 255, 255, 0.98);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    background: #0f0f0f;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .solid .navLink {
-    color: var(--text-muted);
+    color: var(--text-main);
 }
 
 .solid .mobileToggle {
-    color: var(--text-main);
+    color: #ffffff;
 }
 
 .container {
@@ -102,7 +102,7 @@
 
 .scrolled .navLink,
 .solid .navLink {
-    color: var(--text-muted);
+    color: var(--text-main);
 }
 
 .scrolled .navLink:hover,
@@ -154,7 +154,7 @@
 
 .scrolled .mobileToggle,
 .solid .mobileToggle {
-    color: var(--text-main);
+    color: #ffffff;
 }
 
 .mobileMenu {

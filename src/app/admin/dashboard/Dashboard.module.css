@@ -2,7 +2,7 @@
     display: grid;
     grid-template-columns: 280px 1fr;
     min-height: 100vh;
-    background: var(--background);
+    background: #050505;
     color: var(--text-main);
 }
 
@@ -13,7 +13,7 @@
     justify-content: center;
     font-size: 18px;
     color: var(--primary);
-    background: var(--background);
+    background: #050505;
 }
 
 .mobileHeader {
@@ -23,8 +23,8 @@
     left: 0;
     right: 0;
     height: 70px;
-    background: #ffffff;
-    border-bottom: 1px solid var(--border);
+    background: #0d0d0d;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
     padding: 0 20px;
     align-items: center;
     justify-content: space-between;
@@ -55,15 +55,15 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(4px);
     z-index: 1001;
 }
 
 /* Sidebar */
 .sidebar {
-    background: #ffffff;
-    border-right: 1px solid var(--border);
+    background: #0d0d0d;
+    border-right: 1px solid rgba(255, 255, 255, 0.07);
     padding: 32px 24px;
     display: flex;
     flex-direction: column;
@@ -101,8 +101,8 @@
 }
 
 .navItem:hover {
-    background: var(--surface-hover);
-    color: var(--text-main);
+    background: rgba(255, 255, 255, 0.05);
+    color: #ffffff;
 }
 
 .navItem.active {
@@ -150,6 +150,7 @@
 .content {
     padding: 40px;
     overflow-y: auto;
+    background: #0a0a0a;
 }
 
 .header {
@@ -162,14 +163,14 @@
 .header h1 {
     font-size: 28px;
     font-weight: 700;
-    color: var(--text-main);
+    color: #ffffff;
 }
 
 .userProfile {
     display: flex;
     align-items: center;
     gap: 16px;
-    color: var(--text-main);
+    color: var(--text-muted);
     font-weight: 500;
 }
 
@@ -196,21 +197,20 @@
 }
 
 .statCard {
-    background: #ffffff;
-    border: 1px solid rgba(0, 0, 0, 0.04);
+    background: #141414;
+    border: 1px solid rgba(255, 255, 255, 0.07);
     padding: 28px;
     border-radius: 24px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.02);
+    transition: all 0.3s ease;
 }
 
 .statCard:hover {
-    border-color: rgba(211, 47, 47, 0.2);
+    border-color: rgba(235, 33, 46, 0.3);
     transform: translateY(-4px);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 12px 32px rgba(235, 33, 46, 0.08);
 }
 
 .statInfo p {
@@ -223,7 +223,7 @@
 .statInfo h3 {
     font-size: 24px;
     font-weight: 700;
-    color: var(--text-main);
+    color: #ffffff;
 }
 
 .statIcon {
@@ -237,26 +237,25 @@
 
 /* Table */
 .tableContainer {
-    background: #ffffff;
-    border: 1px solid rgba(0, 0, 0, 0.04);
-    border-radius: 32px;
+    background: #141414;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 24px;
     overflow: hidden;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.02);
 }
 
 .tableHeader {
-    padding: 28px 36px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+    padding: 24px 32px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #ffffff;
+    background: #141414;
 }
 
 .tableHeader h2 {
     font-size: 18px;
-    font-weight: 600;
-    color: var(--text-main);
+    font-weight: 700;
+    color: #ffffff;
 }
 
 .viewAllBtn {
@@ -278,24 +277,25 @@
 
 .table th {
     text-align: left;
-    padding: 18px 36px;
-    font-size: 13px;
+    padding: 16px 32px;
+    font-size: 11px;
     text-transform: uppercase;
     color: var(--text-muted);
-    letter-spacing: 1.2px;
-    background: #fafafa;
+    letter-spacing: 1.5px;
+    background: #0f0f0f;
     font-weight: 700;
 }
 
 .table td {
-    padding: 24px 36px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.03);
-    background: #ffffff;
-    transition: background 0.3s ease;
+    padding: 20px 32px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    background: #141414;
+    color: #ffffff;
+    transition: background 0.2s ease;
 }
 
 .table tbody tr:hover td {
-    background: var(--surface-hover);
+    background: #1a1a1a;
 }
 
 .customerInfo {
@@ -305,7 +305,7 @@
 
 .customerName {
     font-weight: 600;
-    color: var(--text-main);
+    color: #ffffff;
 }
 
 .customerPhone {
@@ -321,17 +321,16 @@
 }
 
 .bookingMessage {
-    background: rgba(211, 47, 47, 0.04);
-    border: 1px dashed rgba(211, 47, 47, 0.1);
+    background: rgba(235, 33, 46, 0.06);
+    border: 1px dashed rgba(235, 33, 46, 0.2);
     border-radius: 8px;
     padding: 10px 14px;
     margin-top: 12px;
     font-size: 12px;
     line-height: 1.6;
-    color: var(--text-main);
+    color: var(--text-muted);
     max-width: 280px;
     font-style: italic;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
 }
 
 .bookingMessage strong {
@@ -349,12 +348,12 @@
 
 .carName {
     font-weight: 600;
-    color: var(--text-main);
+    color: #ffffff;
 }
 
 .driverTag {
     font-size: 10px;
-    background: var(--surface-hover);
+    background: rgba(235, 33, 46, 0.1);
     color: var(--primary);
     padding: 4px 8px;
     border-radius: 6px;
@@ -367,7 +366,7 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    color: var(--text-main);
+    color: #ffffff;
 }
 
 .separator {
@@ -378,7 +377,7 @@
 .price {
     font-weight: 700;
     color: var(--primary);
-    background: var(--surface-hover);
+    background: rgba(235, 33, 46, 0.1);
     padding: 6px 12px;
     border-radius: 8px;
 }
@@ -397,17 +396,17 @@
 }
 
 .pending {
-    background: rgba(255, 193, 7, 0.15);
-    color: #d39e00;
+    background: rgba(255, 193, 7, 0.12);
+    color: #ffc107;
 }
 
 .confirmed {
-    background: rgba(40, 167, 69, 0.15);
+    background: rgba(40, 167, 69, 0.12);
     color: #28a745;
 }
 
 .cancelled {
-    background: rgba(220, 53, 69, 0.15);
+    background: rgba(220, 53, 69, 0.12);
     color: #dc3545;
 }
 
@@ -424,8 +423,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--background);
-    border: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     transition: var(--transition-smooth);
 }
 
@@ -470,24 +469,23 @@
 }
 
 .messageCard {
-    background: #ffffff;
-    border: 1px solid var(--border);
+    background: #141414;
+    border: 1px solid rgba(255, 255, 255, 0.07);
     border-radius: 20px;
     padding: 24px 28px;
     cursor: pointer;
     transition: var(--transition-smooth);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
 }
 
 .messageCard:hover {
     border-color: var(--primary);
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 8px 25px rgba(235, 33, 46, 0.1);
 }
 
 .messageCard.unread {
     border-left: 4px solid var(--primary);
-    background: var(--surface-hover);
+    background: rgba(235, 33, 46, 0.04);
 }
 
 .messageTop {
@@ -520,7 +518,7 @@
 .senderName {
     font-weight: 700;
     font-size: 18px;
-    color: var(--text-main);
+    color: #ffffff;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -552,7 +550,7 @@
 .messageTime {
     font-size: 13px;
     color: var(--text-muted);
-    background: var(--background);
+    background: rgba(255, 255, 255, 0.05);
     padding: 6px 12px;
     border-radius: 8px;
     font-weight: 500;
@@ -577,10 +575,30 @@
 }
 
 .messageBody {
-    color: var(--text-main);
+    color: var(--text-muted);
     font-size: 15px;
     line-height: 1.7;
     padding-left: 64px;
+}
+
+/* Fleet cards */
+.fleetGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+}
+
+.fleetCard {
+    background: #141414;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: var(--transition-smooth);
+}
+
+.fleetCard:hover {
+    border-color: rgba(235, 33, 46, 0.3);
+    transform: translateY(-4px);
 }
 
 @media (max-width: 1200px) {
@@ -602,7 +620,7 @@
         z-index: 1002;
         transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         display: flex;
-        box-shadow: 20px 0 50px rgba(0, 0, 0, 0.1);
+        box-shadow: 20px 0 50px rgba(0, 0, 0, 0.5);
     }
 
     .sidebar.open {

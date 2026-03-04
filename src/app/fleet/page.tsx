@@ -9,6 +9,7 @@ import { db } from "@/lib/firebase";
 import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
 import { motion } from "framer-motion";
 import styles from "./Fleet.module.css";
+import Footer from "@/components/Footer";
 
 const TYPES = ["All", "Sedan", "Premium Sedan", "SUV", "Pickup / 4x4", "Van"];
 
@@ -144,6 +145,7 @@ export default function FleetPage() {
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
             />
+            <Footer />
         </>
     );
 }

@@ -472,7 +472,7 @@ export default function AdminDashboard() {
                                     <p>Total Bookings</p>
                                     <h3>{stats.total}</h3>
                                 </div>
-                                <div className={styles.statIcon} style={{ background: "rgba(212, 175, 55, 0.1)", color: "var(--primary)" }}>
+                                <div className={styles.statIcon} style={{ background: "rgba(235, 33, 46, 0.1)", color: "var(--primary)" }}>
                                     <CalendarCheck size={24} />
                                 </div>
                             </div>
@@ -619,7 +619,7 @@ export default function AdminDashboard() {
                                             padding: '8px 16px', borderRadius: '100px',
                                             border: '1px solid var(--border)',
                                             background: bookingFilter === f ? 'var(--primary)' : 'var(--surface-hover)',
-                                            color: bookingFilter === f ? '#000' : 'var(--text-main)',
+                                            color: bookingFilter === f ? '#fff' : 'var(--text-main)',
                                             fontWeight: bookingFilter === f ? 700 : 500,
                                             cursor: 'pointer', textTransform: 'capitalize', whiteSpace: 'nowrap'
                                         }}

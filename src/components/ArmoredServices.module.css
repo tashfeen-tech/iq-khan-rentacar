@@ -1,0 +1,147 @@
+.container {
+    padding: 100px 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.header {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 80px;
+}
+
+.badge {
+    color: var(--primary);
+    text-transform: uppercase;
+    font-weight: 800;
+    font-size: 14px;
+    letter-spacing: 2px;
+    display: block;
+    margin-bottom: 16px;
+}
+
+.title {
+    font-size: clamp(32px, 5vw, 42px);
+    font-weight: 800;
+    margin-bottom: 24px;
+}
+
+.subtitle {
+    color: var(--text-muted);
+    font-size: 18px;
+    line-height: 1.8;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 32px;
+}
+
+.serviceCard {
+    background: var(--surface-hover);
+    padding: 40px;
+    border-radius: 24px;
+    border: 1px solid var(--border);
+    transition: var(--transition-smooth);
+}
+
+.serviceCard:hover {
+    border-color: var(--primary);
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.iconBox {
+    width: 56px;
+    height: 56px;
+    background: rgba(235, 33, 46, 0.1);
+    color: var(--primary);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+}
+
+.serviceCard h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    line-height: 1.4;
+}
+
+.serviceCard p {
+    color: var(--text-muted);
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.vehicleHighlight {
+    margin-top: 80px;
+    background: linear-gradient(135deg, #0d0d0d 0%, #1a1a1a 100%);
+    border-radius: 32px;
+    padding: 60px;
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+}
+
+.vehicleHighlight::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 10%;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, var(--primary-glow) 0%, transparent 70%);
+    pointer-events: none;
+    transform: translateY(-50%);
+}
+
+.highlightContent {
+    max-width: 500px;
+    position: relative;
+    z-index: 1;
+}
+
+.highlightContent h3 {
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 24px;
+}
+
+.highlightContent p {
+    color: var(--text-muted);
+    font-size: 18px;
+    margin-bottom: 32px;
+}
+
+.highlightContent ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.highlightContent li {
+    font-size: 18px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.highlightContent li::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    background: var(--primary);
+    border-radius: 50%;
+}
+
+@media (max-width: 768px) {
+    .vehicleHighlight {
+        padding: 40px;
+    }
+}

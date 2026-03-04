@@ -4,6 +4,11 @@ import Navbar from "@/components/Navbar";
 import { motion } from "framer-motion";
 import styles from "./About.module.css";
 import { Shield, Star, Clock, Users, MapPin, Award } from "lucide-react";
+import Partners from "@/components/Partners";
+import ArmoredServices from "@/components/ArmoredServices";
+import HotelServices from "@/components/HotelServices";
+import RentalPlans from "@/components/RentalPlans";
+import Footer from "@/components/Footer";
 
 const VALUES = [
     {
@@ -143,6 +148,12 @@ export default function AboutPage() {
                     </div>
                 </section>
 
+                {/* New Sections from Profile */}
+                <Partners />
+                <ArmoredServices />
+                <HotelServices />
+                <RentalPlans />
+
                 {/* CTA */}
                 <section className={styles.cta}>
                     <motion.h2
@@ -159,6 +170,7 @@ export default function AboutPage() {
                     </a>
                 </section>
             </div>
+            <Footer />
         </>
     );
 }
