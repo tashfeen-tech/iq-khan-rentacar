@@ -97,7 +97,8 @@ export default function AdminDashboard() {
     const [isCarModalOpen, setIsCarModalOpen] = useState(false);
     const [editingCar, setEditingCar] = useState<any>(null);
     const [carForm, setCarForm] = useState({
-        name: "", type: "Sedan", transmission: "Automatic", seats: 4, image: "", features: "", price: ""
+        name: "", type: "Sedan", transmission: "Automatic", seats: 4, image: "", features: "", price: "",
+        priceOneSideDrop: "", priceAirportLahore: "", priceAirportIslamabad: "", priceCorporate: "", priceWedding: ""
     });
     const [imageFile, setImageFile] = useState<File | null>(null);
 
@@ -245,7 +246,7 @@ export default function AdminDashboard() {
 
     const openCreateCar = () => {
         setEditingCar(null);
-        setCarForm({ name: "", type: "Sedan", transmission: "Automatic", seats: 4, image: "", features: "", price: "" });
+        setCarForm({ name: "", type: "Sedan", transmission: "Automatic", seats: 4, image: "", features: "", price: "", priceOneSideDrop: "", priceAirportLahore: "", priceAirportIslamabad: "", priceCorporate: "", priceWedding: "" });
         setImageFile(null);
         setIsCarModalOpen(true);
     };
@@ -259,7 +260,12 @@ export default function AdminDashboard() {
             seats: car.seats,
             image: car.image,
             features: car.features?.join(", ") || "",
-            price: car.price || ""
+            price: car.price || car.priceFleet || "",
+            priceOneSideDrop: car.priceOneSideDrop || "",
+            priceAirportLahore: car.priceAirportLahore || "",
+            priceAirportIslamabad: car.priceAirportIslamabad || "",
+            priceCorporate: car.priceCorporate || "",
+            priceWedding: car.priceWedding || ""
         });
         setImageFile(null);
         setIsCarModalOpen(true);
@@ -285,7 +291,12 @@ export default function AdminDashboard() {
                 image: imgUrl,
                 features: carForm.features.split(",").map(f => f.trim()).filter(Boolean),
                 available: true,
-                price: carForm.price
+                priceFleet: carForm.price,
+                priceOneSideDrop: carForm.priceOneSideDrop,
+                priceAirportLahore: carForm.priceAirportLahore,
+                priceAirportIslamabad: carForm.priceAirportIslamabad,
+                priceCorporate: carForm.priceCorporate,
+                priceWedding: carForm.priceWedding
             };
 
             if (editingCar) {
@@ -902,9 +913,12 @@ export default function AdminDashboard() {
                                 <tr>
                                     <th>Image</th>
                                     <th>Vehicle</th>
-                                    <th>Type</th>
-                                    <th>Transmission</th>
-                                    <th>Features</th>
+                                    <th>Fleet/Day</th>
+                                    <th>One Side Drop</th>
+                                    <th>Airport LHE</th>
+                                    <th>Airport ISB</th>
+                                    <th>Corporate</th>
+                                    <th>Wedding</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -912,26 +926,26 @@ export default function AdminDashboard() {
                                 {displayCars.map((car) => (
                                     <tr key={car.docId}>
                                         <td>
-                                            <div style={{ width: '80px', height: '40px', background: '#f5f5f5', borderRadius: '8px', overflow: 'hidden', position: 'relative' }}>
+                                            <div style={{ width: '60px', height: '35px', background: '#f5f5f5', borderRadius: '8px', overflow: 'hidden', position: 'relative' }}>
                                                 <Image
                                                     src={car.image}
                                                     alt={car.name}
                                                     fill
-                                                    sizes="80px"
+                                                    sizes="60px"
                                                     style={{ objectFit: 'contain' }}
                                                 />
                                             </div>
                                         </td>
-                                        <td><span className={styles.customerName}>{car.name}</span><br /><span style={{ fontSize: '12px', color: 'var(--text-muted)' }}>Rs. {car.price}/day</span></td>
-                                        <td>{car.type}</td>
-                                        <td>{car.transmission}</td>
                                         <td>
-                                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px', maxWidth: '200px' }}>
-                                                {car.features?.map((f: string, i: number) => (
-                                                    <span key={i} style={{ fontSize: '10px', background: 'var(--surface-hover)', padding: '2px 6px', borderRadius: '4px' }}>{f}</span>
-                                                ))}
-                                            </div>
+                                            <span className={styles.customerName}>{car.name}</span><br />
+                                            <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>{car.type} · {car.seats} seats</span>
                                         </td>
+                                        <td><span style={{ fontSize: '13px', color: car.priceFleet ? '#2ecc71' : 'var(--text-muted)', fontWeight: car.priceFleet ? 700 : 400 }}>{car.priceFleet || '—'}</span></td>
+                                        <td><span style={{ fontSize: '13px', color: car.priceOneSideDrop ? '#2ecc71' : 'var(--text-muted)', fontWeight: car.priceOneSideDrop ? 700 : 400 }}>{car.priceOneSideDrop || '—'}</span></td>
+                                        <td><span style={{ fontSize: '13px', color: car.priceAirportLahore ? '#2ecc71' : 'var(--text-muted)', fontWeight: car.priceAirportLahore ? 700 : 400 }}>{car.priceAirportLahore || '—'}</span></td>
+                                        <td><span style={{ fontSize: '13px', color: car.priceAirportIslamabad ? '#2ecc71' : 'var(--text-muted)', fontWeight: car.priceAirportIslamabad ? 700 : 400 }}>{car.priceAirportIslamabad || '—'}</span></td>
+                                        <td><span style={{ fontSize: '13px', color: car.priceCorporate ? '#2ecc71' : 'var(--text-muted)', fontWeight: car.priceCorporate ? 700 : 400 }}>{car.priceCorporate || '—'}</span></td>
+                                        <td><span style={{ fontSize: '13px', color: car.priceWedding ? '#2ecc71' : 'var(--text-muted)', fontWeight: car.priceWedding ? 700 : 400 }}>{car.priceWedding || '—'}</span></td>
                                         <td>
                                             <div className={styles.actions}>
                                                 <button onClick={() => openEditCar(car)} className={styles.approveBtn} title="Edit">
@@ -966,62 +980,86 @@ export default function AdminDashboard() {
                             {editingCar ? 'Edit Vehicle' : 'Add New Vehicle'}
                         </h2>
 
-                        <form onSubmit={handleSaveCar} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
-                                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                                    <label style={{ fontSize: '14px', fontWeight: 600, color: 'var(--text-muted)' }}>Name / Model</label>
-                                    <input required value={carForm.name} onChange={e => setCarForm({ ...carForm, name: e.target.value })} style={{ padding: '12px', borderRadius: '12px', border: '1px solid var(--border)', background: 'var(--background)' }} />
+                        <form onSubmit={handleSaveCar} style={{ display: 'flex', flexDirection: 'column', gap: '16px', maxHeight: '70vh', overflowY: 'auto', paddingRight: '10px' }}>
+                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                                    <label style={{ fontSize: '13px', fontWeight: 600, color: 'var(--text-muted)' }}>Name / Model</label>
+                                    <input required value={carForm.name} onChange={e => setCarForm({ ...carForm, name: e.target.value })} style={{ padding: '10px', borderRadius: '10px', border: '1px solid var(--border)', background: 'var(--background)' }} />
                                 </div>
-                                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                                    <label style={{ fontSize: '14px', fontWeight: 600, color: 'var(--text-muted)' }}>Type</label>
-                                    <select required value={carForm.type} onChange={e => setCarForm({ ...carForm, type: e.target.value })} style={{ padding: '12px', borderRadius: '12px', border: '1px solid var(--border)', background: 'var(--background)' }}>
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                                    <label style={{ fontSize: '13px', fontWeight: 600, color: 'var(--text-muted)' }}>Type</label>
+                                    <select required value={carForm.type} onChange={e => setCarForm({ ...carForm, type: e.target.value })} style={{ padding: '10px', borderRadius: '10px', border: '1px solid var(--border)', background: 'var(--background)' }}>
+                                        <option>Hatchback</option>
                                         <option>Sedan</option>
                                         <option>Premium Sedan</option>
                                         <option>SUV</option>
-                                        <option>Premium SUV</option>
+                                        <option>Luxury SUV</option>
+                                        <option>MPV</option>
                                         <option>Van</option>
-                                        <option>Luxury Van</option>
                                         <option>Pickup / 4x4</option>
-                                        <option>Luxury Sedan</option>
                                     </select>
                                 </div>
                             </div>
 
-                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
-                                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                                    <label style={{ fontSize: '14px', fontWeight: 600, color: 'var(--text-muted)' }}>Daily Price (Rs.)</label>
-                                    <input required type="text" placeholder="e.g. 15,000" value={carForm.price} onChange={e => setCarForm({ ...carForm, price: e.target.value })} style={{ padding: '12px', borderRadius: '12px', border: '1px solid var(--border)', background: 'var(--background)' }} />
+                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '16px' }}>
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                                    <label style={{ fontSize: '13px', fontWeight: 600, color: 'var(--text-muted)' }}>Seats</label>
+                                    <input type="number" required value={carForm.seats} onChange={e => setCarForm({ ...carForm, seats: Number(e.target.value) })} style={{ padding: '10px', borderRadius: '10px', border: '1px solid var(--border)', background: 'var(--background)' }} />
                                 </div>
-                                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                                    <label style={{ fontSize: '14px', fontWeight: 600, color: 'var(--text-muted)' }}>Seats</label>
-                                    <input type="number" required value={carForm.seats} onChange={e => setCarForm({ ...carForm, seats: Number(e.target.value) })} style={{ padding: '12px', borderRadius: '12px', border: '1px solid var(--border)', background: 'var(--background)' }} />
-                                </div>
-                            </div>
-
-                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
-                                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                                    <label style={{ fontSize: '14px', fontWeight: 600, color: 'var(--text-muted)' }}>Transmission</label>
-                                    <select required value={carForm.transmission} onChange={e => setCarForm({ ...carForm, transmission: e.target.value })} style={{ padding: '12px', borderRadius: '12px', border: '1px solid var(--border)', background: 'var(--background)' }}>
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                                    <label style={{ fontSize: '13px', fontWeight: 600, color: 'var(--text-muted)' }}>Transmission</label>
+                                    <select required value={carForm.transmission} onChange={e => setCarForm({ ...carForm, transmission: e.target.value })} style={{ padding: '10px', borderRadius: '10px', border: '1px solid var(--border)', background: 'var(--background)' }}>
                                         <option>Automatic</option>
                                         <option>Manual</option>
                                     </select>
                                 </div>
                             </div>
 
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                                <label style={{ fontSize: '14px', fontWeight: 600, color: 'var(--text-muted)' }}>Features (comma separated)</label>
-                                <input placeholder="AC, GPS, Bluetooth..." value={carForm.features} onChange={e => setCarForm({ ...carForm, features: e.target.value })} style={{ padding: '12px', borderRadius: '12px', border: '1px solid var(--border)', background: 'var(--background)' }} />
+                            {/* Pricing Section */}
+                            <div style={{ borderTop: '1px solid var(--border)', paddingTop: '16px', marginTop: '4px' }}>
+                                <h3 style={{ fontSize: '15px', fontWeight: 700, marginBottom: '12px', color: '#2ecc71' }}>💰 Service Pricing (Rs.)</h3>
+                                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '12px' }}>
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                                        <label style={{ fontSize: '12px', fontWeight: 600, color: 'var(--text-muted)' }}>Fleet / Day</label>
+                                        <input type="text" placeholder="e.g. 8,000" value={carForm.price} onChange={e => setCarForm({ ...carForm, price: e.target.value })} style={{ padding: '9px', borderRadius: '8px', border: '1px solid var(--border)', background: 'var(--background)', fontSize: '13px' }} />
+                                    </div>
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                                        <label style={{ fontSize: '12px', fontWeight: 600, color: 'var(--text-muted)' }}>One Side Drop</label>
+                                        <input type="text" placeholder="e.g. 25,000" value={carForm.priceOneSideDrop} onChange={e => setCarForm({ ...carForm, priceOneSideDrop: e.target.value })} style={{ padding: '9px', borderRadius: '8px', border: '1px solid var(--border)', background: 'var(--background)', fontSize: '13px' }} />
+                                    </div>
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                                        <label style={{ fontSize: '12px', fontWeight: 600, color: 'var(--text-muted)' }}>Airport (Lahore)</label>
+                                        <input type="text" placeholder="e.g. 5,000" value={carForm.priceAirportLahore} onChange={e => setCarForm({ ...carForm, priceAirportLahore: e.target.value })} style={{ padding: '9px', borderRadius: '8px', border: '1px solid var(--border)', background: 'var(--background)', fontSize: '13px' }} />
+                                    </div>
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                                        <label style={{ fontSize: '12px', fontWeight: 600, color: 'var(--text-muted)' }}>Airport (Islamabad)</label>
+                                        <input type="text" placeholder="e.g. 20,000" value={carForm.priceAirportIslamabad} onChange={e => setCarForm({ ...carForm, priceAirportIslamabad: e.target.value })} style={{ padding: '9px', borderRadius: '8px', border: '1px solid var(--border)', background: 'var(--background)', fontSize: '13px' }} />
+                                    </div>
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                                        <label style={{ fontSize: '12px', fontWeight: 600, color: 'var(--text-muted)' }}>Corporate / Month</label>
+                                        <input type="text" placeholder="e.g. 150,000" value={carForm.priceCorporate} onChange={e => setCarForm({ ...carForm, priceCorporate: e.target.value })} style={{ padding: '9px', borderRadius: '8px', border: '1px solid var(--border)', background: 'var(--background)', fontSize: '13px' }} />
+                                    </div>
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                                        <label style={{ fontSize: '12px', fontWeight: 600, color: 'var(--text-muted)' }}>Wedding / Event</label>
+                                        <input type="text" placeholder="e.g. 35,000" value={carForm.priceWedding} onChange={e => setCarForm({ ...carForm, priceWedding: e.target.value })} style={{ padding: '9px', borderRadius: '8px', border: '1px solid var(--border)', background: 'var(--background)', fontSize: '13px' }} />
+                                    </div>
+                                </div>
                             </div>
 
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                                <label style={{ fontSize: '14px', fontWeight: 600, color: 'var(--text-muted)' }}>Car Image</label>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                                <label style={{ fontSize: '13px', fontWeight: 600, color: 'var(--text-muted)' }}>Features (comma separated)</label>
+                                <input placeholder="AC, GPS, Bluetooth..." value={carForm.features} onChange={e => setCarForm({ ...carForm, features: e.target.value })} style={{ padding: '10px', borderRadius: '10px', border: '1px solid var(--border)', background: 'var(--background)' }} />
+                            </div>
+
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                                <label style={{ fontSize: '13px', fontWeight: 600, color: 'var(--text-muted)' }}>Car Image</label>
                                 {carForm.image && !imageFile && (
-                                    <img src={carForm.image} alt="Preview" style={{ height: '100px', objectFit: 'contain', background: '#f5f5f5', borderRadius: '8px', marginBottom: '8px' }} />
+                                    <img src={carForm.image} alt="Preview" style={{ height: '80px', objectFit: 'contain', background: '#f5f5f5', borderRadius: '8px', marginBottom: '4px' }} />
                                 )}
-                                <input type="file" accept="image/*" onChange={e => setImageFile(e.target.files?.[0] || null)} style={{ padding: '12px', borderRadius: '12px', border: '1px solid var(--border)', background: 'var(--background)' }} />
+                                <input type="file" accept="image/*" onChange={e => setImageFile(e.target.files?.[0] || null)} style={{ padding: '10px', borderRadius: '10px', border: '1px solid var(--border)', background: 'var(--background)' }} />
                             </div>
 
-                            <button type="submit" disabled={loading} style={{ padding: '16px', borderRadius: '12px', background: 'var(--primary)', color: '#000', fontWeight: 'bold', border: 'none', cursor: 'pointer', marginTop: '10px' }}>
+                            <button type="submit" disabled={loading} style={{ padding: '14px', borderRadius: '12px', background: 'var(--primary)', color: '#000', fontWeight: 'bold', border: 'none', cursor: 'pointer', marginTop: '4px' }}>
                                 {loading ? "Saving..." : "Save Vehicle"}
                             </button>
                         </form>

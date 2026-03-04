@@ -202,7 +202,7 @@
 .submitBtn {
     margin-top: 10px;
     background: var(--primary);
-    color: #ffffff;
+    color: #000000;
     padding: 16px;
     border-radius: 12px;
     font-size: 16px;

@@ -86,7 +86,7 @@ textarea::placeholder {
 
 .btn-primary {
   background: var(--primary);
-  color: #ffffff;
+  color: #000000;
   padding: 12px 28px;
   border-radius: 50px;
   font-weight: 700;
@@ -120,7 +120,7 @@ textarea::placeholder {
 
 .btn-secondary:hover {
   background: var(--primary);
-  color: #ffffff;
+  color: #000000;
   transform: translateY(-2px);
   box-shadow: 0 8px 25px var(--primary-glow);
 }

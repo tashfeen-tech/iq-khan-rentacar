@@ -11,7 +11,7 @@ import { motion } from "framer-motion";
 import styles from "./Fleet.module.css";
 import Footer from "@/components/Footer";
 
-const TYPES = ["All", "Sedan", "Premium Sedan", "SUV", "Pickup / 4x4", "Van"];
+const TYPES = ["All", "Hatchback", "Sedan", "Premium Sedan", "SUV", "Luxury SUV", "MPV", "Van", "Pickup / 4x4"];
 
 export default function FleetPage() {
     const [selectedCar, setSelectedCar] = useState<Car | null>(null);
@@ -63,7 +63,15 @@ export default function FleetPage() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.7, delay: 0.15 }}
                     >
-                        {loading ? "Loading vehicles..." : `${fleetData.length} vehicles available in Lahore — from sleek sedans to powerful 4x4s`}
+                        {loading ? "Loading vehicles..." : `${fleetData.length} vehicles available in Lahore`}
+                    </motion.p>
+                    <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.7, delay: 0.2 }}
+                        style={{ color: '#2ecc71', fontSize: '14px', fontWeight: 600, marginTop: '8px' }}
+                    >
+                        🚗 All rentals include a professional chauffeur (with driver)
                     </motion.p>
                 </div>
 

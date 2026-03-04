@@ -10,11 +10,12 @@ import { db } from "@/lib/firebase";
 import { collection, onSnapshot, query } from "firebase/firestore";
 import { motion } from "framer-motion";
 import Partners from "@/components/Partners";
-import ArmoredServices from "@/components/ArmoredServices";
+import WeddingServices from "@/components/WeddingServices";
 import HotelServices from "@/components/HotelServices";
 import VideoGallery from "@/components/VideoGallery";
 import RentalPlans from "@/components/RentalPlans";
 import Footer from "@/components/Footer";
+import WhatsAppFloat from "@/components/WhatsAppFloat";
 
 export default function Home() {
   const [selectedCar, setSelectedCar] = useState<Car | null>(null);
@@ -51,7 +52,7 @@ export default function Home() {
       seats: 4,
       image: "/logo.png",
       available: true,
-      features: ["VIP Treatment", "Chauffeur Included", "Flexible Timing"]
+      features: ["Chauffeur Driven", "Professional Service", "Flexible Timing"]
     });
     setIsModalOpen(true);
   };
@@ -61,18 +62,19 @@ export default function Home() {
       <Navbar />
       <Hero onBookService={handleBookService} />
 
-      {/* Improved Quick Booking CTAs */}
+      {/* Quick Booking CTAs */}
       <section style={{ padding: '60px 24px', maxWidth: '1200px', margin: '0 auto' }}>
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
           gap: '30px'
         }}>
+          {/* Wedding / Event Booking Card */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            onClick={() => handleBookService("Bulletproof Armored Vehicle")}
+            onClick={() => handleBookService("Wedding & Event Booking")}
             className="premium-card"
             style={{
               padding: '60px 40px',
@@ -97,16 +99,10 @@ export default function Home() {
               background: 'radial-gradient(circle, rgba(46, 204, 113, 0.2) 0%, transparent 70%)'
             }} />
 
-            <div style={{ width: '100%', height: '180px', position: 'relative', borderRadius: '16px', overflow: 'hidden', marginBottom: '10px' }}>
-              <img
-                src="/cars/armored-lc.png"
-                alt="Armored Land Cruiser"
-                style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.95 }}
-              />
-            </div>
+            <div style={{ fontSize: '60px', marginBottom: '10px' }}>💍</div>
 
             <h3 style={{ fontSize: '28px', fontWeight: 900, color: '#fff' }}>
-              Book <span style={{ color: '#2ecc71' }}>Armored Vehicles</span>
+              Book for <span style={{ color: '#2ecc71' }}>Wedding & Events</span>
             </h3>
 
             <ul style={{
@@ -120,19 +116,20 @@ export default function Home() {
               gap: '12px',
               fontSize: '13px'
             }}>
-              <li>✓ B6/B7 Ballistic Protection</li>
-              <li>✓ Bulletproof Glass & Suspension</li>
-              <li>✓ Security Details & Escort</li>
-              <li>✓ Tactical Professional Drivers</li>
-              <li>✓ High-Risk Mitigation</li>
-              <li>✓ Trained Armed Guards</li>
-              <li>✓ LC200/LC300 & Mercedes</li>
-              <li>✓ Diplomatic & VIP Protocol</li>
+              <li>✓ Decorated Bridal Cars</li>
+              <li>✓ Baraat Fleet Arrangements</li>
+              <li>✓ Professional Chauffeurs</li>
+              <li>✓ Multi-Day Event Packages</li>
+              <li>✓ Mehndi, Baraat & Walima</li>
+              <li>✓ Photo-Ready Vehicles</li>
+              <li>✓ Honda Civic, Fortuner & Prado</li>
+              <li>✓ On-Time Guaranteed Service</li>
             </ul>
 
-            <span className="btn-primary" style={{ padding: '16px 40px', fontSize: '18px', width: '100%' }}>Book Security Detail</span>
+            <span className="btn-primary" style={{ padding: '16px 40px', fontSize: '18px', width: '100%' }}>Book Wedding Car</span>
           </motion.div>
 
+          {/* Corporate Rental Card */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -198,7 +195,7 @@ export default function Home() {
               <li>✓ 24/7 Priority Ops Support</li>
               <li>✓ Monthly Fleet Contracts</li>
               <li>✓ Executive Protocol Services</li>
-              <li>✓ Strict Driver Verification</li>
+              <li>✓ Professional Chauffeurs</li>
               <li>✓ Trusted by Pepsi & Nestle</li>
               <li>✓ Logistics Coordination</li>
               <li>✓ Scalable Business Leasing</li>
@@ -210,7 +207,7 @@ export default function Home() {
         </div>
       </section>
 
-      <ArmoredServices />
+      <WeddingServices />
       <HotelServices />
       <RentalPlans />
       <VideoGallery />
@@ -226,8 +223,11 @@ export default function Home() {
             Our <span className="gradient-text">Premium Fleet</span>
           </h2>
 
-          <p style={{ color: 'var(--text-muted)', textAlign: 'center', maxWidth: '600px', margin: '0 auto 60px', fontSize: '18px' }}>
-            {loading ? "Loading available vehicles..." : "Choose from our diverse range of well-maintained vehicles for any occasion, from daily commutes to grand celebrations."}
+          <p style={{ color: 'var(--text-muted)', textAlign: 'center', maxWidth: '600px', margin: '0 auto 16px', fontSize: '18px' }}>
+            {loading ? "Loading available vehicles..." : "Choose from our diverse range of well-maintained vehicles. All rentals include a professional chauffeur."}
+          </p>
+          <p style={{ color: '#2ecc71', textAlign: 'center', fontSize: '14px', fontWeight: 600, marginBottom: '60px' }}>
+            🚗 All vehicles are chauffeur-driven with professional drivers
           </p>
         </motion.div>
 
@@ -259,8 +259,6 @@ export default function Home() {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
       />
-
-
 
       {/* Partner Section */}
       <section id="partner" style={{ background: 'var(--surface-hover)', padding: '100px 24px' }}>
@@ -314,7 +312,7 @@ export default function Home() {
             <div style={{ background: 'var(--surface)', padding: '24px', borderRadius: '16px', border: '1px solid var(--border)' }}>
               <div style={{ display: 'flex', gap: '4px', color: '#FFD700', marginBottom: '10px' }}>★★★★★</div>
               <p style={{ color: 'var(--text-main)', fontStyle: 'italic', marginBottom: '10px' }}>
-                "Excellent service! The car was in perfect condition and the driver was very professional. Highly recommended for one-way travel to Islamabad."
+                &quot;Excellent service! The car was in perfect condition and the driver was very professional. Highly recommended for one-way travel to Islamabad.&quot;
               </p>
               <p style={{ fontSize: '14px', color: 'var(--text-muted)', fontWeight: 'bold' }}>- Google User</p>
             </div>
@@ -322,7 +320,7 @@ export default function Home() {
             <div style={{ background: 'var(--surface)', padding: '24px', borderRadius: '16px', border: '1px solid var(--border)' }}>
               <div style={{ display: 'flex', gap: '4px', color: '#FFD700', marginBottom: '10px' }}>★★★★★</div>
               <p style={{ color: 'var(--text-main)', fontStyle: 'italic', marginBottom: '10px' }}>
-                "Booked an Audi for a wedding event. Seamless process and top-notch vehicle quality. IQ Khan Rent A Car is indeed the best in Lahore."
+                &quot;Booked a decorated car for our wedding. Seamless process and the vehicle looked stunning. IQ Khan Rent A Car is the best in Lahore.&quot;
               </p>
               <p style={{ fontSize: '14px', color: 'var(--text-muted)', fontWeight: 'bold' }}>- Local Guide</p>
             </div>
@@ -330,7 +328,7 @@ export default function Home() {
             <div style={{ background: 'var(--surface)', padding: '24px', borderRadius: '16px', border: '1px solid var(--border)' }}>
               <div style={{ display: 'flex', gap: '4px', color: '#FFD700', marginBottom: '10px' }}>★★★★★</div>
               <p style={{ color: 'var(--text-main)', fontStyle: 'italic', marginBottom: '10px' }}>
-                "I used their airport pick and drop service. The driver was waiting at the terminal right on time. Highly prompt and extremely reliable."
+                &quot;I used their airport pick and drop service. The driver was waiting at the terminal right on time. Highly prompt and extremely reliable.&quot;
               </p>
               <p style={{ fontSize: '14px', color: 'var(--text-muted)', fontWeight: 'bold' }}>- Sarah K.</p>
             </div>
@@ -338,7 +336,7 @@ export default function Home() {
             <div style={{ background: 'var(--surface)', padding: '24px', borderRadius: '16px', border: '1px solid var(--border)' }}>
               <div style={{ display: 'flex', gap: '4px', color: '#FFD700', marginBottom: '10px' }}>★★★★★</div>
               <p style={{ color: 'var(--text-main)', fontStyle: 'italic', marginBottom: '10px' }}>
-                "Best car rental in Lahore. I rented a Yaris for 3 days and the entire process from booking to returning was fully smooth with zero hidden charges."
+                &quot;Best car rental in Lahore. I rented a Yaris for 3 days and the entire process from booking to returning was fully smooth with zero hidden charges.&quot;
               </p>
               <p style={{ fontSize: '14px', color: 'var(--text-muted)', fontWeight: 'bold' }}>- Ali R.</p>
             </div>
@@ -348,6 +346,7 @@ export default function Home() {
 
       {/* Footer */}
       <Footer />
+      <WhatsAppFloat />
     </>
   );
 }

@@ -2,11 +2,11 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Calendar, User, Phone, Mail, LogIn, MessageCircle, MapPin, Shield, Users, Clock } from "lucide-react";
+import { X, Calendar, User, Phone, Mail, LogIn, MessageCircle, MapPin, Users, Clock, Heart } from "lucide-react";
 import styles from "./BookingModal.module.css";
 import { Car, FLEET_DATA } from "@/data/fleet";
 import { db } from "@/lib/firebase";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { collection, addDoc, serverTimestamp, onSnapshot, query } from "firebase/firestore";
 import { useAuth } from "@/lib/AuthContext";
 import Link from "next/link";
 import Image from "next/image";
@@ -19,26 +19,43 @@ interface BookingModalProps {
 
 const BookingModal = ({ car, isOpen, onClose }: BookingModalProps) => {
     const { user, profile } = useAuth();
+    const [fleetCars, setFleetCars] = useState<Car[]>([]);
     const [formData, setFormData] = useState({
         name: "",
         email: "",
         phone: "",
         pickupDate: "",
         returnDate: "",
-        withDriver: false,
         message: "",
         fromCity: "",
         toCity: "",
         airport: "",
         time: "",
         selectedFleetCar: "",
-        protectionLevel: "B6",
         companyName: "",
-        duration: "Monthly"
+        duration: "Monthly",
+        eventType: "",
+        eventDate: "",
+        numberOfCars: "1"
     });
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
     const [success, setSuccess] = useState(false);
+
+    // Load fleet cars from Firestore for price display
+    useEffect(() => {
+        const q = query(collection(db, "cars"));
+        const unsubscribe = onSnapshot(q, (snapshot) => {
+            const cars = snapshot.docs.map(doc => ({
+                id: doc.id,
+                ...doc.data()
+            })) as Car[];
+            setFleetCars(cars);
+        });
+        return () => unsubscribe();
+    }, []);
+
+    const displayFleet = fleetCars.length > 0 ? fleetCars : FLEET_DATA;
 
     // Auto-fill from logged-in user profile
     useEffect(() => {
@@ -52,11 +69,26 @@ const BookingModal = ({ car, isOpen, onClose }: BookingModalProps) => {
         }
     }, [user, profile]);
 
+    // Get price for selected car based on service type
+    const getServicePrice = () => {
+        if (!formData.selectedFleetCar) return null;
+        const selectedCar = displayFleet.find(c => c.name === formData.selectedFleetCar);
+        if (!selectedCar) return null;
+
+        if (isOneSideDrop) return selectedCar.priceOneSideDrop;
+        if (isAirport) {
+            if (formData.airport?.includes("Lahore")) return selectedCar.priceAirportLahore;
+            if (formData.airport?.includes("Islamabad")) return selectedCar.priceAirportIslamabad;
+            return selectedCar.priceAirportLahore || selectedCar.priceAirportIslamabad;
+        }
+        if (isCorporate) return selectedCar.priceCorporate;
+        if (isWedding) return selectedCar.priceWedding;
+        return null;
+    };
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!car) return;
-
-
 
         setLoading(true);
         setError("");
@@ -66,22 +98,35 @@ const BookingModal = ({ car, isOpen, onClose }: BookingModalProps) => {
             const end = new Date(formData.returnDate);
             const days = Math.ceil((end.getTime() - start.getTime()) / (1000 * 3600 * 24)) || 1;
 
+            let calculatedPrice = 0;
+            if (isSpecial) {
+                const spPrice = getServicePrice();
+                if (spPrice) calculatedPrice = Number(spPrice.toString().replace(/,/g, ''));
+            } else if (car.priceFleet) {
+                const dailyPrice = Number(car.priceFleet.toString().replace(/,/g, ''));
+                if (!isNaN(dailyPrice)) {
+                    calculatedPrice = dailyPrice * (days > 0 ? days : 1);
+                }
+            }
+
             await addDoc(collection(db, "bookings"), {
                 name: formData.name,
                 email: formData.email.toLowerCase(),
                 phone: formData.phone,
                 pickupDate: formData.pickupDate,
                 returnDate: formData.returnDate,
-                withDriver: formData.withDriver,
+                withDriver: true, // Always with driver
                 message: formData.message,
                 fromCity: formData.fromCity,
                 toCity: formData.toCity,
                 airport: formData.airport,
                 time: formData.time,
                 selectedFleetCar: formData.selectedFleetCar,
-                protectionLevel: formData.protectionLevel,
                 companyName: formData.companyName,
                 duration: formData.duration,
+                eventType: formData.eventType,
+                eventDate: formData.eventDate,
+                numberOfCars: formData.numberOfCars,
                 carId: car.id,
                 carName: car.name,
                 carImage: car.image,
@@ -89,11 +134,10 @@ const BookingModal = ({ car, isOpen, onClose }: BookingModalProps) => {
                 userId: user?.uid || null,
                 createdAt: serverTimestamp(),
                 days: days > 0 ? days : 1,
-                totalPrice: 0, // Admin updates this
+                totalPrice: calculatedPrice,
                 read: false
             });
             setSuccess(true);
-            // Reset form
             setFormData(prev => ({
                 ...prev,
                 message: "",
@@ -103,7 +147,10 @@ const BookingModal = ({ car, isOpen, onClose }: BookingModalProps) => {
                 toCity: "",
                 airport: "",
                 time: "",
-                selectedFleetCar: ""
+                selectedFleetCar: "",
+                eventType: "",
+                eventDate: "",
+                numberOfCars: "1"
             }));
             setTimeout(() => {
                 onClose();
@@ -117,15 +164,15 @@ const BookingModal = ({ car, isOpen, onClose }: BookingModalProps) => {
         }
     };
 
-
-
     if (!isOpen || !car) return null;
 
-    const isOneWay = car.id === 'service-all-pakistan-one-way-service';
+    const isOneSideDrop = car.id === 'service-one-side-drop-service';
     const isAirport = car.id === 'service-airport-pick-&-drop-service';
-    const isArmored = car.id === 'service-bulletproof-armored-vehicle';
+    const isWedding = car.id === 'service-wedding-&-event-booking';
     const isCorporate = car.id === 'service-corporate-rental-solution';
-    const isSpecial = isOneWay || isAirport || isArmored || isCorporate;
+    const isSpecial = isOneSideDrop || isAirport || isWedding || isCorporate;
+
+    const servicePrice = getServicePrice();
 
     return (
         <AnimatePresence>
@@ -169,6 +216,21 @@ const BookingModal = ({ car, isOpen, onClose }: BookingModalProps) => {
                                 </div>
                                 <h3>{car.name}</h3>
                                 <p className={styles.carType}>{car.type}</p>
+
+
+
+                                <div style={{
+                                    background: 'rgba(46, 204, 113, 0.08)',
+                                    borderRadius: '10px',
+                                    padding: '10px 14px',
+                                    margin: '10px 0',
+                                    fontSize: '13px',
+                                    color: '#2ecc71',
+                                    fontWeight: 600,
+                                    textAlign: 'center'
+                                }}>
+                                    🚗 Chauffeur-Driven (With Driver)
+                                </div>
 
                                 <ul className={styles.featureList}>
                                     {car.features.map((f, i) => <li key={i}>{f}</li>)}
@@ -247,33 +309,63 @@ const BookingModal = ({ car, isOpen, onClose }: BookingModalProps) => {
                                                     style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid var(--border)', background: 'var(--surface)', color: 'var(--text-main)' }}
                                                 >
                                                     <option value="" disabled>Choose a vehicle...</option>
-                                                    {FLEET_DATA.map(c => (
-                                                        <option key={c.id} value={c.name}>{c.name}</option>
-                                                    ))}
+                                                    {displayFleet.map(c => {
+                                                        let price = '';
+                                                        if (isOneSideDrop && c.priceOneSideDrop) price = ` - Rs. ${c.priceOneSideDrop}`;
+                                                        if (isAirport && c.priceAirportLahore) price = ` - Rs. ${c.priceAirportLahore}`;
+                                                        if (isCorporate && c.priceCorporate) price = ` - Rs. ${c.priceCorporate}`;
+                                                        if (isWedding && c.priceWedding) price = ` - Rs. ${c.priceWedding}`;
+                                                        return (
+                                                            <option key={c.id} value={c.name}>{c.name}{price}</option>
+                                                        );
+                                                    })}
                                                 </select>
                                             </div>
 
-                                            {isOneWay && (
+                                            {/* Show price for selected car */}
+                                            {servicePrice && (
+                                                <div style={{
+                                                    background: 'rgba(46, 204, 113, 0.1)',
+                                                    border: '1px solid rgba(46, 204, 113, 0.3)',
+                                                    borderRadius: '12px',
+                                                    padding: '12px 16px',
+                                                    marginBottom: '15px',
+                                                    textAlign: 'center'
+                                                }}>
+                                                    <span style={{ color: '#2ecc71', fontSize: '20px', fontWeight: 800 }}>Rs. {servicePrice}</span>
+                                                    <span style={{ color: 'var(--text-muted)', fontSize: '13px' }}> per trip</span>
+                                                </div>
+                                            )}
+
+                                            {isOneSideDrop && (
                                                 <div className={styles.inputRow}>
                                                     <div className={styles.inputGroup}>
                                                         <label><MapPin size={16} /> From City</label>
-                                                        <input
-                                                            type="text"
+                                                        <select
                                                             required
-                                                            placeholder="City name"
                                                             value={formData.fromCity}
                                                             onChange={e => setFormData({ ...formData, fromCity: e.target.value })}
-                                                        />
+                                                            style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid var(--border)', background: 'var(--surface)', color: 'var(--text-main)' }}
+                                                        >
+                                                            <option value="" disabled>Select city...</option>
+                                                            <option value="Lahore">Lahore</option>
+                                                            <option value="Islamabad / Rawalpindi">Islamabad / Rawalpindi</option>
+                                                            <option value="Multan">Multan</option>
+                                                        </select>
                                                     </div>
                                                     <div className={styles.inputGroup}>
                                                         <label><MapPin size={16} /> To City</label>
-                                                        <input
-                                                            type="text"
+                                                        <select
                                                             required
-                                                            placeholder="City in Punjab, KPK, Sindh"
                                                             value={formData.toCity}
                                                             onChange={e => setFormData({ ...formData, toCity: e.target.value })}
-                                                        />
+                                                            style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid var(--border)', background: 'var(--surface)', color: 'var(--text-main)' }}
+                                                        >
+                                                            <option value="" disabled>Select city...</option>
+                                                            <option value="Lahore">Lahore</option>
+                                                            <option value="Islamabad / Rawalpindi">Islamabad / Rawalpindi</option>
+                                                            <option value="Multan">Multan</option>
+                                                        </select>
                                                     </div>
                                                 </div>
                                             )}
@@ -289,14 +381,51 @@ const BookingModal = ({ car, isOpen, onClose }: BookingModalProps) => {
                                                     >
                                                         <option value="" disabled>Select Airport</option>
                                                         <option value="Allama Iqbal International Airport, Lahore">Allama Iqbal International Airport, Lahore</option>
-                                                        <option value="Jinnah International Airport, Karachi">Jinnah International Airport, Karachi</option>
                                                         <option value="Islamabad International Airport">Islamabad International Airport</option>
                                                     </select>
                                                 </div>
                                             )}
 
+                                            {isWedding && (
+                                                <>
+                                                    <div className={styles.inputRow}>
+                                                        <div className={styles.inputGroup}>
+                                                            <label><Heart size={16} /> Event Type</label>
+                                                            <select
+                                                                required
+                                                                value={formData.eventType}
+                                                                onChange={e => setFormData({ ...formData, eventType: e.target.value })}
+                                                                style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid var(--border)', background: 'var(--surface)', color: 'var(--text-main)' }}
+                                                            >
+                                                                <option value="" disabled>Select event...</option>
+                                                                <option value="Wedding - Baraat">Wedding - Baraat</option>
+                                                                <option value="Wedding - Walima">Wedding - Walima</option>
+                                                                <option value="Wedding - Mehndi">Wedding - Mehndi</option>
+                                                                <option value="Wedding - Full Package">Wedding - Full Package (All Events)</option>
+                                                                <option value="Corporate Event">Corporate Event</option>
+                                                                <option value="Private Celebration">Private Celebration</option>
+                                                                <option value="Other Event">Other Event</option>
+                                                            </select>
+                                                        </div>
+                                                        <div className={styles.inputGroup}>
+                                                            <label>Number of Cars</label>
+                                                            <select
+                                                                value={formData.numberOfCars}
+                                                                onChange={e => setFormData({ ...formData, numberOfCars: e.target.value })}
+                                                                style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid var(--border)', background: 'var(--surface)', color: 'var(--text-main)' }}
+                                                            >
+                                                                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(n => (
+                                                                    <option key={n} value={String(n)}>{n} {n === 1 ? 'Car' : 'Cars'}</option>
+                                                                ))}
+                                                                <option value="10+">10+ Cars</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </>
+                                            )}
+
                                             <div className={styles.inputGroup} style={{ marginBottom: '15px' }}>
-                                                <label><Calendar size={16} /> Date & Time</label>
+                                                <label><Calendar size={16} /> {isWedding ? 'Event Date & Time' : 'Date & Time'}</label>
                                                 <input
                                                     type="datetime-local"
                                                     required
@@ -304,21 +433,6 @@ const BookingModal = ({ car, isOpen, onClose }: BookingModalProps) => {
                                                     onChange={e => setFormData({ ...formData, pickupDate: e.target.value })}
                                                 />
                                             </div>
-
-                                            {isArmored && (
-                                                <div className={styles.inputGroup} style={{ marginBottom: '15px' }}>
-                                                    <label><Shield size={16} /> Protection Level Required</label>
-                                                    <select
-                                                        value={formData.protectionLevel}
-                                                        onChange={e => setFormData({ ...formData, protectionLevel: e.target.value })}
-                                                        style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid var(--border)', background: 'var(--surface)', color: 'var(--text-main)' }}
-                                                    >
-                                                        <option value="B6">B6 Level Protection (High)</option>
-                                                        <option value="B7">B7 Level Protection (Maximum)</option>
-                                                        <option value="Unarmored">Unarmored / VIP Only</option>
-                                                    </select>
-                                                </div>
-                                            )}
 
                                             {isCorporate && (
                                                 <div className={styles.inputRow}>
@@ -370,24 +484,19 @@ const BookingModal = ({ car, isOpen, onClose }: BookingModalProps) => {
                                                 </div>
                                             </div>
 
-                                            <div className={styles.toggleGroup}>
-                                                <label style={{ fontSize: '14px', fontWeight: 600 }}>Do you need a driver?</label>
-                                                <div className={styles.toggle}>
-                                                    <button
-                                                        type="button"
-                                                        className={!formData.withDriver ? styles.active : ""}
-                                                        onClick={() => setFormData({ ...formData, withDriver: false })}
-                                                    >
-                                                        Self Drive
-                                                    </button>
-                                                    <button
-                                                        type="button"
-                                                        className={formData.withDriver ? styles.active : ""}
-                                                        onClick={() => setFormData({ ...formData, withDriver: true })}
-                                                    >
-                                                        With Driver
-                                                    </button>
-                                                </div>
+                                            {/* No self-drive toggle - always with driver */}
+                                            <div style={{
+                                                background: 'rgba(46, 204, 113, 0.08)',
+                                                borderRadius: '12px',
+                                                padding: '14px',
+                                                marginBottom: '15px',
+                                                fontSize: '14px',
+                                                color: '#2ecc71',
+                                                fontWeight: 600,
+                                                textAlign: 'center',
+                                                border: '1px solid rgba(46, 204, 113, 0.2)'
+                                            }}>
+                                                🚗 All rentals include a professional chauffeur (with driver)
                                             </div>
                                         </>
                                     )}
@@ -417,7 +526,7 @@ const BookingModal = ({ car, isOpen, onClose }: BookingModalProps) => {
                                         </button>
 
                                         <a
-                                            href={`https://wa.me/923340002910?text=Hi! I am interested in renting the ${car.name}.`}
+                                            href={`https://wa.me/923340002910?text=Hi! I am interested in renting the ${car.name}. ${isSpecial && formData.selectedFleetCar ? `Car: ${formData.selectedFleetCar}. ` : ''}Please share details.`}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             className={styles.submitBtn}
@@ -429,7 +538,7 @@ const BookingModal = ({ car, isOpen, onClose }: BookingModalProps) => {
                                                 gap: '8px',
                                                 background: '#25D366',
                                                 textDecoration: 'none',
-                                                color: 'white'
+                                                color: '#000000'
                                             }}
                                         >
                                             <MessageCircle size={20} />

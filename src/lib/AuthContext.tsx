@@ -74,7 +74,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             email,
             name,
             phone,
-            role: "user",
+            role: email.startsWith("admin@") ? "admin" : "user",
             createdAt: serverTimestamp(),
         };
         await setDoc(doc(db, "users", cred.user.uid), userProfile);

@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import styles from "./About.module.css";
 import { Shield, Star, Clock, Users, MapPin, Award } from "lucide-react";
 import Partners from "@/components/Partners";
-import ArmoredServices from "@/components/ArmoredServices";
+import WeddingServices from "@/components/WeddingServices";
 import HotelServices from "@/components/HotelServices";
 import RentalPlans from "@/components/RentalPlans";
 import Footer from "@/components/Footer";
@@ -150,7 +150,7 @@ export default function AboutPage() {
 
                 {/* New Sections from Profile */}
                 <Partners />
-                <ArmoredServices />
+                <WeddingServices />
                 <HotelServices />
                 <RentalPlans />
 

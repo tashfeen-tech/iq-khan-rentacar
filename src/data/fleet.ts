@@ -7,6 +7,13 @@ export interface Car {
     image: string;
     available: boolean;
     features: string[];
+    // Service-specific pricing (set by admin)
+    priceFleet?: string;        // Daily rental price
+    priceOneSideDrop?: string;  // One Side Drop price
+    priceAirportLahore?: string;  // Airport Lahore price
+    priceAirportIslamabad?: string; // Airport Islamabad price
+    priceCorporate?: string;    // Corporate rental price
+    priceWedding?: string;      // Wedding/Event price
 }
 
 export const FLEET_DATA: Car[] = [
@@ -181,4 +188,3 @@ export const FLEET_DATA: Car[] = [
         features: ['14 Seater', 'Dual AC', 'Large Luggage Space', 'Group Travel']
     }
 ];
-
