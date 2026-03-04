@@ -65,7 +65,7 @@
     flex-direction: column;
 }
 
-.popular {
+.brandName {
     font-size: 22px;
     font-weight: 950;
     color: #fff;
@@ -73,8 +73,8 @@
     line-height: 1;
 }
 
-.scrolled .popular,
-.solid .popular {
+.scrolled .brandName,
+.solid .brandName {
     color: var(--text-main);
 }
 
