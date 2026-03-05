@@ -11,8 +11,13 @@ const Footer = () => {
                     <p style={{ color: 'var(--text-muted)', lineHeight: '1.6' }}>
                         The most trusted car rental service in Pakistan. All vehicles are chauffeur-driven with professional drivers. Travel anywhere with comfort, safety, and peace of mind.
                     </p>
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', marginTop: '20px' }}>
-                        <a href="https://www.facebook.com/iqkhanrentacar" target="_blank" rel="noreferrer" style={{ color: 'var(--text-main)', fontWeight: 600 }}>Facebook</a>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: '20px' }}>
+                        <a href="https://share.google/HkvTPbco2qxQ5fwPz" target="_blank" rel="noreferrer" style={{ color: 'var(--text-main)', fontWeight: 600, fontSize: '13px', background: 'rgba(255,255,255,0.05)', padding: '6px 14px', borderRadius: '50px', border: '1px solid var(--border)', transition: 'all 0.3s' }}>Google</a>
+                        <a href="https://www.facebook.com/iqkhanrentacar" target="_blank" rel="noreferrer" style={{ color: 'var(--text-main)', fontWeight: 600, fontSize: '13px', background: 'rgba(255,255,255,0.05)', padding: '6px 14px', borderRadius: '50px', border: '1px solid var(--border)', transition: 'all 0.3s' }}>Facebook HQ</a>
+                        <a href="https://www.facebook.com/profile.php?id=61583779704854" target="_blank" rel="noreferrer" style={{ color: 'var(--text-main)', fontWeight: 600, fontSize: '13px', background: 'rgba(255,255,255,0.05)', padding: '6px 14px', borderRadius: '50px', border: '1px solid var(--border)', transition: 'all 0.3s' }}>Facebook Branch</a>
+                        <a href="https://www.instagram.com/iqkhan.carrentals/" target="_blank" rel="noreferrer" style={{ color: 'var(--text-main)', fontWeight: 600, fontSize: '13px', background: 'rgba(255,255,255,0.05)', padding: '6px 14px', borderRadius: '50px', border: '1px solid var(--border)', transition: 'all 0.3s' }}>Instagram</a>
+                        <a href="https://www.youtube.com/@IQKhanRentACar-t4v" target="_blank" rel="noreferrer" style={{ color: 'var(--text-main)', fontWeight: 600, fontSize: '13px', background: 'rgba(255,255,255,0.05)', padding: '6px 14px', borderRadius: '50px', border: '1px solid var(--border)', transition: 'all 0.3s' }}>YouTube</a>
+                        <a href="https://www.tiktok.com/@iqkhan_rentacar" target="_blank" rel="noreferrer" style={{ color: 'var(--text-main)', fontWeight: 600, fontSize: '13px', background: 'rgba(255,255,255,0.05)', padding: '6px 14px', borderRadius: '50px', border: '1px solid var(--border)', transition: 'all 0.3s' }}>TikTok</a>
                     </div>
                 </div>
                 <div>
@@ -58,7 +63,7 @@ const Footer = () => {
                             </a>
                         </li>
                         <li>iqkhanrentacar@gmail.com</li>
-                        <li><a href="https://www.facebook.com/iqkhanrentacar" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--primary)', textDecoration: 'underline', fontWeight: 600 }}>Facebook Page</a></li>
+                        <li><a href="https://share.google/HkvTPbco2qxQ5fwPz" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--primary)', textDecoration: 'underline', fontWeight: 600 }}>Google Business Profile</a></li>
                     </ul>
                 </div>
             </div>

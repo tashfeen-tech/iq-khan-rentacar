@@ -4,7 +4,7 @@ import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import { motion } from "framer-motion";
 import styles from "./Contact.module.css";
-import { Phone, Mail, MapPin, MessageCircle, Clock, Send } from "lucide-react";
+import { Phone, Mail, MapPin, MessageCircle, Clock, Send, Globe } from "lucide-react";
 import { db } from "@/lib/firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import Footer from "@/components/Footer";
@@ -111,12 +111,17 @@ export default function ContactPage() {
                         </div>
 
                         <div className={styles.infoItem}>
-                            <div className={styles.infoIcon}><MapPin size={22} /></div>
+                            <div className={styles.infoIcon}><Globe size={22} /></div>
                             <div>
-                                <span className={styles.infoLabel}>Social Media</span>
-                                <a href="https://www.facebook.com/iqkhanrentacar" target="_blank" rel="noopener noreferrer" className={styles.infoValue} style={{ color: 'var(--primary)', textDecoration: 'underline' }}>
-                                    View on Facebook
-                                </a>
+                                <span className={styles.infoLabel}>Social Media Links</span>
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '4px' }}>
+                                    <a href="https://share.google/HkvTPbco2qxQ5fwPz" target="_blank" rel="noopener noreferrer" className={styles.infoValue} style={{ color: 'var(--primary)', textDecoration: 'underline' }}>Google Profile</a>
+                                    <a href="https://www.facebook.com/iqkhanrentacar" target="_blank" rel="noopener noreferrer" className={styles.infoValue} style={{ color: 'var(--primary)', textDecoration: 'underline' }}>Facebook HQ</a>
+                                    <a href="https://www.facebook.com/profile.php?id=61583779704854" target="_blank" rel="noopener noreferrer" className={styles.infoValue} style={{ color: 'var(--primary)', textDecoration: 'underline' }}>Facebook Branch</a>
+                                    <a href="https://www.instagram.com/iqkhan.carrentals/" target="_blank" rel="noopener noreferrer" className={styles.infoValue} style={{ color: 'var(--primary)', textDecoration: 'underline' }}>Instagram</a>
+                                    <a href="https://www.youtube.com/@IQKhanRentACar-t4v" target="_blank" rel="noopener noreferrer" className={styles.infoValue} style={{ color: 'var(--primary)', textDecoration: 'underline' }}>YouTube</a>
+                                    <a href="https://www.tiktok.com/@iqkhan_rentacar" target="_blank" rel="noopener noreferrer" className={styles.infoValue} style={{ color: 'var(--primary)', textDecoration: 'underline' }}>TikTok</a>
+                                </div>
                             </div>
                         </div>
 
