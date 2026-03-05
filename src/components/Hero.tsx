@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ChevronRight, Calendar, MapPin, Search } from "lucide-react";
+import { ChevronRight, Calendar, MapPin, Search, MessageCircle } from "lucide-react";
 import styles from "./Hero.module.css";
 
 const Hero = ({ onBookService }: { onBookService?: (serviceName: string) => void }) => {
@@ -21,7 +21,7 @@ const Hero = ({ onBookService }: { onBookService?: (serviceName: string) => void
                         style={{ padding: '40px', background: 'rgba(255, 255, 255, 0.05)', backdropFilter: 'blur(10px)', border: '1px solid rgba(46, 204, 113, 0.27)' }}
                     >
                         <h2 style={{ fontSize: '30px', fontWeight: 900, marginBottom: '20px', color: '#fff' }}>
-                            <span style={{ color: '#2ecc71' }}>One Side</span> <br /> Drop Service
+                            🗺️ <span style={{ color: '#2ecc71' }}>One Side</span> <br /> Drop Service
                         </h2>
 
                         <ul style={{
@@ -44,9 +44,14 @@ const Hero = ({ onBookService }: { onBookService?: (serviceName: string) => void
                             <li>✓ 24/7 Booking Availability</li>
                         </ul>
 
-                        <button onClick={() => onBookService?.("One Side Drop Service")} className="btn-primary" style={{ width: '100%', textAlign: 'center', border: 'none', cursor: 'pointer' }}>
-                            Book One Side Drop
-                        </button>
+                        <div style={{ display: 'flex', gap: '10px' }}>
+                            <button onClick={() => onBookService?.("One Side Drop Service")} className="btn-primary" style={{ flex: 1, textAlign: 'center', border: 'none', cursor: 'pointer', fontSize: '14px' }}>
+                                Book Form
+                            </button>
+                            <a href="https://wa.me/923340002910?text=Hi! I want to book the One Side Drop Service." target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ flex: 1, background: '#25D366', color: '#000', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', textDecoration: 'none', fontSize: '14px' }}>
+                                <MessageCircle size={16} /> WhatsApp
+                            </a>
+                        </div>
                     </motion.div>
 
                     {/* Airport Pick & Drop Card */}
@@ -58,7 +63,7 @@ const Hero = ({ onBookService }: { onBookService?: (serviceName: string) => void
                         style={{ padding: '40px', background: 'rgba(255, 255, 255, 0.05)', backdropFilter: 'blur(10px)', border: '1px solid rgba(46, 204, 113, 0.27)' }}
                     >
                         <h2 style={{ fontSize: '30px', fontWeight: 900, marginBottom: '20px', color: '#fff' }}>
-                            <span style={{ color: '#2ecc71' }}>Airport Pick & Drop</span> <br /> Service
+                            ✈️ <span style={{ color: '#2ecc71' }}>Airport Pick & Drop</span> <br /> Service
                         </h2>
 
                         <ul style={{
@@ -81,9 +86,14 @@ const Hero = ({ onBookService }: { onBookService?: (serviceName: string) => void
                             <li>✓ Round-the-clock Availability for All Flights</li>
                         </ul>
 
-                        <button onClick={() => onBookService?.("Airport Pick & Drop Service")} className="btn-primary" style={{ width: '100%', textAlign: 'center', border: 'none', cursor: 'pointer' }}>
-                            Book Airport Transfer
-                        </button>
+                        <div style={{ display: 'flex', gap: '10px' }}>
+                            <button onClick={() => onBookService?.("Airport Pick & Drop Service")} className="btn-primary" style={{ flex: 1, textAlign: 'center', border: 'none', cursor: 'pointer', fontSize: '14px' }}>
+                                Book Form
+                            </button>
+                            <a href="https://wa.me/923340002910?text=Hi! I need an Airport Transfer Service." target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ flex: 1, background: '#25D366', color: '#000', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', textDecoration: 'none', fontSize: '14px' }}>
+                                <MessageCircle size={16} /> WhatsApp
+                            </a>
+                        </div>
                     </motion.div>
 
                 </div>

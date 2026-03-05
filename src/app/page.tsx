@@ -126,7 +126,12 @@ export default function Home() {
               <li>✓ On-Time Guaranteed Service</li>
             </ul>
 
-            <span className="btn-primary" style={{ padding: '16px 40px', fontSize: '18px', width: '100%' }}>Book Wedding Car</span>
+            <div style={{ display: 'flex', gap: '10px', width: '100%' }}>
+              <span className="btn-primary" style={{ padding: '16px', fontSize: '15px', flex: 1, textAlign: 'center', justifyContent: 'center' }}>Book Form</span>
+              <a href="https://wa.me/923340002910?text=Hi! I want to book a Wedding Car." target="_blank" rel="noopener noreferrer" className="btn-primary" onClick={(e) => e.stopPropagation()} style={{ padding: '16px', fontSize: '15px', flex: 1, background: '#25D366', color: '#000', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', textDecoration: 'none' }}>
+                <span style={{ fontSize: '18px' }}>💬</span> WhatsApp
+              </a>
+            </div>
           </motion.div>
 
           {/* Corporate Rental Card */}
@@ -160,22 +165,7 @@ export default function Home() {
               background: 'radial-gradient(circle, rgba(46, 204, 113, 0.13) 0%, transparent 70%)'
             }} />
 
-            <div style={{ width: '100%', height: '180px', position: 'relative', borderRadius: '16px', overflow: 'hidden', marginBottom: '10px' }}>
-              <div style={{ width: '100%', height: '100%', position: 'relative' }}>
-                <img
-                  src="/cars/corporate-logos.png"
-                  alt="Corporate Partners"
-                  style={{
-                    width: '160%',
-                    height: 'auto',
-                    position: 'absolute',
-                    top: '-45%',
-                    left: '-30%',
-                    opacity: 0.95
-                  }}
-                />
-              </div>
-            </div>
+            <div style={{ fontSize: '60px', marginBottom: '10px' }}>🏢</div>
 
             <h3 style={{ fontSize: '28px', fontWeight: 900, color: '#fff' }}>
               Book for your <span style={{ color: '#2ecc71' }}>Corporation</span>
@@ -202,7 +192,12 @@ export default function Home() {
               <li>✓ Dedicated Account Managers</li>
             </ul>
 
-            <span className="btn-primary" style={{ padding: '16px 40px', fontSize: '18px', width: '100%' }}>Corporate Inquiry</span>
+            <div style={{ display: 'flex', gap: '10px', width: '100%' }}>
+              <span className="btn-primary" style={{ padding: '16px', fontSize: '15px', flex: 1, textAlign: 'center', justifyContent: 'center' }}>Inquiry Form</span>
+              <a href="https://wa.me/923340002910?text=Hi! I need Corporate Rental Solutions." target="_blank" rel="noopener noreferrer" className="btn-primary" onClick={(e) => e.stopPropagation()} style={{ padding: '16px', fontSize: '15px', flex: 1, background: '#25D366', color: '#000', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', textDecoration: 'none' }}>
+                <span style={{ fontSize: '18px' }}>💬</span> WhatsApp
+              </a>
+            </div>
           </motion.div>
         </div>
       </section>
@@ -284,12 +279,13 @@ export default function Home() {
             gap: '40px'
           }}>
             {[
-              { title: "24/7 Support", desc: "Always here to help you on the road." },
-              { title: "Best Rates", desc: "Competitive pricing with no hidden costs." },
-              { title: "Clean Vehicles", desc: "Sanitized and well-maintained cars every time." },
-              { title: "Pro Drivers", desc: "Experienced and verified professional chauffeurs." }
+              { icon: "📞", title: "24/7 Support", desc: "Always here to help you on the road." },
+              { icon: "💰", title: "Best Rates", desc: "Competitive pricing with no hidden costs." },
+              { icon: "✨", title: "Clean Vehicles", desc: "Sanitized and well-maintained cars every time." },
+              { icon: "🤝", title: "Pro Drivers", desc: "Experienced and verified professional chauffeurs." }
             ].map((service, i) => (
               <div key={i} className="premium-card" style={{ padding: '32px', textAlign: 'center' }}>
+                <div style={{ fontSize: '40px', marginBottom: '16px' }}>{service.icon}</div>
                 <h3 style={{ color: 'var(--primary)', marginBottom: '12px', fontSize: '20px' }}>{service.title}</h3>
                 <p style={{ color: 'var(--text-muted)' }}>{service.desc}</p>
               </div>
