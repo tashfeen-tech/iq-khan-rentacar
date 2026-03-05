@@ -88,8 +88,8 @@ export default function ContactPage() {
                             <div className={styles.infoIcon}><Mail size={22} /></div>
                             <div>
                                 <span className={styles.infoLabel}>Email</span>
-                                <a href="mailto:iqkhanrentacar@gmail.com" className={styles.infoValue}>
-                                    iqkhanrentacar@gmail.com
+                                <a href="mailto:iqk4534@gmail.com" className={styles.infoValue}>
+                                    iqk4534@gmail.com
                                 </a>
                             </div>
                         </div>

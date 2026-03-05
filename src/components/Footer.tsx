@@ -62,7 +62,7 @@ const Footer = () => {
                                 💬 Chat on WhatsApp
                             </a>
                         </li>
-                        <li>iqkhanrentacar@gmail.com</li>
+                        <li>iqk4534@gmail.com</li>
                         <li><a href="https://share.google/HkvTPbco2qxQ5fwPz" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--primary)', textDecoration: 'underline', fontWeight: 600 }}>Google Business Profile</a></li>
                     </ul>
                 </div>
