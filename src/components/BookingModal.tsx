@@ -69,13 +69,23 @@ const BookingModal = ({ car, isOpen, onClose }: BookingModalProps) => {
         }
     }, [user, profile]);
 
+    const getCustomOneSidePrice = (carModel: any) => {
+        const n = carModel.name.toLowerCase();
+        if (n.includes('coaster')) return '35000 Rs Bachat';
+        if (n.includes('grand cabin') || n.includes('hiace')) return '20000 Rs Bachat';
+        if (n.includes('fortuner') || n.includes('prado') || n.includes('kia') || n.includes('sportage') || n.includes('v8') || n.includes('mg') || n.includes('hyundai')) return 'L<>I 65k | I<>M 70k | L<>M 65k';
+        if (n.includes('civic') || n.includes('altis') || n.includes('grande')) return 'L<>I 40k | I<>M 45k | L<>M 40k';
+        if (n.includes('changan') || n.includes('karvaan') || n.includes('apv') || n.includes('brv') || carModel.seats >= 7) return 'L<>I 35k | I<>M 35k | L<>M 35k';
+        return 'L<>I 35k | I<>M 40k | L<>M 35k';
+    };
+
     // Get price for selected car based on service type
     const getServicePrice = () => {
         if (!formData.selectedFleetCar) return null;
         const selectedCar = displayFleet.find(c => c.name === formData.selectedFleetCar);
         if (!selectedCar) return null;
 
-        if (isOneSideDrop) return selectedCar.priceOneSideDrop;
+        if (isOneSideDrop) return getCustomOneSidePrice(selectedCar);
         if (isAirport) {
             if (formData.airport?.includes("Lahore")) return selectedCar.priceAirportLahore;
             if (formData.airport?.includes("Islamabad")) return selectedCar.priceAirportIslamabad;
@@ -311,10 +321,10 @@ const BookingModal = ({ car, isOpen, onClose }: BookingModalProps) => {
                                                     <option value="" disabled>Choose a vehicle...</option>
                                                     {displayFleet.map(c => {
                                                         let price = '';
-                                                        if (isOneSideDrop && c.priceOneSideDrop) price = ` - Rs. ${c.priceOneSideDrop}`;
-                                                        if (isAirport && c.priceAirportLahore) price = ` - Rs. ${c.priceAirportLahore}`;
-                                                        if (isCorporate && c.priceCorporate) price = ` - Rs. ${c.priceCorporate}`;
-                                                        if (isWedding && c.priceWedding) price = ` - Rs. ${c.priceWedding}`;
+                                                        if (isOneSideDrop) price = ` - ${getCustomOneSidePrice(c)}`;
+                                                        else if (isAirport && c.priceAirportLahore) price = ` - Rs. ${c.priceAirportLahore}`;
+                                                        else if (isCorporate && c.priceCorporate) price = ` - Rs. ${c.priceCorporate}`;
+                                                        else if (isWedding && c.priceWedding) price = ` - Rs. ${c.priceWedding}`;
                                                         return (
                                                             <option key={c.id} value={c.name}>{c.name}{price}</option>
                                                         );
