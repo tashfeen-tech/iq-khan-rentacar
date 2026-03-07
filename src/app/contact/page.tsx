@@ -84,15 +84,7 @@ export default function ContactPage() {
                             </div>
                         </div>
 
-                        <div className={styles.infoItem}>
-                            <div className={styles.infoIcon}><Mail size={22} /></div>
-                            <div>
-                                <span className={styles.infoLabel}>Email</span>
-                                <a href="mailto:iqk4534@gmail.com" className={styles.infoValue}>
-                                    iqk4534@gmail.com
-                                </a>
-                            </div>
-                        </div>
+
 
                         <div className={styles.infoItem}>
                             <div className={styles.infoIcon}><MapPin size={22} /></div>
