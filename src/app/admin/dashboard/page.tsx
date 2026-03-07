@@ -846,6 +846,7 @@ export default function AdminDashboard() {
                                     <th>Partner Name & Phone</th>
                                     <th>Car Details & City</th>
                                     <th>Ownership/Refs</th>
+                                    <th>Expected Price</th>
                                     <th>Message</th>
                                     <th>Date</th>
                                 </tr>
@@ -871,6 +872,11 @@ export default function AdminDashboard() {
                                                 Ref 1: {p.referencePhone1}<br />
                                                 Ref 2: {p.referencePhone2}
                                             </div>
+                                        </td>
+                                        <td>
+                                            <span style={{ fontWeight: 600, color: 'var(--primary)' }}>
+                                                {p.expectedPrice ? `Rs. ${p.expectedPrice}` : "—"}
+                                            </span>
                                         </td>
                                         <td>
                                             <div style={{ maxWidth: '200px', fontSize: '13px', opacity: 0.8 }}>

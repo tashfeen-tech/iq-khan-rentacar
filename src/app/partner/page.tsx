@@ -14,7 +14,8 @@ export default function PartnerPage() {
         message: "",
         referencePhone1: "",
         referencePhone2: "",
-        homeOwnership: "Owned" // From given notes
+        homeOwnership: "Owned", // From given notes
+        expectedPrice: ""
     });
     const [submitting, setSubmitting] = useState(false);
     const [success, setSuccess] = useState(false);
@@ -30,7 +31,7 @@ export default function PartnerPage() {
             });
             setSuccess(true);
             setFormData({
-                name: "", phone: "", carModel: "", city: "", message: "", referencePhone1: "", referencePhone2: "", homeOwnership: "Owned"
+                name: "", phone: "", carModel: "", city: "", message: "", referencePhone1: "", referencePhone2: "", homeOwnership: "Owned", expectedPrice: ""
             });
         } catch (error) {
             console.error("Error submitting form:", error);
@@ -87,6 +88,11 @@ export default function PartnerPage() {
                                     <option value="Owned">Owned</option>
                                     <option value="Rented">Rented</option>
                                 </select>
+                            </div>
+
+                            <div>
+                                <label style={{ display: 'block', marginBottom: '8px', fontWeight: 500 }}>Expected Price per Month (Rs.)</label>
+                                <input required placeholder="e.g. 80000" type="number" value={formData.expectedPrice} onChange={e => setFormData({ ...formData, expectedPrice: e.target.value })} style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid var(--border)' }} />
                             </div>
 
                             <div>
