@@ -84,7 +84,7 @@ export default function PartnerPage() {
 
                             <div>
                                 <label style={{ display: 'block', marginBottom: '8px', fontWeight: 500 }}>Home Ownership Status</label>
-                                <select value={formData.homeOwnership} onChange={e => setFormData({ ...formData, homeOwnership: e.target.value })} style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid var(--border)', background: 'white' }}>
+                                <select value={formData.homeOwnership} onChange={e => setFormData({ ...formData, homeOwnership: e.target.value })} style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid var(--border)', background: 'var(--surface)', color: 'var(--text-main)' }}>
                                     <option value="Owned">Owned</option>
                                     <option value="Rented">Rented</option>
                                 </select>
