@@ -55,7 +55,9 @@ const BookingModal = ({ car, isOpen, onClose }: BookingModalProps) => {
         return () => unsubscribe();
     }, []);
 
-    const displayFleet = fleetCars.length > 0 ? fleetCars : FLEET_DATA;
+    const displayFleet = fleetCars.length > 0
+        ? [...fleetCars, ...FLEET_DATA.filter(fc => !fleetCars.find(dbCar => dbCar.id === fc.id))]
+        : FLEET_DATA;
 
     // Auto-fill from logged-in user profile
     useEffect(() => {

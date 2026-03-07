@@ -36,7 +36,9 @@ export default function Home() {
     return () => unsubscribe();
   }, []);
 
-  const displayFleet = fleetData.length > 0 ? fleetData : FLEET_DATA;
+  const displayFleet = fleetData.length > 0
+    ? [...fleetData, ...FLEET_DATA.filter(fc => !fleetData.find(dbCar => dbCar.id === fc.id))]
+    : FLEET_DATA;
 
   const handleBookClick = (car: Car) => {
     setSelectedCar(car);

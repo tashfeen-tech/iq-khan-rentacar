@@ -227,14 +227,16 @@ export default function AdminDashboard() {
         return () => unsubscribe();
     }, [user, profile]);
 
-    const displayCars = cars.length > 0 ? cars : FLEET_DATA.map(c => ({ ...c, docId: c.id }));
+    const displayCars = cars.length > 0
+        ? [...cars, ...FLEET_DATA.filter(fc => !cars.find(dbCar => dbCar.id === fc.id)).map(c => ({ ...c, docId: c.id }))]
+        : FLEET_DATA.map(c => ({ ...c, docId: c.id }));
 
     const seedCars = async () => {
         const { FLEET_DATA } = await import("@/data/fleet");
         setLoading(true);
         try {
             for (const car of FLEET_DATA) {
-                await setDoc(doc(db, "cars", car.id), car);
+                await setDoc(doc(db, "cars", car.id), car, { merge: true });
             }
             alert("Fleet successfully seeded into Firestore!");
         } catch (err) {
