@@ -77,6 +77,7 @@ interface PartnerSubmission {
     referencePhone1: string;
     referencePhone2: string;
     message: string;
+    expectedPrice?: string;
     status: string;
     createdAt: any;
 }
