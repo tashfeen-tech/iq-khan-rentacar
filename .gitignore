@@ -34,3 +34,12 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# python scripts / temp
+venv/
+bing_cars/
+*.py
+download-cars.py
+download_remaining.py
+download-bing.py
+generate-images.js
