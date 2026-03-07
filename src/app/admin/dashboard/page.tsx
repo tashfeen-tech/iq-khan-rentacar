@@ -272,6 +272,16 @@ export default function AdminDashboard() {
         setIsCarModalOpen(true);
     };
 
+    const getCustomOneSidePrice = (name: string, seats: number = 4) => {
+        const n = name.toLowerCase();
+        if (n.includes('coaster')) return '35000 Rs Bachat';
+        if (n.includes('grand cabin') || n.includes('hiace')) return '20000 Rs Bachat';
+        if (n.includes('fortuner') || n.includes('prado') || n.includes('kia') || n.includes('sportage') || n.includes('v8') || n.includes('mg') || n.includes('hyundai')) return 'L<>I 65k | I<>M 70k | L<>M 65k';
+        if (n.includes('civic') || n.includes('altis') || n.includes('grande')) return 'L<>I 40k | I<>M 45k | L<>M 40k';
+        if (n.includes('changan') || n.includes('karvaan') || n.includes('apv') || n.includes('brv') || seats >= 7) return 'L<>I 35k | I<>M 35k | L<>M 35k';
+        return 'L<>I 35k | I<>M 40k | L<>M 35k';
+    };
+
     const handleSaveCar = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
@@ -369,7 +379,7 @@ export default function AdminDashboard() {
         total: bookings.length,
         pending: bookings.filter(b => b.status === "pending").length,
         confirmed: bookings.filter(b => b.status === "confirmed").length,
-        revenue: bookings.filter(b => b.status === "confirmed").reduce((acc, b) => acc + (b.totalPrice || 0), 0),
+        revenue: bookings.filter(b => b.status === "confirmed").reduce((acc, b) => acc + (typeof b.totalPrice === 'number' ? b.totalPrice : 0), 0),
         unreadMessages: messages.filter(m => !m.read).length
     };
 
@@ -575,7 +585,7 @@ export default function AdminDashboard() {
                                                 </div>
                                             </td>
                                             <td>
-                                                <span className={styles.price}>Rs. {booking.totalPrice?.toLocaleString()}</span>
+                                                <span className={styles.price}>{typeof booking.totalPrice === 'number' ? `Rs. ${booking.totalPrice.toLocaleString()}` : booking.totalPrice}</span>
                                             </td>
                                             <td>
                                                 <span className={`${styles.status} ${styles[booking.status]}`}>
@@ -710,17 +720,18 @@ export default function AdminDashboard() {
                                         </td>
                                         <td>
                                             <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                                                <span style={{ fontWeight: 'bold' }}>Rs.</span>
                                                 <input
-                                                    type="number"
+                                                    type="text"
                                                     defaultValue={booking.totalPrice || 0}
                                                     onBlur={(e) => {
-                                                        const newVal = Number(e.target.value);
-                                                        if (!isNaN(newVal) && newVal !== booking.totalPrice) {
-                                                            updateBookingField(booking.id, "totalPrice", newVal);
+                                                        const val = e.target.value;
+                                                        const numVal = Number(val.replace(/,/g, ''));
+                                                        const finalVal = isNaN(numVal) || val === '' ? val : numVal;
+                                                        if (finalVal !== booking.totalPrice) {
+                                                            updateBookingField(booking.id, "totalPrice", finalVal);
                                                         }
                                                     }}
-                                                    style={{ width: '80px', padding: '4px 8px', borderRadius: '4px', border: '1px solid var(--border)', background: 'var(--surface-hover)', outline: 'none' }}
+                                                    style={{ width: '120px', padding: '4px 8px', borderRadius: '4px', border: '1px solid var(--border)', background: 'var(--surface-hover)', outline: 'none', color: 'var(--text-main)' }}
                                                 />
                                             </div>
                                         </td>
@@ -948,7 +959,7 @@ export default function AdminDashboard() {
                                             <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>{car.type} · {car.seats} seats</span>
                                         </td>
                                         <td><span style={{ fontSize: '13px', color: car.priceFleet ? '#2ecc71' : 'var(--text-muted)', fontWeight: car.priceFleet ? 700 : 400 }}>{car.priceFleet || '—'}</span></td>
-                                        <td><span style={{ fontSize: '13px', color: car.priceOneSideDrop ? '#2ecc71' : 'var(--text-muted)', fontWeight: car.priceOneSideDrop ? 700 : 400 }}>{car.priceOneSideDrop || '—'}</span></td>
+                                        <td><span style={{ fontSize: '13px', color: '#2ecc71', fontWeight: 700 }}>{car.priceOneSideDrop || getCustomOneSidePrice(car.name, car.seats)}</span></td>
                                         <td><span style={{ fontSize: '13px', color: car.priceAirportLahore ? '#2ecc71' : 'var(--text-muted)', fontWeight: car.priceAirportLahore ? 700 : 400 }}>{car.priceAirportLahore || '—'}</span></td>
                                         <td><span style={{ fontSize: '13px', color: car.priceAirportIslamabad ? '#2ecc71' : 'var(--text-muted)', fontWeight: car.priceAirportIslamabad ? 700 : 400 }}>{car.priceAirportIslamabad || '—'}</span></td>
                                         <td><span style={{ fontSize: '13px', color: car.priceCorporate ? '#2ecc71' : 'var(--text-muted)', fontWeight: car.priceCorporate ? 700 : 400 }}>{car.priceCorporate || '—'}</span></td>
@@ -1032,7 +1043,7 @@ export default function AdminDashboard() {
                                     </div>
                                     <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
                                         <label style={{ fontSize: '12px', fontWeight: 600, color: 'var(--text-muted)' }}>One Side Drop</label>
-                                        <input type="text" placeholder="e.g. 25,000" value={carForm.priceOneSideDrop} onChange={e => setCarForm({ ...carForm, priceOneSideDrop: e.target.value })} style={{ padding: '9px', borderRadius: '8px', border: '1px solid var(--border)', background: 'var(--background)', fontSize: '13px' }} />
+                                        <input type="text" placeholder={getCustomOneSidePrice(carForm.name, carForm.seats)} value={carForm.priceOneSideDrop} onChange={e => setCarForm({ ...carForm, priceOneSideDrop: e.target.value })} style={{ padding: '9px', borderRadius: '8px', border: '1px solid var(--border)', background: 'var(--background)', fontSize: '13px' }} />
                                     </div>
                                     <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
                                         <label style={{ fontSize: '12px', fontWeight: 600, color: 'var(--text-muted)' }}>Airport (Lahore)</label>

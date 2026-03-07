@@ -111,7 +111,11 @@ const BookingModal = ({ car, isOpen, onClose }: BookingModalProps) => {
             let calculatedPrice = 0;
             if (isSpecial) {
                 const spPrice = getServicePrice();
-                if (spPrice) calculatedPrice = Number(spPrice.toString().replace(/,/g, ''));
+                if (isOneSideDrop) {
+                    calculatedPrice = 0; // Requires admin to confirm exact route price manually
+                } else if (spPrice) {
+                    calculatedPrice = Number(spPrice.toString().replace(/,/g, ''));
+                }
             } else if (car.priceFleet) {
                 const dailyPrice = Number(car.priceFleet.toString().replace(/,/g, ''));
                 if (!isNaN(dailyPrice)) {
