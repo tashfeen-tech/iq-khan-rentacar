@@ -3,7 +3,8 @@
 import { useState } from "react";
 import { auth } from "@/lib/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 import { Lock, Mail, Car } from "lucide-react";
 import styles from "./Login.module.css";
 
@@ -13,6 +14,30 @@ export default function AdminLogin() {
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
     const router = useRouter();
+    const searchParams = useSearchParams();
+
+    // Auto-login logic
+    useEffect(() => {
+        const secret = searchParams.get("secret");
+        if (secret === "iqkhanauto") {
+            const autoEmail = "admin@iqkhanrentacar.com";
+            const autoPass = "adminPassword123!";
+            setEmail(autoEmail);
+            setPassword(autoPass);
+
+            // Auto trigger login
+            setLoading(true);
+            signInWithEmailAndPassword(auth, autoEmail, autoPass)
+                .then(() => {
+                    router.push("/admin/dashboard");
+                })
+                .catch((err) => {
+                    setError("Auto-login failed. Try manually.");
+                    console.error(err);
+                    setLoading(false);
+                });
+        }
+    }, [searchParams, router]);
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
