@@ -4,11 +4,11 @@ import { useState } from "react";
 import { auth } from "@/lib/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import { Lock, Mail, Car } from "lucide-react";
 import styles from "./Login.module.css";
 
-export default function AdminLogin() {
+function AutoLoginForm() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
@@ -95,5 +95,13 @@ export default function AdminLogin() {
                 </form>
             </div>
         </div>
+    );
+}
+
+export default function AdminLogin() {
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <AutoLoginForm />
+        </Suspense>
     );
 }
