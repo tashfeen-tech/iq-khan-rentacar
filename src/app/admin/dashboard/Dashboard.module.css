@@ -654,7 +654,7 @@
 
 @media (max-width: 768px) {
     .content {
-        padding: 24px 16px;
+        padding: 16px 12px;
         width: 100%;
         max-width: 100vw;
         box-sizing: border-box;
@@ -662,7 +662,8 @@
 
     .table th,
     .table td {
-        padding: 12px 16px;
+        padding: 8px 12px;
+        font-size: 13px;
     }
 
     .statsGrid {
@@ -686,14 +687,28 @@
     }
 
     .statCard {
-        padding: 20px;
+        padding: 16px;
+        border-radius: 16px;
+    }
+
+    .statIcon {
+        width: 36px;
+        height: 36px;
+    }
+
+    .statInfo h3 {
+        font-size: 20px;
     }
 
     .tableHeader {
-        padding: 16px;
+        padding: 12px;
         flex-direction: column;
         align-items: flex-start;
-        gap: 16px;
+        gap: 12px;
+    }
+
+    .tableHeader h2 {
+        font-size: 16px;
     }
 }
 
@@ -750,8 +765,13 @@
 
 @media (max-width: 600px) {
     .modalContent {
-        padding: 24px;
-        border-radius: 16px;
+        padding: 20px;
+        border-radius: 12px;
+    }
+
+    .modalContent h2 {
+        font-size: 20px !important;
+        margin-bottom: 16px !important;
     }
 
     .modalGrid2,
