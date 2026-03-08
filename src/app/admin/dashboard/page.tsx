@@ -989,8 +989,8 @@ export default function AdminDashboard() {
 
             {/* Car Modal UI right inside the DOM */}
             {isCarModalOpen && (
-                <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(5px)', zIndex: 3000, display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '20px' }} onClick={() => setIsCarModalOpen(false)}>
-                    <div style={{ background: 'var(--surface)', padding: '40px', borderRadius: '24px', width: '100%', maxWidth: '600px', border: '1px solid var(--border)', position: 'relative' }} onClick={e => e.stopPropagation()}>
+                <div className={styles.modalOverlay} onClick={() => setIsCarModalOpen(false)}>
+                    <div className={styles.modalContent} onClick={e => e.stopPropagation()}>
                         <button onClick={() => setIsCarModalOpen(false)} style={{ position: 'absolute', top: '24px', right: '24px', background: 'transparent', border: 'none', color: 'var(--text-main)', cursor: 'pointer' }}>
                             <XCircle size={24} />
                         </button>
@@ -998,8 +998,8 @@ export default function AdminDashboard() {
                             {editingCar ? 'Edit Vehicle' : 'Add New Vehicle'}
                         </h2>
 
-                        <form onSubmit={handleSaveCar} style={{ display: 'flex', flexDirection: 'column', gap: '16px', maxHeight: '70vh', overflowY: 'auto', paddingRight: '10px' }}>
-                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+                        <form onSubmit={handleSaveCar} className={styles.modalForm}>
+                            <div className={styles.modalGrid2}>
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
                                     <label style={{ fontSize: '13px', fontWeight: 600, color: 'var(--text-muted)' }}>Name / Model</label>
                                     <input required value={carForm.name} onChange={e => setCarForm({ ...carForm, name: e.target.value })} style={{ padding: '10px', borderRadius: '10px', border: '1px solid var(--border)', background: 'var(--background)' }} />
@@ -1019,7 +1019,7 @@ export default function AdminDashboard() {
                                 </div>
                             </div>
 
-                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '16px' }}>
+                            <div className={styles.modalGrid3}>
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
                                     <label style={{ fontSize: '13px', fontWeight: 600, color: 'var(--text-muted)' }}>Seats</label>
                                     <input type="number" required value={carForm.seats} onChange={e => setCarForm({ ...carForm, seats: Number(e.target.value) })} style={{ padding: '10px', borderRadius: '10px', border: '1px solid var(--border)', background: 'var(--background)' }} />
@@ -1036,7 +1036,7 @@ export default function AdminDashboard() {
                             {/* Pricing Section */}
                             <div style={{ borderTop: '1px solid var(--border)', paddingTop: '16px', marginTop: '4px' }}>
                                 <h3 style={{ fontSize: '15px', fontWeight: 700, marginBottom: '12px', color: '#2ecc71' }}>💰 Service Pricing (Rs.)</h3>
-                                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '12px' }}>
+                                <div className={styles.modalGrid3} style={{ gap: '12px' }}>
                                     <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
                                         <label style={{ fontSize: '12px', fontWeight: 600, color: 'var(--text-muted)' }}>Fleet / Day</label>
                                         <input type="text" placeholder="e.g. 8,000" value={carForm.price} onChange={e => setCarForm({ ...carForm, price: e.target.value })} style={{ padding: '9px', borderRadius: '8px', border: '1px solid var(--border)', background: 'var(--background)', fontSize: '13px' }} />
